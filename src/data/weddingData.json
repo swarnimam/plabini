@@ -1,36 +1,36 @@
 {
   "meta": {
-    "siteTitle": "Swarnimam & Plabini — A Story Worth Remembering | 18.12.2026",
-    "siteDescription": "An interactive cinematic love story and wedding celebration of Swarnimam and Plabini at The Grand Taj Palace, Udaipur.",
-    "canonicalUrl": "https://SwarnimamandPlabini.com/",
+    "siteTitle": "Swarnimam & Plabini — A Story Worth Remembering | 9.12.2026",
+    "siteDescription": "An interactive cinematic love story and wedding celebration of Swarnimam and Plabini at Rajwara Resort, Gaya, Bihar.",
+    "canonicalUrl": "https://SwarnimamAndPlabini.com/",
     "themeColor": "#080B0D",
     "ogImage": "/images/hero-couple-main.jpg"
   },
   "couple": {
     "partner1": {
       "firstName": "Swarnimam",
-      "lastName": "Kapoor",
+      "lastName": "Kumar",
       "role": "Groom"
     },
     "partner2": {
       "firstName": "Plabini",
-      "lastName": "Singhania",
+      "lastName": "Nayak",
       "role": "Bride"
     },
-    "monogram": "A ♥ M",
+    "monogram": "S ♥ P",
     "initials": {
-      "p1": "A",
-      "p2": "M"
+      "p1": "S",
+      "p2": "P"
     },
     "tagline": "FOREVER STARTS HERE",
     "subtitle": "A STORY WORTH REMEMBERING"
   },
   "weddingDate": {
-    "isoString": "2026-12-18T11:30:00+05:30",
-    "displayDate": "18.12.2026",
-    "displayFull": "DECEMBER 18, 2026",
+    "isoString": "2026-12-09T23:30:00+05:30",
+    "displayDate": "09.12.2026",
+    "displayFull": "DECEMBER 09, 2026",
     "year": "2026",
-    "time": "11:30 AM"
+    "time": "11:30 PM"
   },
   "audio": {
     "title": "A Love Worth Remembering",
@@ -41,7 +41,7 @@
   },
   "hero": {
     "image": "/images/hero-couple-main.jpg",
-    "alt": "Swarnimam and Plabini at The Grand Taj Palace",
+    "alt": "Swarnimam and Plabini at Rajwara Resort, Gaya, Bihar",
     "quote": "And in your smile, I saw something more beautiful than the stars.",
     "scrollPrompt": "SCROLL TO EXPLORE"
   },
@@ -60,7 +60,7 @@
       {
         "sceneNumber": "02",
         "headline": "ONE UNEXPECTED MEETING.",
-        "subtext": "A spontaneous afternoon that stretched into twilight under the Rajasthan skies. Two worlds quietly aligning into one.",
+        "subtext": "A spontaneous afternoon that stretched into twilight. Two worlds quietly aligning into one.",
         "image": "/images/story-02-meeting.jpg",
         "caption": "The Unplanned Journey"
       },
@@ -84,7 +84,7 @@
     "image": "/images/parallax-scene.jpg",
     "kicker": "A Quiet Horizon",
     "title": "Two Souls, One Endless Skyline",
-    "quote": "In the quiet of the Rajasthan hills, we discovered that home wasn't a place, but a presence."
+    "quote": "In the quiet of the evening, we discovered that home wasn't a place, but a presence."
   },
   "timeline": {
     "chapterKicker": "Chapter II — The Journey",
@@ -129,9 +129,9 @@
       {
         "year": "2026",
         "title": "Our Wedding",
-        "description": "Surrounded by our loved ones, promising forever beneath the golden palace arches.",
+        "description": "Surrounded by our loved ones, Swarnimam and Plabini begin their forever together.",
         "image": "/images/timeline-2026.jpg",
-        "location": "The Grand Taj Palace"
+        "location": "Rajwara Resort, Gaya, Bihar"
       }
     ]
   },
@@ -147,35 +147,35 @@
       {
         "id": "g1",
         "src": "/images/gallery-01.jpg",
-        "caption": "Sunset across Lake Pichola",
+        "caption": "A moment worth remembering",
         "orientation": "landscape",
         "category": "portraits"
       },
       {
         "id": "g2",
         "src": "/images/gallery-02.jpg",
-        "caption": "Candid smiles during twilight",
+        "caption": "Candid smiles during the celebration",
         "orientation": "portrait",
         "category": "candid"
       },
       {
         "id": "g3",
         "src": "/images/gallery-03.jpg",
-        "caption": "Beneath the marble arches",
+        "caption": "Moments from the celebrations",
         "orientation": "portrait",
         "category": "ceremony"
       },
       {
         "id": "g4",
         "src": "/images/gallery-04.jpg",
-        "caption": "The golden ring crafted with love",
+        "caption": "The little details that make it special",
         "orientation": "square",
         "category": "details"
       },
       {
         "id": "g5",
         "src": "/images/gallery-05.jpg",
-        "caption": "A quiet embrace in the mountains",
+        "caption": "A quiet moment together",
         "orientation": "landscape",
         "category": "portraits"
       },
@@ -190,73 +190,99 @@
   },
   "events": {
     "chapterKicker": "Chapter IV — The Celebrations",
-    "title": "The Sacred Ceremonies",
-    "subtitle": "Join us in celebrating each cherished ritual",
+    "title": "The Wedding Celebrations",
+    "subtitle": "Two days, cherished rituals, laughter, music, and the beginning of forever",
     "items": [
       {
-        "id": "haldi",
-        "name": "HALDI",
-        "date": "20 DEC 2026",
-        "displayDate": "Sunday, 20 Dec 2026",
-        "time": "10:00 AM",
-        "venueName": "The Royal Poolside Lawn",
-        "venueAddress": "The Grand Taj Palace, Udaipur",
-        "description": "A morning immersed in radiant turmeric hues, marigolds, festive music, and auspicious blessings.",
-        "dressCode": "Sunlit Yellows & Festive Florals",
-        "iconName": "sun",
-        "image": "/images/event-haldi.jpg"
+        "id": "tilak",
+        "name": "TILAK",
+        "date": "08 DEC 2026",
+        "displayDate": "Tuesday, 08 Dec 2026",
+        "time": "03:30 PM",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "A cherished ceremony marking the beginning of the wedding celebrations and bringing families together in celebration.",
+        "dressCode": null,
+        "iconName": "flower",
+        "image": "/images/event-tilak.jpg"
       },
       {
-        "id": "mehendi",
-        "name": "MEHENDI",
-        "date": "20 DEC 2026",
-        "displayDate": "Sunday, 20 Dec 2026",
-        "time": "04:00 PM",
-        "venueName": "Palace Courtyard & Terraces",
-        "venueAddress": "The Grand Taj Palace, Udaipur",
-        "description": "Intricate henna adornments, folk melodies, acoustic harmonies, and artisanal refreshments at dusk.",
-        "dressCode": "Emerald Greens & Pastel Silks",
-        "iconName": "flower",
-        "image": "/images/event-mehendi.jpg"
+        "id": "cricket",
+        "name": "CRICKET MATCH",
+        "date": "08 DEC 2026",
+        "displayDate": "Tuesday, 08 Dec 2026",
+        "time": "TBD",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "A fun and informal cricket match for family and friends during the day's celebrations.",
+        "dressCode": null,
+        "iconName": "sparkles",
+        "image": "/images/event-cricket.jpg"
       },
       {
         "id": "sangeet",
         "name": "SANGEET",
-        "date": "21 DEC 2026",
-        "displayDate": "Monday, 21 Dec 2026",
-        "time": "07:00 PM",
-        "venueName": "The Imperial Ballroom",
-        "venueAddress": "The Grand Taj Palace, Udaipur",
-        "description": "A night of vibrant dance performances, musical celebration, and unforgettable family revelry.",
-        "dressCode": "Glamorous Midnight & Shimmering Golds",
+        "date": "08 DEC 2026",
+        "displayDate": "Tuesday, 08 Dec 2026",
+        "time": "08:00 PM onwards",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "An evening of music, dance, performances, laughter, and unforgettable celebrations with family and friends.",
+        "dressCode": null,
         "iconName": "music",
         "image": "/images/event-sangeet.jpg"
       },
       {
-        "id": "wedding",
-        "name": "WEDDING",
-        "date": "22 DEC 2026",
-        "displayDate": "Tuesday, 22 Dec 2026",
-        "time": "11:30 AM",
-        "venueName": "The Sacred Lakefront Mandap",
-        "venueAddress": "The Grand Taj Palace, Udaipur",
-        "description": "The auspicious Pheras, Vedic chants, and the sacred union of two souls under the eternal heavens.",
-        "dressCode": "Regal Traditional & Heritage Royal",
-        "iconName": "heart",
-        "image": "/images/event-wedding.jpg"
+        "id": "haldi",
+        "name": "HALDI",
+        "date": "09 DEC 2026",
+        "displayDate": "Wednesday, 09 Dec 2026",
+        "time": "11:00 AM onwards",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "A joyful and auspicious Haldi ceremony filled with turmeric, blessings, laughter, and celebration.",
+        "dressCode": null,
+        "iconName": "sun",
+        "image": "/images/event-haldi.jpg"
       },
       {
-        "id": "reception",
-        "name": "RECEPTION",
-        "date": "22 DEC 2026",
-        "displayDate": "Tuesday, 22 Dec 2026",
-        "time": "07:30 PM",
-        "venueName": "The Crystal Dining Pavilion",
-        "venueAddress": "The Grand Taj Palace, Udaipur",
-        "description": "A black-tie banquet dinner, heartfelt champagne toasts, and dancing beneath the moonlit chandelier.",
-        "dressCode": "Black Tie / Haute Couture Formals",
+        "id": "baraat",
+        "name": "BARAAT",
+        "date": "09 DEC 2026",
+        "displayDate": "Wednesday, 09 Dec 2026",
+        "time": "07:00 PM",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "The groom's grand arrival accompanied by music, dancing, family, friends, and the energy of the celebration.",
+        "dressCode": null,
         "iconName": "sparkles",
-        "image": "/images/event-reception.jpg"
+        "image": "/images/event-baraat.jpg"
+      },
+      {
+        "id": "jaimala",
+        "name": "JAIMALA",
+        "date": "09 DEC 2026",
+        "displayDate": "Wednesday, 09 Dec 2026",
+        "time": "09:00 PM",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "The beautiful exchange of garlands as Swarnimam and Plabini celebrate their union surrounded by their loved ones.",
+        "dressCode": null,
+        "iconName": "heart",
+        "image": "/images/event-jaimala.jpg"
+      },
+      {
+        "id": "wedding",
+        "name": "WEDDING",
+        "date": "09 DEC 2026",
+        "displayDate": "Wednesday, 09 Dec 2026",
+        "time": "11:30 PM onwards",
+        "venueName": "Rajwara Resort",
+        "venueAddress": "Gaya, Bihar, India",
+        "description": "The sacred wedding ceremony where Swarnimam and Plabini begin their journey together, surrounded by family, blessings, and loved ones.",
+        "dressCode": null,
+        "iconName": "heart",
+        "image": "/images/event-wedding.jpg"
       }
     ]
   },
@@ -266,29 +292,29 @@
   },
   "venue": {
     "chapterKicker": "Chapter V — The Destination",
-    "name": "THE GRAND TAJ PALACE",
-    "tagline": "A timeless place for a timeless celebration.",
-    "location": "Udaipur, Rajasthan, India",
-    "description": "Perched delicately on the serene waters of Lake Pichola, The Grand Taj Palace is an architectural marvel of white marble, arched verandas, and regal heritage that has hosted centuries of timeless royal romance.",
-    "image": "/images/venue-taj-palace.jpg",
+    "name": "RAJWARA RESORT",
+    "tagline": "A beautiful place for a beautiful beginning.",
+    "location": "Gaya, Bihar, India",
+    "description": "Rajwara Resort in Gaya, Bihar, will be the destination where Swarnimam and Plabini's two-day wedding celebration unfolds.",
+    "image": "/images/venue-rajwara-resort.jpg",
     "mapCoordinates": {
-      "lat": 24.5764,
-      "lng": 73.6806
+      "lat": null,
+      "lng": null
     },
-    "googleMapsUrl": "https://maps.google.com/?q=The+Grand+Taj+Palace+Udaipur",
-    "airportInfo": "Maharana Pratap Airport (UDR) — 45 mins private transfer",
-    "accommodations": "Exclusive private suites reserved for all registered wedding guests."
+    "googleMapsUrl": null,
+    "airportInfo": null,
+    "accommodations": null
   },
   "rsvp": {
     "kicker": "Honor Us With Your Presence",
     "title": "Kindly Respond",
-    "deadlineNotice": "Please respond before 15 November 2026",
-    "deadlineDate": "2026-11-15",
+    "deadlineNotice": null,
+    "deadlineDate": null,
     "maxGuests": 4,
     "successModal": {
-      "seal": "A ♥ M",
+      "seal": "S ♥ P",
       "title": "Your Presence Is A Blessing",
-      "message": "Thank you for confirming. We eagerly await celebrating our love together with you at The Grand Taj Palace.",
+      "message": "Thank you for confirming. We eagerly await celebrating this beautiful beginning with you at Rajwara Resort, Gaya.",
       "buttonText": "Return to Story"
     }
   },
