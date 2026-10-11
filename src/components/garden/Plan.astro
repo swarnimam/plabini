@@ -1,0 +1,15 @@
+---
+import { invitation as w, asset } from '../../data/invitation';
+const { compact = false } = Astro.props;
+---
+<div class:list={['plan-content', { compact }]}>
+  <p class="plan-intro">8–9 December 2026 · All times in IST<br />{w.venue.name}, Gaya</p>
+  <ol class="plan-events">
+    {w.events.map(event => <li>
+      <span class="plan-number">{event.number}</span>
+      <div class="plan-event-info"><h3>{event.name}</h3><p><time datetime={event.iso}>{event.date} · {event.time}</time></p><p class="plan-dress">{event.attire}</p></div>
+      <a href={asset(`calendar/${event.id}.ics`)} download aria-label={`Save ${event.name} to your calendar`}>↗</a>
+    </li>)}
+  </ol>
+  <div class="plan-actions"><a class="button button-gold" href={asset('celebrations.ics')} download>Save all four dates <span aria-hidden="true">↓</span></a><a class="inline-link" href={w.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Find the venue ↗<span class="sr-only"> (opens Google Maps in a new tab)</span></a></div>
+</div>

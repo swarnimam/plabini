@@ -1,6 +1,6 @@
 # Swarnimam & Plabini — #perfectlyPS
 
-An invitation-inspired wedding website for 8–9 December 2026 at Greater Rajwada Resort, Gaya. Built with Astro as a portable static site.
+An immersive wedding website for 8–9 December 2026 at Greater Rajwada Resort, Gaya. **The Garden of Forever** turns the four ceremonies into a continuous journey through original illustrated gardens. Built with Astro as a portable static site.
 
 ## Run and build
 
@@ -44,10 +44,13 @@ The workflow must be merged into the default branch before GitHub shows its manu
 
 - `src/data/invitation.ts` — authoritative published names, family, venue and ceremony information.
 - `src/pages/index.astro` — invitation page structure.
-- `src/components/events/WeddingEventsSection.astro` — alternating connected event timeline.
+- `src/components/garden/ChapterJourney.astro` — scroll-linked ceremony artwork and readable event chapters.
 - `src/components/rsvp/RsvpPortal.astro` — response composer; does not claim to send an RSVP.
-- `src/styles/invitation.css` — responsive ivory, rose, sage and antique-gold design.
-- `src/scripts/invitation.ts` — countdown, mobile-menu behavior and response copy controls.
+- `src/styles/garden.css` — responsive moonlit, rose, indigo and saffron worlds.
+- `src/scripts/invitation.ts` — countdown and response copy controls.
+- `src/scripts/garden.ts` — ceremony scene controller, invitation reveal, quick schedule, optional ambience and motion controls.
+- `src/data/gardenScenes.ts` — presentation copy and artwork; all factual content stays in `invitation.ts`.
+- `IMMERSIVE_DESIGN.md` — visual concept, interactions, artwork prompts and validation boundaries.
 - `src/lib/calendar.ts` — UTF-8-safe RFC 5545 calendar generation from the same event data.
 - `CONTENT_NOTES.md` — content sources, schedule conflicts, artwork provenance and remaining confirmations.
 - `REPO_REVIEW.md` — findings from the original implementation and the redesign decisions.
@@ -56,7 +59,9 @@ The original story, timeline, gallery, ambient-audio and cinematic components, o
 
 ## Guest experience
 
-The invitation, ceremony times, calendar downloads, venue link, FAQ and navigation work without JavaScript. JavaScript adds a countdown and a response composer. Reduced-motion visitors receive no entry animations or smooth scrolling. The mobile navigation uses native disclosure controls and works without JS.
+The invitation, ceremony times, calendar downloads, venue link and navigation work without JavaScript. The invitation is a native details disclosure. Without JavaScript, visitors get all ceremony artwork and text in a normal page; with JavaScript, large screens gain a sticky scene that changes with scroll. Phones keep an illustrated vertical story.
+
+JavaScript also adds a countdown, a native modal with the full schedule, a symbolic diya interaction and a response composer. A permanent Motion control disables optional movement; reduced-motion preferences are respected from first paint. Ambient audio is silent by default, starts only after a click, and pauses when the tab is hidden. Audio is a subtle synthetic soundscape, not a recording or licensed track. No scroll hijacking, custom cursor, WebGL dependency or blocking intro.
 
 RSVP messages are **not sent or stored** by this site. Guests prepare and copy their response, then send it directly to the family through their existing conversation. A confirmed destination and delivery integration are required before replacing this with a submission form. No uncertain phone number is used.
 

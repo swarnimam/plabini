@@ -1,6 +1,6 @@
 ---
 import { invitation, asset } from '../data/invitation';
-import '../styles/invitation.css';
+import '../styles/garden.css';
 const title = `${invitation.names.groom} & ${invitation.names.bride} | 8–9 December 2026`;
 const description = `Together with our families, we invite you to celebrate our wedding on 8–9 December 2026 at ${invitation.venue.name}, Gaya. #perfectlyPS`;
 const canonical = Astro.site ? new URL(import.meta.env.BASE_URL, Astro.site) : undefined;
@@ -20,7 +20,7 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f7f2e8" />
+    <meta name="theme-color" content="#102e29" />
     <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
@@ -32,7 +32,7 @@ const structuredData = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="preload" as="image" href={asset('images/invitation-garden.webp')} />
+    <link rel="preload" as="image" href={asset('images/garden/forever-night.webp')} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
   </head>
   <body>
