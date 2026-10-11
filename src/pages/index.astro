@@ -90,7 +90,7 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
       <div class="section-heading"><p class="eyebrow">A little before you arrive</p><h2 id="guest-title">For our <em>favourite people.</em></h2></div>
       <div class="faq-list">
         <details><summary>Where will the ceremonies take place?<span aria-hidden="true">+</span></summary><p>All four ceremonies are at {w.venue.name}, {w.venue.address}. The venue link opens a Google Maps search to help you plan your route.</p></details>
-        <details><summary>What should I wear?<span aria-hidden="true">+</span></summary><p>For Tilakotsav, come dressed in your favourite festive colours. Dress comfortably for the celebrations; any further attire details will be shared by the family.</p></details>
+        <details><summary>What should I wear?<span aria-hidden="true">+</span></summary><ul class="attire-list">{w.events.map(event => <li><strong>{event.name}:</strong> {event.attire}</li>)}</ul></details>
         <details><summary>Which time zone is the schedule in?<span aria-hidden="true">+</span></summary><p>All timings are in Indian Standard Time (IST). You can download the ceremony schedule below; calendar apps will convert the times to your local time zone.</p></details>
         <details><summary>How can I let you know I’m coming?<span aria-hidden="true">+</span></summary><p>Use the response card below to prepare your message, then send it to the family through your usual conversation. Your response is only delivered when you send the message.</p></details>
       </div>

@@ -22,7 +22,7 @@ The intended experience is an emotional, polished wedding website that also give
 | Resilience | Loader relied on sessionStorage and JS; multiple sections started invisible | Content visible by default, optional native Web Animations enhancement, no blocking loader |
 | Accessibility | Repeated h1s, incomplete reduced-motion behavior, modal without focus trapping | Single h1, native details, labelled fields, skip link, visible focus, no modal, reduced-motion handling |
 | Performance | Continuous canvas animation, scroll handlers, grain overlays and synthetic audio | No perpetual animation loop or large client framework; image in WebP; below-fold images lazy-loaded |
-| Hosting | Guessed canonical domain and stale sitemap, no deployment configuration | Real origin/base configurable, no fake canonical; manual GitHub Pages workflow |
+| Hosting | Guessed canonical domain and stale sitemap, no deployment configuration | Real origin/base configurable, no fake canonical; GitHub Pages workflow with main-branch and manual deployments plus PR checks |
 | Documentation | Local Windows file links, stale venue/time claims and unsupported Lighthouse claims | Current setup/content docs and explicit verification limits |
 
 ## Preserved, not published
@@ -31,7 +31,7 @@ Old cinematic components and JSON remain available for future adaptation. Retain
 
 ## Remaining decisions
 
-The finished invitation, detailed wedding-night ritual times, extra informal events, real personal photos/story, RSVP delivery destination, and a precise venue map pin still need confirmation. The website is ready for visual review as an invitation and schedule; it is not a backend guest-management system.
+The finished Flow invitation has now been read; its four event start times and dress codes are authoritative. Any extra informal events, real personal photos/story, RSVP delivery destination, and a precise venue map pin still need confirmation. The website is ready for visual review as an invitation and schedule; it is not a backend guest-management system.
 
 ## Validation scope
 

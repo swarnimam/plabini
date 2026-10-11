@@ -16,6 +16,7 @@ for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
   const file = 'dist/' + url.slice(base.length);
   assert.ok(existsSync(file), `Missing generated asset ${file}`);
 }
+for (const dress of ['Festive attire in vibrant colours', 'Traditional elegance or formal suits', 'Festive attire in shades of yellow', 'Elegant ethnic wear']) assert.ok(html.includes(dress), `Missing invitation dress code: ${dress}`);
 const starts = { tilakotsav: '20261208T083000Z', sangeet: '20261208T140000Z', haldi: '20261209T060000Z', 'shubh-vivah': '20261209T140000Z' };
 const combined = readFileSync('dist/celebrations.ics', 'utf8');
 assert.equal((combined.match(/BEGIN:VEVENT/g) || []).length, 4);

@@ -21,7 +21,24 @@ Set `SITE_URL` to the real deployed origin to generate canonical/social URLs. Fo
 SITE_URL=https://swarnimam.github.io BASE_PATH=/plabini npm run build
 ```
 
-The manual GitHub Pages workflow builds and publishes the selected branch. To use it, enable Settings → Pages → Source → GitHub Actions, then run “Deploy wedding website” in Actions. It does not deploy automatically on pushes. The redesigned branch is reviewable before any public publication.
+## GitHub Pages pipeline
+
+Two workflows are included:
+
+- **Check wedding website** (`.github/workflows/check.yml`): validates pull requests into `main` and pushes to `codex/**` branches. Builds and verifies both a root deployment and the `/plabini` project path. It has read-only permissions and cannot deploy.
+- **Deploy wedding website** (`.github/workflows/deploy.yml`): runs on pushes/merges to `main`, or manually from Actions. Installs locked dependencies, reads the actual Pages origin/base path, builds, verifies, uploads `dist/`, and deploys only after success. Manual runs on other branches are intentionally skipped.
+
+One-time setup:
+
+1. In the repository's **Settings → Pages → Build and deployment**, set **Source: GitHub Actions**.
+2. Merge the redesigned website and workflows into `main`.
+3. Open **Actions → Deploy wedding website** to follow the first deployment. Subsequent pushes to `main` deploy automatically. To redeploy manually, select **Run workflow → main**.
+4. The deployment job's environment link shows the actual URL. Without a custom domain, the expected URL is `https://swarnimam.github.io/plabini/`.
+
+No personal access token or custom secrets are required; GitHub supplies the short-lived `GITHUB_TOKEN`. The deployment job alone has `pages: write` and `id-token: write`. Concurrent deployments are serialized. Existing repository/environment restrictions still apply.
+
+The workflow must be merged into the default branch before GitHub shows its manual Run workflow button. No public deployment is claimed before a successful Actions run.
+
 
 ## Edit the invitation
 
