@@ -1,0 +1,29 @@
+---
+import { invitation as w, asset } from '../../data/invitation';
+---
+<section class="letter-section" id="invitation" aria-labelledby="letter-title">
+  <div class="letter-heading"><p class="eyebrow">01 / A letter from our hearts</p><h2 id="letter-title">Some things are better<br /><em>opened with love.</em></h2></div>
+  <details class="envelope" id="wedding-envelope">
+    <summary>
+      <span class="envelope-stitch" aria-hidden="true"></span>
+      <span class="envelope-flap" aria-hidden="true"></span>
+      <span class="envelope-to">To our favourite people,</span>
+      <span class="wax-seal"><img src={asset('images/ps-monogram.jpg')} width="1254" height="1254" alt="PS peacock monogram" loading="lazy" /></span>
+      <span class="seal-prompt"><span class="when-closed">Break the seal</span><span class="when-open">Close the letter</span><span aria-hidden="true">↗</span></span>
+      <span class="envelope-from">With love, Swarnimam & Plabini</span>
+    </summary>
+    <div class="letter-paper">
+      <p class="sacred" lang="hi">॥ श्री गणेशाय नमः ॥</p>
+      <p class="letter-parents">{w.groomParents}</p>
+      <p>request the pleasure of your company<br />at the wedding of their son</p>
+      <p class="letter-names">Swarnimam <em>&</em> Plabini</p>
+      <p>daughter of {w.brideParents}.</p>
+      <span class="letter-divider" aria-hidden="true">✧</span>
+      <p lang="hi" class="letter-hindi">पावन परिणयोत्सव की मंगल बेला पर<br />सपरिवार पधारकर वर-वधू को आशीर्वाद दें।</p>
+      <p class="letter-date">9 December 2026 · 7:30 pm</p>
+      <p>{w.venue.name}, Gaya</p>
+      <p class="letter-family">With warm wishes from the entire Kumar family</p>
+    </div>
+  </details>
+  <p class="letter-footnote">An invitation to two days of celebration.<br />And a lifetime of being part of our story.</p>
+</section>

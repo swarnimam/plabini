@@ -39,3 +39,7 @@ The working document includes traditional-family contact details mixed with olde
 `public/images/invitation-garden.webp`: original artwork generated using the built-in image-generation tool; the PNG was converted to WebP for web delivery. Ornamental artwork, not a photograph of the venue.
 
 Generation brief: an airy Indian wedding invitation watercolor on warm ivory handmade paper, delicate ivory magnolia and blush roses, gold blossoms and sage foliage at the outer edges, a small peacock in the lower right and ornamental arch fragment in the lower left; central 65% left empty for live HTML typography; no text, monogram, watermark or people. Palette parchment, muted sage, blush and antique gold.
+
+## Immersive edition
+
+The Garden of Forever edition keeps every confirmed event time and dress code unchanged. Four generated garden scenes are expressly imaginative settings, not photographs or claims about the real resort. Full prompts, asset paths, and interaction behavior are in IMMERSIVE_DESIGN.md.

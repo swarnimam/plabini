@@ -8,8 +8,8 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(new Set(ids).size, ids.length, 'Unique HTML ids');
 for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), `Broken anchor ${match[1]}`);
 // Astro's base is inferred from a known asset so checks work in CI without extra env.
-const imagePath = html.match(/src="([^"]*images\/invitation-garden.webp)"/)[1];
-const base = imagePath.slice(0, -'images/invitation-garden.webp'.length);
+const imagePath = html.match(/src="([^"]*images\/garden\/forever-night.webp)"/)[1];
+const base = imagePath.slice(0, -'images/garden/forever-night.webp'.length);
 for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
   const url = match[1];
   assert.ok(url.startsWith(base), `Asset outside base: ${url}`);
@@ -29,6 +29,10 @@ for (const [event, start] of Object.entries(starts)) {
   for (const line of raw.split('\r\n')) assert.ok(Buffer.byteLength(line, 'utf8') <= 75, `ICS line too long: ${event}`);
   assert.ok(!raw.replace(/\r\n/g, '').includes('\n'), 'ICS uses CRLF');
 }
+assert.equal((html.match(/data-chapter="[0-3]"/g) || []).length, 4, 'Four readable ceremony chapters');
+assert.ok(html.includes('id="plan-dialog"'), 'Quick schedule dialog exists');
+assert.ok(html.includes('id="wedding-envelope"'), 'Native invitation disclosure exists');
+assert.ok(html.includes('id="motion-toggle"'), 'Motion control exists');
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 assert.equal(schema.location.address.addressLocality, 'Gaya');
 assert.equal(schema.startDate, '2026-12-08T14:00:00+05:30');

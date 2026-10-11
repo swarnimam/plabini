@@ -1,105 +1,57 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { invitation as w, asset } from '../data/invitation';
-import WeddingEventsSection from '../components/events/WeddingEventsSection.astro';
+import Envelope from '../components/garden/Envelope.astro';
+import ChapterJourney from '../components/garden/ChapterJourney.astro';
+import Ritual from '../components/garden/Ritual.astro';
+import Plan from '../components/garden/Plan.astro';
 import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
 ---
 <BaseLayout>
-  <header class="site-header">
-    <a class="wordmark" href="#home" aria-label="Swarnimam and Plabini, home">P<span>&</span>S<span class="wordmark-caption">THE WEDDING</span></a>
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#invitation">The invitation</a><a href="#celebrations">Celebrations</a><a href="#venue">The venue</a>
-    </nav>
-    <a class="header-cta" href="#rsvp">Join our celebration <span aria-hidden="true">↗</span></a>
-    <details class="mobile-nav">
-      <summary aria-label="Open navigation">Menu <span aria-hidden="true">☰</span></summary>
-      <nav aria-label="Mobile navigation"><a href="#invitation">The invitation</a><a href="#celebrations">Celebrations</a><a href="#venue">The venue</a><a href="#rsvp">Join us</a></nav>
-    </details>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  <header class="garden-header">
+    <a href="#home" class="garden-brand" aria-label="Swarnimam and Plabini, home"><span>P<span class="brand-amp">&</span>S</span><small>#perfectlyPS</small></a>
+    <nav class="garden-nav" aria-label="Main navigation"><a href="#invitation">The invitation</a><a href="#celebrations">The celebrations</a><a href="#venue">The destination</a></nav>
+    <div class="header-end"><a class="details-fallback" href="#schedule">The details ↗</a><button type="button" data-open-plan hidden>The details <span aria-hidden="true">↗</span></button><details class="garden-menu"><summary aria-label="Open navigation"><span></span><span></span></summary><nav aria-label="Mobile navigation"><a href="#invitation">The invitation</a><a href="#celebrations">The celebrations</a><a href="#venue">The destination</a><a href="#rsvp">Your response</a></nav></details></div>
   </header>
   <main id="main">
-    <section class="hero" id="home" aria-labelledby="couple-names">
-      <img class="hero-garden" src={asset('images/invitation-garden.webp')} alt="" width="1536" height="1024" fetchpriority="high" />
-      <div class="hero-frame" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="sacred" lang="hi">॥ श्री गणेशाय नमः ॥</p>
-        <p class="eyebrow">Together with our families</p>
-        <h1 id="couple-names"><span>{w.names.groom}</span><em>&</em><span>{w.names.bride}</span></h1>
-        <p class="hero-subtitle">A lifetime of love. A celebration with you.</p>
-        <div class="hero-date"><span aria-hidden="true"></span><p>08 & 09 <b>DECEMBER 2026</b></p><span aria-hidden="true"></span></div>
-        <p class="hero-location">{w.venue.name} <span aria-hidden="true">·</span> Gaya, Bihar</p>
-        <a class="button button-wine" href="#celebrations">Explore the celebrations <span aria-hidden="true">↓</span></a>
+    <section id="home" class="garden-hero" aria-labelledby="couple-names">
+      <div class="hero-art" id="hero-art"><img src={asset('images/garden/forever-night.webp')} width="1536" height="1024" alt="An imagined moonlit garden with a golden mandap, lotus pool and peacock" fetchpriority="high" /></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="fireflies" aria-hidden="true">{Array.from({length:14},(_,i)=><span style={`--i:${i};--x:${(i*37+11)%100}%;--y:${(i*23+19)%80}%`}></span>)}</div>
+      <div class="hero-side-note" aria-hidden="true">A CELEBRATION WRITTEN IN THE STARS</div>
+      <div class="garden-hero-copy">
+        <p class="hero-kicker">THE GARDEN OF FOREVER</p>
+        <p class="hero-blessing" lang="hi">॥ श्री गणेशाय नमः ॥</p>
+        <h1 id="couple-names"><span class="hero-first">Swarnimam</span><em>&</em><span class="hero-second">Plabini</span></h1>
+        <p class="hero-poem">Two hearts. One beautiful universe.</p>
+        <a class="enter-garden" href="#invitation"><span class="enter-circle" aria-hidden="true">↓</span><span>Let our forever unfold</span></a>
       </div>
-      <div class="hero-bottom"><span>{w.hashtag}</span><a href="#invitation">An invitation from the heart <span aria-hidden="true">↓</span></a><span>08—09 / 12 / 26</span></div>
+      <div class="hero-bottom-line"><p>08—09 <span>DECEMBER 2026</span></p><span class="hero-location">GREATER RAJWADA RESORT · GAYA</span><a href="#celebrations">Explore the four worlds <span aria-hidden="true">↗</span></a></div>
     </section>
-
-    <section id="invitation" class="invitation-section section-pad" aria-labelledby="invitation-title">
-      <div class="invitation-grid wrap">
-        <div class="monogram-panel reveal">
-          <div class="arch-outline" aria-hidden="true"></div>
-          <img src={asset('images/ps-monogram.jpg')} width="1254" height="1254" alt="PS wedding monogram with a gold peacock, flowers, and #perfectlyPS" loading="lazy" />
-          <p>Two hearts. Two families. One beautiful beginning.</p>
-        </div>
-        <div class="invitation-copy reveal">
-          <p class="eyebrow">With love & blessings</p>
-          <h2 id="invitation-title">Some moments<br />are meant to be <em>shared.</em></h2>
-          <div class="ornament" aria-hidden="true">✧</div>
-          <p class="parents">{w.groomParents}</p>
-          <p>request the pleasure of your company as their son</p>
-          <p class="couple-line">Swarnimam <em>&</em> Plabini</p>
-          <p>daughter of {w.brideParents},<br />begin their journey together.</p>
-          <p class="invitation-hindi" lang="hi">सपरिवार पधारकर वर-वधू को<br />अपना स्नेह एवं आशीर्वाद दें।</p>
-          <p class="family-signoff">With warm wishes from the entire Kumar family</p>
-        </div>
+    <section class="overture" aria-label="An invitation to celebrate"><span class="overture-symbol" aria-hidden="true">✧</span><p>Come for the promises.<br />Stay for the <em>magic.</em></p><span class="overture-note">Our wedding. Your presence.<br />Everything we could wish for.</span></section>
+    <Envelope />
+    <div class="garden-interlude" aria-hidden="true"><span>Two days</span><i>✧</i><span>Four celebrations</span><i>✧</i><span>One forever</span></div>
+    <ChapterJourney />
+    <Ritual />
+    <section class="forever-countdown" aria-labelledby="countdown-title">
+      <div class="countdown-heading"><p class="eyebrow">The next chapter is almost here</p><h2 id="countdown-title">A lifetime awaits.</h2></div>
+      <div class="countdown" data-wedding-date={w.weddingISO} role="timer" aria-label="Time remaining until the wedding celebration">{['Days','Hours','Minutes','Seconds'].map((unit)=><div><span data-unit={unit.toLowerCase()}>—</span><small>{unit}</small></div>)}</div>
+      <p>9 December 2026 · 7:30 pm IST</p>
+    </section>
+    <section id="venue" class="destination" aria-labelledby="venue-title">
+      <div class="destination-top"><p class="eyebrow">04 / Where our worlds come together</p><span>BIHAR, INDIA · 08—09 DECEMBER</span></div>
+      <div class="destination-grid"><div class="destination-heading" data-reveal><p class="destination-city">Gaya<span aria-hidden="true">.</span></p><h2 id="venue-title">One place.<br />All our <em>favourite people.</em></h2><p>From the first blessing to the last dance,<br />this is where we’ll make our memories.</p></div>
+        <div class="destination-ticket" data-reveal><div class="ticket-top"><span>A JOURNEY TO REMEMBER</span><span aria-hidden="true">✧</span></div><h3>Greater<br /><em>Rajwada Resort</em></h3><p>Manpur, Gaya, Bihar<br />Near Mehta Petrol Pump</p><div class="ticket-perforation" aria-hidden="true"></div><dl><div><dt>Dates</dt><dd>8–9 December 2026</dd></div><div><dt>Occasion</dt><dd>Our forever begins</dd></div></dl><a class="button button-ink" href={w.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Find your way to us <span aria-hidden="true">↗</span><span class="sr-only"> (opens Google Maps in a new tab)</span></a><p class="ticket-note">For arrival arrangements, get in touch with the family.</p></div>
       </div>
     </section>
-
-    <section class="countdown-section" aria-labelledby="countdown-title">
-      <div class="wrap countdown-layout">
-        <div><p class="eyebrow">A date close to our hearts</p><h2 id="countdown-title">The wait for <em>forever.</em></h2><p>Wednesday, 9 December 2026</p></div>
-        <div class="countdown" data-wedding-date={w.weddingISO} role="timer" aria-label="Time remaining until the wedding celebration">
-          {['Days', 'Hours', 'Minutes', 'Seconds'].map((label) => <div><span data-unit={label.toLowerCase()}>—</span><small>{label}</small></div>)}
-        </div>
-      </div>
-      <noscript><p class="no-js-date">Our wedding celebration begins on 9 December 2026 at 7:30 pm IST.</p></noscript>
-    </section>
-
-    <WeddingEventsSection />
-
-    <section class="blessing-section" aria-label="A blessing for our journey">
-      <span class="small-flower" aria-hidden="true">✻</span>
-      <p lang="hi">माँ लक्ष्मी का हाथ हो, सरस्वती का साथ हो,<br />गणेश का निवास हो।</p>
-      <p class="blessing-translation">With the blessings of our families,<br />and the love of everyone who brought us here.</p>
-    </section>
-
-    <section id="venue" class="venue-section section-pad" aria-labelledby="venue-title">
-      <div class="wrap venue-layout">
-        <div class="venue-art reveal" aria-hidden="true">
-          <img src={asset('images/invitation-garden.webp')} alt="" loading="lazy" width="1536" height="1024" />
-          <div class="venue-art-label"><span>THE CELEBRATION</span><b>Gaya</b><i>Bihar, India</i><span>8—9 DECEMBER 2026</span></div>
-        </div>
-        <div class="venue-copy reveal"><p class="eyebrow">One place. All our favourite people.</p><h2 id="venue-title">Greater Rajwada<br /><em>Resort</em></h2>
-          <p class="venue-address">Manpur, Gaya, Bihar<br /><span>Near Mehta Petrol Pump</span></p>
-          <p>From the first blessings to the wedding celebration, all four ceremonies will take place here. We can’t wait to celebrate with you.</p>
-          <a class="button button-wine" href={w.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Find the venue <span aria-hidden="true">↗</span><span class="sr-only"> (opens Google Maps in a new tab)</span></a>
-          <p class="venue-note">Planning your journey? Get in touch with the family for help with arrival arrangements.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="guest-notes section-pad" aria-labelledby="guest-title"><div class="wrap">
-      <div class="section-heading"><p class="eyebrow">A little before you arrive</p><h2 id="guest-title">For our <em>favourite people.</em></h2></div>
-      <div class="faq-list">
-        <details><summary>Where will the ceremonies take place?<span aria-hidden="true">+</span></summary><p>All four ceremonies are at {w.venue.name}, {w.venue.address}. The venue link opens a Google Maps search to help you plan your route.</p></details>
-        <details><summary>What should I wear?<span aria-hidden="true">+</span></summary><ul class="attire-list">{w.events.map(event => <li><strong>{event.name}:</strong> {event.attire}</li>)}</ul></details>
-        <details><summary>Which time zone is the schedule in?<span aria-hidden="true">+</span></summary><p>All timings are in Indian Standard Time (IST). You can download the ceremony schedule below; calendar apps will convert the times to your local time zone.</p></details>
-        <details><summary>How can I let you know I’m coming?<span aria-hidden="true">+</span></summary><p>Use the response card below to prepare your message, then send it to the family through your usual conversation. Your response is only delivered when you send the message.</p></details>
-      </div>
-    </div></section>
+    <section class="schedule-section" id="schedule" aria-labelledby="schedule-title"><div class="schedule-heading"><p class="eyebrow">The beautiful, practical details</p><h2 id="schedule-title">Your place<br />in the <em>celebration.</em></h2><p>All four moments, at a glance.<br />Save the dates. Pick your colours.<br />We’ll take care of the memories.</p></div><Plan /></section>
     <RsvpPortal />
   </main>
-  <footer class="site-footer">
-    <p class="eyebrow">Until we celebrate together</p><p class="footer-names">Swarnimam <em>&</em> Plabini</p>
-    <p class="footer-hashtag">{w.hashtag}</p><div class="footer-meta"><span>8–9 December 2026 · Gaya</span><a href="#home">Back to the beginning ↑</a><span>With love, the entire Kumar family</span></div>
-  </footer>
+  <footer class="garden-footer"><p class="eyebrow">Every story needs its favourite people.</p><p class="footer-large">See you in<br /><em>our forever.</em><span aria-hidden="true">✧</span></p><div class="footer-signature"><p>Swarnimam <em>&</em> Plabini</p><span>#perfectlyPS</span></div><div class="footer-bottom"><span>8–9 December 2026 · Gaya</span><span>With love, the entire Kumar family</span><a href="#home">Back to the stars ↑</a></div></footer>
+  <div class="experience-controls" hidden><button type="button" id="sound-toggle" aria-pressed="false"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sound-label">Sound off</span></button><span class="control-divider" aria-hidden="true"></span><button type="button" id="motion-toggle" aria-pressed="true">Motion on</button></div>
+  <span id="experience-status" class="sr-only" role="status"></span>
+  <dialog id="plan-dialog" aria-labelledby="plan-dialog-title"><form method="dialog"><button class="dialog-close" aria-label="Close celebration details">×</button></form><p class="eyebrow">An invitation to our forever</p><h2 id="plan-dialog-title">The <em>celebrations.</em></h2><Plan compact /></dialog>
   <script src="../scripts/invitation.ts"></script>
+  <script src="../scripts/garden.ts"></script>
 </BaseLayout>

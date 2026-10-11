@@ -25,6 +25,7 @@ menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () =>
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
 
 const form = document.querySelector<HTMLFormElement>('#response-form');
+if (form) form.hidden = false;
 const result = document.querySelector<HTMLElement>('#response-result');
 const message = document.querySelector<HTMLTextAreaElement>('#response-text');
 const attendance = document.querySelector<HTMLSelectElement>('#attendance');
