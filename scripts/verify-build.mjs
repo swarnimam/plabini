@@ -46,5 +46,5 @@ assert.ok(html.includes("Dance performances from both sides"));
 assert.ok(html.includes("games for our guests"));
 
 for (const removed of ['class="folio-number"','class="folio-caption"','class="event-marker"','class="event-poem"','images/garden/sangeet-garden.webp']) assert.ok(!html.includes(removed), `Removed event decoration returned: ${removed}`);
-assert.ok(html.includes('class="dance-scenography"'));
-assert.ok(html.includes('class="union-scenography"'));
+assert.ok(html.includes('sangeet-dance-1024.webp'));
+assert.ok(html.includes('vivah-agni-1024.webp'));

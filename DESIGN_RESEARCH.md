@@ -1,3 +1,7 @@
+# Latest artwork correction
+
+The couple prefers illustrated scenes over code-built compositions. Sangeet now depicts guests dancing, not instruments. Shubh Vivah depicts a red-and-gold mandap and agni with an anonymous illustrative couple, following the couple’s request for pheras imagery. No precise regional sequence/count is asserted. Existing scroll timelines are retained. Generated with the built-in image tool; optimized 640px/1024px WebP assets have crop positions chosen for dancers and fire. See ASSET_PROMPTS.md for full prompts and paths.
+
 # Reference-led motion revision
 
 ## What was inspected

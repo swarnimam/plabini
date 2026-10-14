@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { invitation as w, asset } from '../data/invitation';
 import EventDetails from '../components/chapter/EventDetails.astro';
 import Envelope from '../components/garden/Envelope.astro';
-import EventScenography from '../components/chapter/EventScenography.astro';
 import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
 ---
 <BaseLayout>
@@ -34,7 +33,7 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
       <div class="invitation-folio">
       {w.events.map((event,i) => <article class={`event folio-event folio-${i}`} id={event.id} data-chapter={i} aria-labelledby={`event-${i}`}>
         <div class="folio-sheet">
-          <div class="folio-art" aria-hidden="true">{i === 0 || i === 2 ? <img src={asset(`images/garden/${i === 0 ? 'tilak-garden' : 'haldi-garden'}.webp`)} width="1536" height="1024" loading="lazy" decoding="async" /> : <EventScenography index={i} />}</div>
+          <div class="folio-art" aria-hidden="true">{i === 0 || i === 2 ? <img src={asset(`images/garden/${i === 0 ? 'tilak-garden' : 'haldi-garden'}.webp`)} width="1536" height="1024" loading="lazy" decoding="async" /> : <img src={asset(`images/garden/${i === 1 ? 'sangeet-dance' : 'vivah-agni'}-1024.webp`)} srcset={`${asset(`images/garden/${i === 1 ? 'sangeet-dance' : 'vivah-agni'}-640.webp`)} 640w, ${asset(`images/garden/${i === 1 ? 'sangeet-dance' : 'vivah-agni'}-1024.webp`)} 1024w`} sizes="(min-width: 800px) 48vw, 100vw" width="1024" height="1536" loading="lazy" decoding="async" />}</div>
           <div class="event-main"><p class="event-hindi" lang="hi">{event.hindi}</p><h3 id={`event-${i}`}>{event.name}</h3><p class="event-description">{event.description}</p><EventDetails index={i} /></div>
         </div>
       </article>)}

@@ -23,3 +23,6 @@ body{padding-bottom:0;background:var(--paper)}
 
 /* Container height is interpolated by the envelope timeline, without a second competing CSS transition. */
 .envelope summary{transition:none}
+
+/* Restored illustrated scenes: keep dancers and agni within portrait/mobile crops. */
+.folio-1 .folio-art>img{object-position:50% 70%}.folio-3 .folio-art>img{object-position:50% 65%}.folio-3.event{background:#4a1720}.folio-3 .event-hindi{color:#e3bd7b}

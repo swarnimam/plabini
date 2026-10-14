@@ -55,20 +55,7 @@ media.add('(prefers-reduced-motion: no-preference)',()=>{
    .fromTo(copy,{x:dir*(desktop?65:0),y:35,opacity:.45},{x:0,y:0,opacity:1,ease:'power2.out'},.15);
   const image=event.querySelector('.folio-art>img');
   if(image)gsap.fromTo(image,{scale:1.3,yPercent:-5},{scale:1.05,yPercent:5,ease:'none',scrollTrigger:{trigger:art,start:'top bottom',end:'bottom top',scrub:true}});
-  if(i===1){
-   const stage=gsap.timeline({scrollTrigger:{trigger:art,start:'top bottom',end:'bottom top',scrub:.4}});
-   stage.fromTo(event.querySelector('.light-columns'),{rotation:-22,yPercent:-15},{rotation:15,yPercent:10,ease:'none'},0)
-    .fromTo(event.querySelector('.stage-word'),{scale:.72,rotationY:-20},{scale:1.12,rotationY:12,ease:'none'},0)
-    .fromTo(event.querySelector('.beam-a'),{rotation:-30},{rotation:35,ease:'none'},0)
-    .fromTo(event.querySelector('.beam-b'),{rotation:30},{rotation:-35,ease:'none'},0);
-  }
-  if(i===3){
-   const union=gsap.timeline({scrollTrigger:{trigger:art,start:'top bottom',end:'center center',scrub:.5}});
-   union.fromTo(event.querySelector('.union-left'),{xPercent:-65,rotation:-35},{xPercent:0,rotation:-18,ease:'power2.out'},0)
-    .fromTo(event.querySelector('.union-right'),{xPercent:65,rotation:35},{xPercent:0,rotation:18,ease:'power2.out'},0)
-    .fromTo(event.querySelector('.union-weave'),{scale:1.5,rotation:-22,opacity:.1},{scale:1,rotation:0,opacity:.65},0)
-    .fromTo(event.querySelector('.union-monogram'),{scale:.5,opacity:0},{scale:1,opacity:1},.25);
-  }
+
  });
  gsap.utils.toArray<HTMLElement>('[data-reveal],.letter-heading,.celebration-intro h2').forEach(el=>gsap.from(el,{y:55,opacity:.2,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none reverse'}}));
  gsap.utils.toArray<SVGPathElement>('.draw-path').forEach((p,i)=>gsap.fromTo(p,{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:1.8,delay:i*.15,scrollTrigger:{trigger:p,start:'top 85%'}}));
