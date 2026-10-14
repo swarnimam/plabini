@@ -1,3 +1,21 @@
+# Reference-led motion revision
+
+## What was inspected
+
+- [Turion Space](https://www.turionspace.com/): retrieved published page content and image references. Direct HTML request returned 403; live interaction playback was unavailable. Its [studio case study](https://wild.as/work/turion-space) explicitly credits Framer implementation, BUCK branding/renderings and custom motion. The useful lesson is a coordinated visual system and authored assets, not merely adding more effects. We adapt that principle through scroll-controlled camera depth and unified event compositions, not borrowed aerospace imagery.
+- [Concrete Management](https://www.concretemanagement.ch/fr): retrieved page content and HTML. Its HTML imports Spline Viewer and includes a scene embed, confirming a 3D component. This establishes technology use, not how its interaction feels. No browser or touch behavior was tested. We adapt the spatial-composition principle with lightweight CSS geometry rather than making a 3D download necessary for guest information.
+- [GSAP ScrollTrigger documentation](https://gsap.com/docs/v3/Plugins/ScrollTrigger/): consulted primary documentation for scrubbed timelines, responsive behavior and refresh. Implemented native scrolling without pinning, forced snapping or smooth-scroll interception.
+
+## Implementation
+
+The earlier animation was predominantly one-shot entrances; this revision uses reversible scroll timelines. Hero imagery advances as the typography recedes. Event artwork expands through a curved mask while the spread straightens in perspective and the details settle. Tilak and Haldi keep the images the couple liked. Sangeet uses original dimensional light columns, a perspective floor and approved Hindi typography. Shubh Vivah uses two woven planes joining around the approved monogram; this is an artistic interpretation of union, not an asserted ritual. Remove all event numbers, alternate labels and redundant taglines. Envelope opening/closing interpolates the container height, withdraws the letter and staggers its contents. Native details remains the no-script fallback.
+
+## Mobile, accessibility and cost
+
+Mobile keeps a vertical composition and immediately available event information. No pinning or horizontal gesture capture. OS reduced motion reverts animations and retains complete content. The build reports approximately 47 kB gzip for the motion script including GSAP/ScrollTrigger; this is an asset size, not a measured page performance score. No new raster images, video or WebGL runtime. Browser playback, touch testing, layout screenshots and Core Web Vitals remain unverified in this environment.
+
+## Previous revisions
+
 # Review-led revision: The Garden Invitation
 
 The reviewers preferred the earlier regal garden. Restore its existing moonlit artwork and envelope interaction, preserving corrected family copy and all event facts. The fixed guest dock, moving ribbon, jump table and pictogram loops are removed. Three structural motion gestures replace them: architectural opening doors behind the names; a monogrammed envelope with unfolding letter; whole event pages flying in, settling and opening their illustrated gatefolds. These gestures belong to one physical invitation language. No added rituals or religious claims. The journey remains.

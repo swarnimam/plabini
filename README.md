@@ -28,6 +28,6 @@ npm run verify
 
 ## Content, accessibility and privacy
 
-See CONTENT_NOTES.md for approved details and DESIGN_RESEARCH.md for research, concept, asset provenance and verification limits. This revision uses no personal photographs. Motion runs by default without an on-page switch; the operating system’s reduced-motion preference is respected. Event artwork animates on entry and while visible, and pauses offscreen. Guest-message generation happens in the browser; nothing is transmitted or persisted, and no recipient email is embedded. Food/accommodation sections are omitted.
+See CONTENT_NOTES.md for approved details and DESIGN_RESEARCH.md for research, concept, asset provenance and verification limits. This revision uses no personal photographs. Motion runs by default without an on-page switch; the operating system’s reduced-motion preference is respected. GSAP ScrollTrigger drives reversible scene transitions with native scrolling; no scroll pinning or autoplay audio. Sangeet and Shubh Vivah use original code-built compositions. Guest-message generation happens in the browser; nothing is transmitted or persisted, and no recipient email is embedded. Food/accommodation sections are omitted.
 
 Rendered browser/device QA could not be performed in the implementation environment. Build and content verification is not a substitute for that review.

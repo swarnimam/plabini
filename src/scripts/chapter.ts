@@ -1,37 +1,81 @@
-// Progressive enhancement: content is readable before scripts, without scripts,
-// and with reduced motion. Natural scrolling remains in control throughout.
-const preference = matchMedia('(prefers-reduced-motion: reduce)');
-let motion = !preference.matches;
-const animations = new Set<Animation>();
-const ease = 'cubic-bezier(.16,1,.3,1)';
-function play(el: Element | null, frames: Keyframe[], duration=1300, delay=0){
-  if(!el || !motion) return;
-  const a=el.animate(frames,{duration,delay,easing:ease,fill:'backwards'});
-  animations.add(a);a.onfinish=()=>{animations.delete(a);a.cancel();};
-}
-function sync(){document.documentElement.dataset.motion=motion?'on':'off';if(!motion){animations.forEach(a=>a.cancel());animations.clear();}}
-sync();preference.addEventListener('change',()=>{motion=!preference.matches;sync();});
-// The architectural opening parts around the names, never in front of them.
-for(const [selector,direction] of [['.door-left',-1],['.door-right',1]] as const){play(document.querySelector(selector),[{opacity:1,transform:'perspective(1200px) rotateY(0deg)'},{opacity:1,offset:.35},{opacity:0,transform:`perspective(1200px) rotateY(${direction*100}deg)`}],1900);}
-play(document.querySelector('.hero-copy'),[{opacity:.35,transform:'translateY(35px)'},{opacity:1,transform:'translateY(0)'}],1700);
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ignoreMobileResize:true});
+const media=gsap.matchMedia();
 const envelope=document.querySelector<HTMLDetailsElement>('#wedding-envelope');
-envelope?.addEventListener('toggle',()=>{if(envelope.open)play(envelope.querySelector('.letter-paper'),[{opacity:.2,transform:'perspective(1000px) translateY(-40px) rotateX(-18deg)',clipPath:'inset(0 0 85% 0)'},{opacity:1,transform:'perspective(1000px) translateY(0) rotateX(0deg)',clipPath:'inset(0 0 0% 0)'}],1250);});
-if('IntersectionObserver' in window){
- const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{
-  if(!entry.isIntersecting)return;
-  const el=entry.target as HTMLElement;
-  if(el.classList.contains('folio-event')){
-   const index=Number(el.dataset.chapter), side=index%2?-1:1;
-   // Full invitation pages arrive and settle; the illustrated gatefold opens.
-   play(el.querySelector('.folio-sheet'),[{opacity:.2,transform:`translate3d(${side*85}px,95px,0) rotate(${side*7}deg) rotateY(${side*16}deg) scale(.86)`},{opacity:1,transform:'translate3d(0,0,0) rotate(0deg) rotateY(0deg) scale(1)'}],1550);
-   for(const [leaf,dir] of [['.leaf-left',-1],['.leaf-right',1]] as const)play(el.querySelector(leaf),[{opacity:1,transform:'rotateY(0deg)'},{opacity:1,offset:.35},{opacity:0,transform:`rotateY(${dir*110}deg)`}],1450,220);
-   play(el.querySelector('.event-main'),[{opacity:.25,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],1200,170);
-   play(el.querySelector('.folio-art>img'),[{transform:'scale(1.18)'},{transform:'scale(1)'}],2200);
-  }else if(el.hasAttribute('data-path-scene')){
-   el.querySelectorAll('.draw-path').forEach((p,i)=>play(p,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],2200,i*150));
-  }else play(el,[{opacity:.3,transform:'translateY(40px)'},{opacity:1,transform:'translateY(0)'}],1300);
-  observer.unobserve(el);
- });},{threshold:.08});
- document.querySelectorAll('.folio-event,[data-reveal],[data-path-scene],.letter-heading,.envelope,.celebration-intro h2').forEach(el=>observer.observe(el));
-}
-document.addEventListener('visibilitychange',()=>animations.forEach(a=>document.hidden?a.pause():a.play()));
+let letterTimeline: gsap.core.Timeline | undefined;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+function refresh(){requestAnimationFrame(()=>ScrollTrigger.refresh());}
+let changingLetter=false;
+const summary=envelope?.querySelector('summary');
+summary?.addEventListener('click',event=>{
+ if(!envelope || reduced.matches)return;
+ event.preventDefault();
+ if(changingLetter)return;
+ changingLetter=true;
+ letterTimeline?.revert();
+ const startHeight=envelope.getBoundingClientRect().height;
+ const opening=!envelope.open;
+ // Measure the native end state, then animate the container to it. The native
+ // details control remains the no-script and reduced-motion fallback.
+ envelope.open=opening;
+ const targetHeight=envelope.getBoundingClientRect().height;
+ if(!opening)envelope.open=true;
+ gsap.set(envelope,{height:startHeight,overflow:'clip'});
+ const letter=envelope.querySelector('.letter-paper');
+ letterTimeline=gsap.timeline({onComplete:()=>{
+  if(!opening)envelope.open=false;
+  gsap.set(envelope,{clearProps:'height,overflow'});
+  changingLetter=false;refresh();
+ }});
+ letterTimeline.to(envelope,{height:targetHeight,duration:opening?1.5:.8,ease:'power3.inOut'},0);
+ if(opening){
+  letterTimeline.fromTo(letter,{y:-150,scale:.82,rotationX:-18,opacity:0,clipPath:'inset(0 0 100% 0)'},{y:0,scale:1,rotationX:0,opacity:1,clipPath:'inset(0 0 0% 0)',duration:1.25,ease:'power3.inOut'},.2)
+   .fromTo(envelope.querySelectorAll('.letter-paper>p,.letter-paper>a,.letter-ganesha,.letter-divider'),{y:18,opacity:0},{y:0,opacity:1,stagger:.04,duration:.5,ease:'power2.out'},.9);
+ }else letterTimeline.to(letter,{y:-110,scale:.85,opacity:0,duration:.65,ease:'power2.in'},0);
+});
+envelope?.addEventListener('toggle',()=>{if(!changingLetter)refresh();});
+reduced.addEventListener('change',()=>{letterTimeline?.revert();changingLetter=false;if(envelope)gsap.set(envelope,{clearProps:'height,overflow'});refresh();});
+media.add('(prefers-reduced-motion: no-preference)',()=>{
+ document.documentElement.dataset.motion='on';
+ const desktop=matchMedia('(min-width:800px)').matches;
+ const intro=gsap.timeline();
+ intro.fromTo('.door-left',{opacity:1,rotationY:0},{opacity:0,rotationY:-105,duration:1.8,ease:'power3.inOut'},0)
+  .fromTo('.door-right',{opacity:1,rotationY:0},{opacity:0,rotationY:105,duration:1.8,ease:'power3.inOut'},0)
+  .from('.hero-copy h1>span',{yPercent:80,opacity:0,rotationX:-25,stagger:.15,duration:1.4,ease:'power3.out'},.2);
+ const hero=gsap.timeline({scrollTrigger:{trigger:'.opening',start:'top top',end:'bottom top',scrub:.6}});
+ hero.to('.hero-scenery',{scale:1.28,yPercent:16,ease:'none'},0).to('.hero-copy',{y:130,scale:.86,opacity:.12,ease:'none'},0);
+ gsap.utils.toArray<HTMLElement>('.folio-event').forEach((event,i)=>{
+  const art=event.querySelector('.folio-art'), sheet=event.querySelector('.folio-sheet'), copy=event.querySelector('.event-main');
+  const dir=i%2?-1:1;
+  const scene=gsap.timeline({scrollTrigger:{trigger:event,start:'top 92%',end:desktop?'top 12%':'top 8%',scrub:.45,invalidateOnRefresh:true}});
+  scene.fromTo(sheet,{rotationY:dir*(desktop?12:5),rotationZ:dir*3,y:100,scale:.88},{rotationY:0,rotationZ:0,y:0,scale:1,ease:'power2.out'},0)
+   .fromTo(art,{clipPath:'inset(16% 18% 16% 18% round 180px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'power2.inOut'},0)
+   .fromTo(copy,{x:dir*(desktop?65:0),y:35,opacity:.45},{x:0,y:0,opacity:1,ease:'power2.out'},.15);
+  const image=event.querySelector('.folio-art>img');
+  if(image)gsap.fromTo(image,{scale:1.3,yPercent:-5},{scale:1.05,yPercent:5,ease:'none',scrollTrigger:{trigger:art,start:'top bottom',end:'bottom top',scrub:true}});
+  if(i===1){
+   const stage=gsap.timeline({scrollTrigger:{trigger:art,start:'top bottom',end:'bottom top',scrub:.4}});
+   stage.fromTo(event.querySelector('.light-columns'),{rotation:-22,yPercent:-15},{rotation:15,yPercent:10,ease:'none'},0)
+    .fromTo(event.querySelector('.stage-word'),{scale:.72,rotationY:-20},{scale:1.12,rotationY:12,ease:'none'},0)
+    .fromTo(event.querySelector('.beam-a'),{rotation:-30},{rotation:35,ease:'none'},0)
+    .fromTo(event.querySelector('.beam-b'),{rotation:30},{rotation:-35,ease:'none'},0);
+  }
+  if(i===3){
+   const union=gsap.timeline({scrollTrigger:{trigger:art,start:'top bottom',end:'center center',scrub:.5}});
+   union.fromTo(event.querySelector('.union-left'),{xPercent:-65,rotation:-35},{xPercent:0,rotation:-18,ease:'power2.out'},0)
+    .fromTo(event.querySelector('.union-right'),{xPercent:65,rotation:35},{xPercent:0,rotation:18,ease:'power2.out'},0)
+    .fromTo(event.querySelector('.union-weave'),{scale:1.5,rotation:-22,opacity:.1},{scale:1,rotation:0,opacity:.65},0)
+    .fromTo(event.querySelector('.union-monogram'),{scale:.5,opacity:0},{scale:1,opacity:1},.25);
+  }
+ });
+ gsap.utils.toArray<HTMLElement>('[data-reveal],.letter-heading,.celebration-intro h2').forEach(el=>gsap.from(el,{y:55,opacity:.2,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none reverse'}}));
+ gsap.utils.toArray<SVGPathElement>('.draw-path').forEach((p,i)=>gsap.fromTo(p,{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:1.8,delay:i*.15,scrollTrigger:{trigger:p,start:'top 85%'}}));
+ gsap.fromTo('.city-type',{xPercent:-7},{xPercent:7,ease:'none',scrollTrigger:{trigger:'.city-scene',start:'top bottom',end:'bottom top',scrub:true}});
+ return()=>{document.documentElement.dataset.motion='off';};
+});
+document.fonts.ready.then(refresh);
+window.addEventListener('load',refresh,{once:true});
+document.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach(img=>img.addEventListener('load',refresh,{once:true}));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)gsap.ticker.sleep();else{gsap.ticker.wake();ScrollTrigger.update();}});

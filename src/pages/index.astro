@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { invitation as w, asset } from '../data/invitation';
 import EventDetails from '../components/chapter/EventDetails.astro';
 import Envelope from '../components/garden/Envelope.astro';
+import EventScenography from '../components/chapter/EventScenography.astro';
 import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
 ---
 <BaseLayout>
@@ -29,12 +30,12 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
     </section>
     <Envelope />
     <section id="celebrations" class="celebrations" aria-labelledby="celebrations-title">
-      <div class="celebration-intro section-space"><p class="celebration-motto"><span>Two days</span><i>✧</i><span>Four celebrations</span><i>✧</i><span>One forever</span></p><p class="overline">02 / Four celebrations. Four worlds.</p><h2 id="celebrations-title">Every moment,<br /><em>its own kind of magic.</em></h2></div>
+      <div class="celebration-intro section-space"><p class="celebration-motto"><span>Two days</span><i>✧</i><span>Four celebrations</span><i>✧</i><span>One forever</span></p><p class="overline">Four celebrations. Four worlds.</p><h2 id="celebrations-title">Every moment,<br /><em>its own kind of magic.</em></h2></div>
       <div class="invitation-folio">
       {w.events.map((event,i) => <article class={`event folio-event folio-${i}`} id={event.id} data-chapter={i} aria-labelledby={`event-${i}`}>
         <div class="folio-sheet">
-          <div class="folio-art" aria-hidden="true"><img src={asset(`images/garden/${['tilak-garden','sangeet-garden','haldi-garden','forever-night'][i]}.webp`)} width="1536" height="1024" loading="lazy" decoding="async" /><div class="folio-leaf leaf-left"></div><div class="folio-leaf leaf-right"></div><span class="folio-number">0{i+1}</span><p class="folio-caption">{['The beginning','The evening','The morning','The promise'][i]}</p></div>
-          <div class="event-main"><div class="event-marker"><span>0{i+1}</span><p>{event.day}<br />{event.date}</p></div><p class="event-hindi" lang="hi">{event.hindi}</p><h3 id={`event-${i}`}>{event.name}</h3><p class="event-poem">{['An auspicious beginning.','An evening on the dance floor.','A little colour. A lot of joy.','The beginning of our forever.'][i]}</p><p class="event-description">{event.description}</p><EventDetails index={i} /></div>
+          <div class="folio-art" aria-hidden="true">{i === 0 || i === 2 ? <img src={asset(`images/garden/${i === 0 ? 'tilak-garden' : 'haldi-garden'}.webp`)} width="1536" height="1024" loading="lazy" decoding="async" /> : <EventScenography index={i} />}</div>
+          <div class="event-main"><p class="event-hindi" lang="hi">{event.hindi}</p><h3 id={`event-${i}`}>{event.name}</h3><p class="event-description">{event.description}</p><EventDetails index={i} /></div>
         </div>
       </article>)}
       </div>
