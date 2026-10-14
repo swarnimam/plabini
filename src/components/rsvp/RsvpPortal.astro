@@ -1,25 +1,15 @@
 ---
 import { invitation as w } from '../../data/invitation';
 ---
-<section id="rsvp" class="rsvp-section section-pad" aria-labelledby="rsvp-title">
-  <div class="wrap rsvp-layout">
-    <div class="rsvp-copy"><p class="eyebrow">Your presence is our favourite gift</p><h2 id="rsvp-title">Come for the wedding.<br /><em>Stay for the memories.</em></h2><p>We’d love to celebrate with you. Prepare a little note and share it with the family to let us know your plans.</p><span class="rsvp-signature">With love,<br />Swarnimam & Plabini</span></div>
-    <div class="response-card">
-      <p class="eyebrow">A note to the family</p>
-      <form id="response-form" data-email={w.rsvpEmail} hidden>
-        <label for="guest-name">Your name<input id="guest-name" name="name" required maxlength="100" autocomplete="name" placeholder="Your full name" /></label>
-        <div class="form-row"><label for="attendance">Will you join us?<select id="attendance" name="attendance"><option value="accept">Joyfully accepts</option><option value="decline">Sending love from afar</option></select></label><label for="guests">Guests, including you<input type="number" id="guests" name="guests" min="1" max="30" value="1" required inputmode="numeric" /></label></div>
-        <label for="guest-message">A message or special request <span>(optional)</span><textarea id="guest-message" name="message" rows="3" maxlength="1000" placeholder="A little love, or anything you’d like us to know…"></textarea></label>
-        <button class="button button-wine" type="submit">Prepare my response <span aria-hidden="true">↗</span></button>
-        <p class="response-help">Prepare your message here, then send it to the family. This form does not submit a response automatically.</p>
-      </form>
-      <noscript><p>Please send your name, attendance, and guest count directly to the family through your usual conversation.</p></noscript>
-      <div id="response-result" hidden tabindex="-1">
-        <h3>Your note is ready.</h3><p>Copy this message and send it to the family in your usual chat.</p>
-        <label for="response-text" class="sr-only">Your prepared response</label><textarea id="response-text" readonly rows="7"></textarea>
-        <div class="response-actions"><button type="button" id="copy-response" class="button button-wine">Copy message</button><button type="button" id="edit-response" class="text-button">Edit response</button></div>
-        <p id="copy-status" role="status" aria-live="polite"></p>
-      </div>
-    </div>
+<section id="rsvp" class="rsvp-section" aria-labelledby="rsvp-title">
+  <div class="rsvp-layout"><div class="rsvp-copy"><p class="eyebrow">A little note, a lot of love</p><h2 id="rsvp-title">Your place<br />in <em>our story.</em></h2><p>Let us know your plans. Prepare a message below, then copy it into your usual conversation with the family.</p><span class="rsvp-signature">With love,<br />Swarnimam & Plabini</span></div>
+    <div class="response-card"><p class="eyebrow">A message to the family</p><form id="response-form" hidden>
+      <label for="guest-name">Your name<input id="guest-name" name="name" required maxlength="100" autocomplete="name" placeholder="Your full name" /></label>
+      <div class="form-row"><label for="attendance">Will you join us?<select id="attendance" name="attendance"><option value="accept">Attending</option><option value="decline">Unable to attend</option><option value="unsure">Yet to confirm</option></select></label><label for="guests">Guests, including you<input type="number" id="guests" name="guests" min="1" max="100" value="1" required inputmode="numeric" /></label></div>
+      <fieldset id="event-options"><legend>Celebrations you plan to attend</legend>{w.events.map(e=><label class="check-label"><input type="checkbox" name="events" value={e.name} checked />{e.name}</label>)}</fieldset>
+      <label for="guest-message">A little note <span>(optional)</span><textarea id="guest-message" name="message" rows="3" maxlength="1000" placeholder="Anything you’d like to tell us…"></textarea></label>
+      <button class="button" type="submit">Prepare my message ↗</button><p class="response-help">Copying this message does not send your response.</p>
+    </form><noscript><p>Send your name, attendance, guest count and chosen celebrations to the family through your usual conversation.</p></noscript>
+    <div id="response-result" hidden tabindex="-1"><h3>Your note is ready.</h3><p>Copy it into your usual conversation with the family. Nothing has been sent.</p><label for="response-text" class="sr-only">Your prepared message</label><textarea id="response-text" readonly rows="10"></textarea><div class="response-actions"><button type="button" id="copy-response" class="button">Copy message</button><button type="button" id="edit-response" class="text-button">Edit message</button></div><p id="copy-status" role="status" aria-live="polite"></p></div></div>
   </div>
 </section>

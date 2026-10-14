@@ -1,0 +1,9 @@
+---
+const { kind } = Astro.props;
+---
+<div class={`scene-art scene-${kind}`} aria-hidden="true">
+  {kind === 'blessings' && <div class="silk-fan">{Array.from({length:17},(_,i)=><span style={`--i:${i}`}></span>)}<i></i></div>}
+  {kind === 'music' && <div class="music-orbits"><span></span><span></span><span></span><span></span><div class="music-core">शाम<br />शानदार</div><i></i><i></i><i></i></div>}
+  {kind === 'sunshine' && <div class="sun-bloom">{Array.from({length:16},(_,i)=><span style={`--i:${i}`}></span>)}<i></i></div>}
+  {kind === 'forever' && <svg class="forever-weave" viewBox="0 0 500 500" fill="none">{Array.from({length:12},(_,i)=><path style={`--i:${i}`} d={`M${-100+i*7} ${60+i*11} C${620-i*6} ${10+i*8}, ${610-i*7} ${460-i*6}, 250 ${440-i*9} C${-110+i*7} ${460-i*6}, ${-120+i*6} ${10+i*8}, ${600-i*7} ${60+i*11}`} />)}</svg>}
+</div>

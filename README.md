@@ -1,74 +1,33 @@
-# Swarnimam & Plabini — #perfectlyPS
+# Swarnimam & Plabini — The Unwritten Chapter
 
-An immersive wedding website for 8–9 December 2026 at Greater Rajwada Resort, Gaya. **The Garden of Forever** turns the four ceremonies into a continuous journey through original illustrated gardens. Built with Astro as a portable static site.
+A mobile-first Astro wedding invitation for 8–9 December 2026, Greater Rajwada Resort, Gaya.
 
-## Run and build
+The current design follows the couple's real story: VIT-AP, friendship in Bangalore, and two families coming together. Original silk artwork, animated Hindi/English event scenes, lightweight canvas and SVG motion, per-event calendar downloads and a local-only response-message composer.
 
-Use Node.js 22 or newer.
+## Develop and verify
 
 ```sh
 npm ci
 npm run dev
 npm run build
-npm run preview
+npm run verify
 ```
 
-The production output is `dist/`. Upload that directory to any static host (for example, GitHub Pages, Netlify, Cloudflare Pages or Vercel configured for Astro static output). No server, database, or runtime secrets are required.
-
-Set `SITE_URL` to the real deployed origin to generate canonical/social URLs. For a GitHub project URL, also set `BASE_PATH=/plabini`. All live assets and calendar links use the configured base path. Do not substitute an unregistered example domain.
+For the GitHub Pages project path:
 
 ```sh
-SITE_URL=https://swarnimam.github.io BASE_PATH=/plabini npm run build
+BASE_PATH=/plabini SITE_URL=https://swarnimam.github.io npm run build
+npm run verify
 ```
 
-## GitHub Pages pipeline
+`src/data/invitation.ts` holds the event details. `src/pages/index.astro`, `src/styles/chapter.css`, `src/styles/celebration.css` and `src/scripts/chapter.ts` implement the current experience. The older garden components remain unused for history; they are not loaded by the current page.
 
-Two workflows are included:
+## Deployment
 
-- **Check wedding website** (`.github/workflows/check.yml`): validates pull requests into `main` and pushes to `codex/**` branches. Builds and verifies both a root deployment and the `/plabini` project path. It has read-only permissions and cannot deploy.
-- **Deploy wedding website** (`.github/workflows/deploy.yml`): runs on pushes/merges to `main`, or manually from Actions. Installs locked dependencies, reads the actual Pages origin/base path, builds, verifies, uploads `dist/`, and deploys only after success. Manual runs on other branches are intentionally skipped.
+`.github/workflows/check.yml` verifies root and project-path builds for pull requests and codex branches. `.github/workflows/deploy.yml` builds and deploys main through GitHub Actions to GitHub Pages, using the Pages-provided URL and base path. Repository Settings → Pages must use GitHub Actions. No backend/secrets are required for this static website. Publishing a feature branch alone does not change the public Pages site; merge its PR to trigger deployment.
 
-One-time setup:
+## Content, accessibility and privacy
 
-1. In the repository's **Settings → Pages → Build and deployment**, set **Source: GitHub Actions**.
-2. Merge the redesigned website and workflows into `main`.
-3. Open **Actions → Deploy wedding website** to follow the first deployment. Subsequent pushes to `main` deploy automatically. To redeploy manually, select **Run workflow → main**.
-4. The deployment job's environment link shows the actual URL. Without a custom domain, the expected URL is `https://swarnimam.github.io/plabini/`.
+See CONTENT_NOTES.md for approved details and DESIGN_RESEARCH.md for research, concept, asset provenance and verification limits. This revision uses no personal photographs. Reduced-motion and a visible motion switch are supported. Guest-message generation happens in the browser; nothing is transmitted or persisted, and no recipient email is embedded. Food/accommodation sections are omitted.
 
-No personal access token or custom secrets are required; GitHub supplies the short-lived `GITHUB_TOKEN`. The deployment job alone has `pages: write` and `id-token: write`. Concurrent deployments are serialized. Existing repository/environment restrictions still apply.
-
-The workflow must be merged into the default branch before GitHub shows its manual Run workflow button. No public deployment is claimed before a successful Actions run.
-
-
-## Edit the invitation
-
-- `src/data/invitation.ts` — authoritative published names, family, venue and ceremony information.
-- `src/pages/index.astro` — invitation page structure.
-- `src/components/garden/ChapterJourney.astro` — scroll-linked ceremony artwork and readable event chapters.
-- `src/components/rsvp/RsvpPortal.astro` — response composer; does not claim to send an RSVP.
-- `src/styles/garden.css` — responsive moonlit, rose, indigo and saffron worlds.
-- `src/scripts/invitation.ts` — countdown and response copy controls.
-- `src/scripts/garden.ts` — ceremony scene controller, invitation reveal, quick schedule, optional ambience and motion controls.
-- `src/data/gardenScenes.ts` — presentation copy and artwork; all factual content stays in `invitation.ts`.
-- `IMMERSIVE_DESIGN.md` — visual concept, interactions, artwork prompts and validation boundaries.
-- `src/lib/calendar.ts` — UTF-8-safe RFC 5545 calendar generation from the same event data.
-- `CONTENT_NOTES.md` — content sources, schedule conflicts, artwork provenance and remaining confirmations.
-- `REPO_REVIEW.md` — findings from the original implementation and the redesign decisions.
-
-The original story, timeline, gallery, ambient-audio and cinematic components, old JSON, and early planning documents are retained for reference. They are not imported into the current page and their placeholder facts are not authoritative. Do not republish them without replacing their content and verifying the behavior.
-
-## Guest experience
-
-The invitation, ceremony times, calendar downloads, venue link and navigation work without JavaScript. The invitation is a native details disclosure. Without JavaScript, visitors get all ceremony artwork and text in a normal page; with JavaScript, large screens gain a sticky scene that changes with scroll. Phones keep an illustrated vertical story.
-
-JavaScript also adds a countdown, a native modal with the full schedule, a symbolic diya interaction and a response composer. A permanent Motion control disables optional movement; reduced-motion preferences are respected from first paint. Ambient audio is silent by default, starts only after a click, and pauses when the tab is hidden. Audio is a subtle synthetic soundscape, not a recording or licensed track. No scroll hijacking, custom cursor, WebGL dependency or blocking intro.
-
-RSVP messages are **not sent or stored** by this site. Guests prepare and copy their response, then send it directly to the family through their existing conversation. A confirmed destination and delivery integration are required before replacing this with a submission form. No uncertain phone number is used.
-
-The map button opens a search for the exact venue name and locality; it is not a verified pin. The artwork is decorative, not an image of the actual resort.
-
-## Verification
-
-`npm run build` compiles the production site. `npm run verify` checks generated assets, internal anchors, metadata, exact calendar starts and UTF-8 line folding, and ensures no placeholder story, false venue, or fake RSVP success leaks into the live HTML. Run the build before verification. Check both root and `/plabini` base-path builds before GitHub Pages publication.
-
-Browser rendering and interaction checks should be completed before sharing broadly; the current editing environment did not provide the supported browser QA tool.
+Rendered browser/device QA could not be performed in the implementation environment. Build and content verification is not a substitute for that review.

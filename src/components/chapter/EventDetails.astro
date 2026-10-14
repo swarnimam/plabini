@@ -1,0 +1,11 @@
+---
+import { invitation, asset } from '../../data/invitation';
+const { index } = Astro.props;
+const event = invitation.events[index];
+---
+<div class="event-details">
+  <p class="event-time"><time datetime={event.iso}>{event.day}, {event.date} 2026 <span>{event.time} <small>IST</small></span></time></p>
+  <p class="event-place">Greater Rajwada Resort · Gaya</p>
+  <p class="dress"><span>Dress code</span>{event.attire}</p>
+  <a class="text-link" href={asset(`calendar/${event.id}.ics`)} download>Save this celebration <span aria-hidden="true">↗</span></a>
+</div>

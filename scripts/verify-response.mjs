@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {prepareResponse} from '../src/lib/response.ts';
+const accepting=prepareResponse(' Priya ','accept','4',['Haldi','Shubh Vivah'],'See you soon');
+assert.ok(accepting.includes('Name: Priya\n'));
+assert.ok(accepting.includes('4\nCelebrations attending: Haldi, Shubh Vivah'));
+assert.ok(accepting.includes('See you soon'));
+const declining=prepareResponse('Priya','decline','4',['Haldi'],'');
+assert.ok(declining.includes('Unable to attend'));
+assert.ok(!declining.includes('Number of guests'));
+assert.ok(!declining.includes('Haldi'));
+const uncertain=prepareResponse('Priya','unsure','1',[],'');
+assert.ok(uncertain.includes('Attendance: Yet to confirm'));
+assert.ok(uncertain.includes('Celebrations attending: Yet to confirm'));
+console.log('Verified response messages: accepting, declining, unconfirmed, event selection and whitespace.');
