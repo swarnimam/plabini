@@ -1,7 +1,7 @@
 ---
 import { invitation, asset } from '../data/invitation';
 import '../styles/chapter.css';
-import '../styles/celebration.css';
+import '../styles/regal.css';
 const title = `${invitation.names.groom} & ${invitation.names.bride} | 8–9 December 2026`;
 const description = `Together with our families, we invite you to celebrate our wedding on 8–9 December 2026 at ${invitation.venue.name}, Gaya. #perfectlyPS`;
 const canonical = Astro.site ? new URL(import.meta.env.BASE_URL, Astro.site) : undefined;
@@ -21,7 +21,7 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#360d26" />
+    <meta name="theme-color" content="#102c27" />
     <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />

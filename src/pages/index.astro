@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { invitation as w, asset } from '../data/invitation';
 import EventDetails from '../components/chapter/EventDetails.astro';
-import SceneArt from '../components/chapter/SceneArt.astro';
+import Envelope from '../components/garden/Envelope.astro';
 import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
 ---
 <BaseLayout>
@@ -12,11 +12,11 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
   </header>
   <main id="main">
     <section class="opening" id="home" aria-labelledby="couple-names">
-      <div class="hero-scenery" aria-hidden="true"><img src={asset('images/chapter/celebration-silk-1280.webp')} srcset={`${asset('images/chapter/celebration-silk-640.webp')} 640w, ${asset('images/chapter/celebration-silk-1280.webp')} 1024w`} sizes="100vw" width="1024" height="1536" fetchpriority="high" alt="" /><div class="hero-shade"></div><canvas id="silk-canvas"></canvas></div>
+      <div class="hero-scenery" aria-hidden="true"><img src={asset('images/garden/forever-night.webp')} width="1536" height="1024" fetchpriority="high" alt="" /><div class="hero-shade"></div></div>
+      <div class="palace-door door-left" aria-hidden="true"></div><div class="palace-door door-right" aria-hidden="true"></div>
       <div class="hero-copy"><p class="hero-hosts">The Kumars <i>&</i> The Nayaks</p><p class="hero-preface">request the pleasure of your company<br />at the wedding of their children</p><h1 id="couple-names"><span>Swarnimam</span><i>&</i><span>Plabini</span></h1><div class="hero-date"><span>08 — 09</span><p>DECEMBER 2026<br />GREATER RAJWADA RESORT · GAYA</p></div><a class="hero-enter" href="#celebrations"><span>Explore the celebrations</span><b aria-hidden="true">↓</b></a></div>
       <span class="hero-side" aria-hidden="true">#perfectlyPS · THE CELEBRATION BEGINS</span>
     </section>
-    <div class="celebration-ribbon" aria-hidden="true"><div>{Array.from({length:4},()=> <span>SWARNIMAM & PLABINI <i>✦</i> 8–9 DECEMBER 2026 <i>✦</i> GAYA, BIHAR <i>✦</i></span>)}</div></div>
     <section id="story" class="story section-space" aria-labelledby="story-title">
       <div class="section-caption"><span>01 / OUR STORY</span><span>VIT-AP · BANGALORE</span></div>
       <h2 id="story-title" class="editorial-title" data-reveal>From friendship<br /><em>to a shared future.</em></h2>
@@ -27,26 +27,22 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
       <div class="city-scene" data-scroll-scene><div class="city-type" aria-hidden="true"><span>Our time</span><em>together.</em></div><div class="city-moments"><p><span>01 / EXPLORING THE CITY</span>New places, shared discoveries.</p><p><span>02 / TIME TOGETHER</span>Food outings and evenings at the movies.</p><p><span>03 / GROWING CLOSER</span>A friendship that became a partnership.</p></div><p class="city-caption">As we explored Bangalore together, food outings, films and conversations became a familiar part of our lives. Over time, the ease of our friendship grew into the certainty that we wanted a future together.</p><svg class="city-lines" viewBox="0 0 800 500" fill="none" aria-hidden="true"><path d="M-100 100C400 -50 100 600 900 300"/><path d="M-100 140C450 0 150 650 900 340"/></svg></div>
       <p class="story-turn" data-reveal>When we began speaking about marriage,<br /><em>it felt like the natural next step in our story.</em></p>
     </section>
-    <section id="invitation" class="family-invitation section-space" aria-labelledby="invitation-title">
-      <img class="monogram" src={asset('images/chapter/ganesha.webp')} width="160" height="160" loading="lazy" alt="Lord Ganesha, from our wedding invitation" />
-      <p class="blessing" lang="hi">॥ श्री गणेशाय नमः ॥</p>
-      <h2 id="invitation-title" data-reveal>An invitation<br /><em>from our families.</em></h2>
-      <div class="inclusive-invitation"><p class="family-names">The Kumars & The Nayaks</p><p>request the pleasure of your company at the wedding of their children</p><p class="invited-couple">Swarnimam <i>&</i> Plabini</p></div>
-      <p class="hindi-invitation" lang="hi">पावन परिणयोत्सव की मंगल बेला पर<br />सपरिवार पधारकर वर-वधू को आशीर्वाद दें।</p>
-      <p class="family-note">Your presence and blessings would mean a great deal to our families<br class="desktop-only" /> as we gather to celebrate this union.</p>
-    </section>
+    <Envelope />
     <section id="celebrations" class="celebrations" aria-labelledby="celebrations-title">
-      <div class="celebration-intro section-space"><p class="overline">08—09 DECEMBER · GAYA</p><h2 id="celebrations-title" lang="hi">मांगलिक कार्यक्रम</h2><p class="intro-line">The wedding celebrations</p><nav class="event-jump" aria-label="Jump to a celebration">{w.events.map((event,i)=><a href={`#${event.id}`}><small>0{i+1}</small>{event.name}</a>)}</nav></div>
-      <article class="event event-beginning" id="tilakotsav" data-chapter="0" aria-labelledby="event-0"><div class="event-marker"><span>01</span><p>THE BLESSINGS<br />TUESDAY AFTERNOON</p></div><div class="event-main"><p class="event-hindi" lang="hi" data-reveal>{w.events[0].hindi}</p><h3 id="event-0">{w.events[0].name}</h3><p class="event-poem">An auspicious beginning.</p><p class="event-description">{w.events[0].description}</p><EventDetails index={0} /></div><SceneArt kind="blessings" /></article>
-      <article class="event event-sangeet" id="sangeet" data-chapter="1" aria-labelledby="event-1"><div class="event-marker"><span>02</span><p>THE SANGEET<br />TUESDAY EVENING</p></div><div class="event-main"><p class="event-hindi" lang="hi" data-reveal>{w.events[1].hindi}</p><h3 id="event-1">Sangeet</h3><p class="event-poem">An evening made<br /><em>for the dance floor.</em></p><p class="event-description">{w.events[1].description}</p><EventDetails index={1} /></div><SceneArt kind="music" /></article>
-      <article class="event event-haldi" id="haldi" data-chapter="2" aria-labelledby="event-2"><div class="event-marker"><span>03</span><p>HALDI & GAMES<br />WEDNESDAY MORNING</p></div><SceneArt kind="sunshine" /><div class="event-main"><p class="event-hindi" lang="hi" data-reveal>{w.events[2].hindi}</p><h3 id="event-2">Haldi</h3><p class="event-poem">A morning of Haldi<br /><em>and family games.</em></p><p class="event-description">{w.events[2].description}</p><EventDetails index={2} /></div></article>
-      <article class="event event-vivah" id="shubh-vivah" data-chapter="3" aria-labelledby="event-3"><div class="event-marker"><span>04</span><p>THE PROMISE<br />WEDNESDAY EVENING</p></div><SceneArt kind="forever" /><div class="event-main"><p class="event-hindi" lang="hi" data-reveal>{w.events[3].hindi}</p><h3 id="event-3">Shubh Vivah</h3><p class="event-poem">The beginning of<br /><em>our married life.</em></p><p class="event-description">{w.events[3].description}</p><EventDetails index={3} /></div></article>
+      <div class="celebration-intro section-space"><p class="celebration-motto"><span>Two days</span><i>✧</i><span>Four celebrations</span><i>✧</i><span>One forever</span></p><p class="overline">02 / Four celebrations. Four worlds.</p><h2 id="celebrations-title">Every moment,<br /><em>its own kind of magic.</em></h2></div>
+      <div class="invitation-folio">
+      {w.events.map((event,i) => <article class={`event folio-event folio-${i}`} id={event.id} data-chapter={i} aria-labelledby={`event-${i}`}>
+        <div class="folio-sheet">
+          <div class="folio-art" aria-hidden="true"><img src={asset(`images/garden/${['tilak-garden','sangeet-garden','haldi-garden','forever-night'][i]}.webp`)} width="1536" height="1024" loading="lazy" decoding="async" /><div class="folio-leaf leaf-left"></div><div class="folio-leaf leaf-right"></div><span class="folio-number">0{i+1}</span><p class="folio-caption">{['The beginning','The evening','The morning','The promise'][i]}</p></div>
+          <div class="event-main"><div class="event-marker"><span>0{i+1}</span><p>{event.day}<br />{event.date}</p></div><p class="event-hindi" lang="hi">{event.hindi}</p><h3 id={`event-${i}`}>{event.name}</h3><p class="event-poem">{['An auspicious beginning.','An evening on the dance floor.','A little colour. A lot of joy.','The beginning of our forever.'][i]}</p><p class="event-description">{event.description}</p><EventDetails index={i} /></div>
+        </div>
+      </article>)}
+      </div>
     </section>
     <section id="venue" class="venue section-space" aria-labelledby="venue-title"><div class="venue-copy"><p class="overline">THE WEDDING VENUE</p><h2 id="venue-title">We look forward to<br /><em>welcoming you<br />in Gaya.</em></h2><p class="venue-name">Greater Rajwada Resort</p><p>Manpur, Gaya · Near Mehta Petrol Pump<br />Bihar, India</p><a class="button" href={w.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Open directions ↗<span class="sr-only"> in Google Maps, new tab</span></a></div><div class="venue-art" aria-hidden="true"><span>08</span><i>&</i><span>09</span><p>DECEMBER<br />GAYA, BIHAR</p><svg viewBox="0 0 400 500" fill="none"><path d="M-40 40C460 0 450 500 80 440S-100 200 440 200"/><path d="M-40 60C430 20 430 480 100 420S-70 220 440 220"/></svg></div></section>
     <RsvpPortal />
   </main>
   <footer class="site-footer"><p class="overline">WITH GRATITUDE FOR YOUR LOVE AND BLESSINGS</p><p class="footer-title">With love,<br /><em>Swarnimam & Plabini.</em></p><div class="footer-bottom"><span>#perfectlyPS</span><span>8–9 DECEMBER 2026 · GAYA</span><a href="#home">Back to top ↑</a></div></footer>
-  <nav class="guest-dock" aria-label="Guest shortcuts"><a href="#celebrations">Celebrations</a><a href="#venue">Directions ↗</a><a href="#rsvp">Your message</a></nav>
   <script src="../scripts/chapter.ts"></script>
   <script src="../scripts/invitation.ts"></script>
 </BaseLayout>

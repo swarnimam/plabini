@@ -1,94 +1,37 @@
-// Natural scroll, independent readable HTML and a complete static fallback.
-const root = document.documentElement;
+// Progressive enhancement: content is readable before scripts, without scripts,
+// and with reduced motion. Natural scrolling remains in control throughout.
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
-const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-const constrained = Boolean(connection?.saveData || ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8) <= 2);
 let motion = !preference.matches;
-const running = new Set<Animation>();
-function animate(el: Element, frames: Keyframe[], options: KeyframeAnimationOptions) {
-  if (!motion) return;
-  const animation = el.animate(frames, options);
-  running.add(animation);
-  animation.onfinish = () => { running.delete(animation); animation.cancel(); };
+const animations = new Set<Animation>();
+const ease = 'cubic-bezier(.16,1,.3,1)';
+function play(el: Element | null, frames: Keyframe[], duration=1300, delay=0){
+  if(!el || !motion) return;
+  const a=el.animate(frames,{duration,delay,easing:ease,fill:'backwards'});
+  animations.add(a);a.onfinish=()=>{animations.delete(a);a.cancel();};
 }
-const opening = document.querySelector<HTMLElement>('.opening');
-const heroImage = document.querySelector<HTMLElement>('.hero-scenery>img');
-const scenes = Array.from(document.querySelectorAll<HTMLElement>('.event,[data-scroll-scene]'));
-let heroVisible=true, frame=0, lastFrame=0;
-const canvas=document.querySelector<HTMLCanvasElement>('#silk-canvas');
-const ctx=canvas?.getContext('2d');
-let width=0,height=0,pointerX=0,pointerY=0;
-function resizeCanvas(){
-  if(!canvas||!opening||!ctx)return;
-  width=opening.clientWidth;height=opening.clientHeight;
-  const ratio=Math.min(devicePixelRatio||1,constrained?1:1.5);
-  canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
-  ctx.setTransform(ratio,0,0,ratio,0,0);
-}
-function draw(time:number){
-  frame=0;
-  if(!motion||!heroVisible||document.hidden||!ctx||!canvas)return;
-  frame=requestAnimationFrame(draw);
-  if(time-lastFrame<33)return;
-  lastFrame=time;ctx.clearRect(0,0,width,height);
-  const t=time*.00022;
-  // A small number of silk-like luminous curves; no sprites or image textures.
-  for(let i=0;i<(constrained?12:20);i++){
-    const phase=i*.14;const sway=Math.sin(t+phase)*width*.07;
-    const left=i%2===0;
-    const edge=left?width*.06:width*.94;
-    const bend=left?width*.21:width*.79;
-    ctx.beginPath();ctx.moveTo(edge+Math.sin(t+phase)*35,-40);
-    ctx.bezierCurveTo(bend+sway+pointerX,height*.2,edge-sway,height*.63,edge+Math.cos(t+phase)*60+pointerX,height+40);
-    ctx.strokeStyle=`rgba(255,${170+i*3},${95+i*3},${.08+i*.009})`;ctx.lineWidth=.7;ctx.stroke();
-    const y=((t*.055+phase*.8)%1)*height;
-    ctx.beginPath();ctx.arc(edge+Math.sin(y/height*6+t)*width*.06+pointerX,y+pointerY,1.1,0,Math.PI*2);ctx.fillStyle='rgba(255,222,161,.6)';ctx.fill();
-  }
-}
-function startCanvas(){if(!frame&&motion&&heroVisible&&!document.hidden)frame=requestAnimationFrame(draw);}
-function stopCanvas(){cancelAnimationFrame(frame);frame=0;ctx?.clearRect(0,0,width,height);}
-function syncMotion(){
-  root.dataset.motion=motion?'on':'off';
-  if(!motion){running.forEach(a=>a.cancel());running.clear();stopCanvas();if(heroImage)heroImage.style.transform='';}
-  else startCanvas();
-}
-syncMotion();resizeCanvas();
-preference.addEventListener('change',()=>{motion=!preference.matches;syncMotion();updateScroll();});
-window.addEventListener('resize',resizeCanvas,{passive:true});
-opening?.addEventListener('pointermove',event=>{if(event.pointerType==='mouse'){pointerX=(event.clientX/innerWidth-.5)*20;pointerY=(event.clientY/innerHeight-.5)*10;}},{passive:true});
-opening?.addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;});
-// The typography stays above all scenery throughout the entrance and scroll.
-if(heroImage)animate(heroImage,[{transform:'scale(1.35)'},{transform:'scale(1.09)'}],{duration:2300,easing:'cubic-bezier(.15,.6,.2,1)'});
-document.querySelectorAll('.hero-copy h1>span').forEach((el,i)=>animate(el,[{opacity:.4,transform:`translateY(${i?30:-30}px)`,letterSpacing:'.03em'},{opacity:1,transform:'translateY(0)',letterSpacing:'-.045em'}],{duration:1600,delay:i*100,easing:'cubic-bezier(.2,.7,.2,1)'}));
+function sync(){document.documentElement.dataset.motion=motion?'on':'off';if(!motion){animations.forEach(a=>a.cancel());animations.clear();}}
+sync();preference.addEventListener('change',()=>{motion=!preference.matches;sync();});
+// The architectural opening parts around the names, never in front of them.
+for(const [selector,direction] of [['.door-left',-1],['.door-right',1]] as const){play(document.querySelector(selector),[{opacity:1,transform:'perspective(1200px) rotateY(0deg)'},{opacity:1,offset:.35},{opacity:0,transform:`perspective(1200px) rotateY(${direction*100}deg)`}],1900);}
+play(document.querySelector('.hero-copy'),[{opacity:.35,transform:'translateY(35px)'},{opacity:1,transform:'translateY(0)'}],1700);
+const envelope=document.querySelector<HTMLDetailsElement>('#wedding-envelope');
+envelope?.addEventListener('toggle',()=>{if(envelope.open)play(envelope.querySelector('.letter-paper'),[{opacity:.2,transform:'perspective(1000px) translateY(-40px) rotateX(-18deg)',clipPath:'inset(0 0 85% 0)'},{opacity:1,transform:'perspective(1000px) translateY(0) rotateX(0deg)',clipPath:'inset(0 0 0% 0)'}],1250);});
 if('IntersectionObserver' in window){
- const visible=new IntersectionObserver(entries=>{entries.forEach(entry=>{
-  entry.target.classList.toggle('is-visible',entry.isIntersecting);
-  if(entry.target===opening){heroVisible=entry.isIntersecting;if(heroVisible)startCanvas();else stopCanvas();}
- });},{threshold:0});
- document.querySelectorAll('.opening,.event,.celebration-ribbon').forEach(el=>visible.observe(el));
- const reveal=new IntersectionObserver(entries=>{entries.forEach(entry=>{
+ const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{
   if(!entry.isIntersecting)return;
-  const el=entry.target;
-  if(el.hasAttribute('data-path-scene'))el.querySelectorAll('.draw-path').forEach((path,i)=>animate(path,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:2200,delay:i*130,easing:'ease-out'}));
-  else if(el.classList.contains('scene-art')){
-    const art=el.querySelector('.ceremony-illustration');
-    if(art)animate(art,[{opacity:.2,transform:'translateY(50px) scale(.78)',clipPath:'inset(12% 6% 0 6%)'},{opacity:1,transform:'translateY(0) scale(1)',clipPath:'inset(0% 0% 0% 0%)'}],{duration:1800,easing:'cubic-bezier(.16,1,.3,1)'});
-    if(el.classList.contains('scene-blessings'))el.querySelectorAll('.ceremony-flower').forEach((flower,i)=>animate(flower,[{translate:`${i%2?60:-60}px -95px`,opacity:0,scale:'.5'},{translate:'0 0',opacity:1,scale:'1'}],{duration:1800,delay:250+i*150,easing:'cubic-bezier(.2,.7,.2,1)'}));
-    if(el.classList.contains('scene-sunshine'))el.querySelectorAll('.turmeric-stroke').forEach(stroke=>animate(stroke,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:1900,easing:'cubic-bezier(.2,.7,.2,1)'}));
-    if(el.classList.contains('scene-forever'))el.querySelectorAll('.fire-rise').forEach(flame=>animate(flame,[{scale:'1 .15',opacity:.3},{scale:'1 1',opacity:1}],{duration:2300,easing:'cubic-bezier(.2,.7,.2,1)'}));
-  }
-  else animate(el,[{opacity:.45,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],{duration:1000,easing:'cubic-bezier(.2,.7,.2,1)'});
-  reveal.unobserve(el);
- });},{threshold:.2});
- document.querySelectorAll('[data-reveal],[data-path-scene],.scene-art').forEach(el=>reveal.observe(el));
+  const el=entry.target as HTMLElement;
+  if(el.classList.contains('folio-event')){
+   const index=Number(el.dataset.chapter), side=index%2?-1:1;
+   // Full invitation pages arrive and settle; the illustrated gatefold opens.
+   play(el.querySelector('.folio-sheet'),[{opacity:.2,transform:`translate3d(${side*85}px,95px,0) rotate(${side*7}deg) rotateY(${side*16}deg) scale(.86)`},{opacity:1,transform:'translate3d(0,0,0) rotate(0deg) rotateY(0deg) scale(1)'}],1550);
+   for(const [leaf,dir] of [['.leaf-left',-1],['.leaf-right',1]] as const)play(el.querySelector(leaf),[{opacity:1,transform:'rotateY(0deg)'},{opacity:1,offset:.35},{opacity:0,transform:`rotateY(${dir*110}deg)`}],1450,220);
+   play(el.querySelector('.event-main'),[{opacity:.25,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],1200,170);
+   play(el.querySelector('.folio-art>img'),[{transform:'scale(1.18)'},{transform:'scale(1)'}],2200);
+  }else if(el.hasAttribute('data-path-scene')){
+   el.querySelectorAll('.draw-path').forEach((p,i)=>play(p,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],2200,i*150));
+  }else play(el,[{opacity:.3,transform:'translateY(40px)'},{opacity:1,transform:'translateY(0)'}],1300);
+  observer.unobserve(el);
+ });},{threshold:.08});
+ document.querySelectorAll('.folio-event,[data-reveal],[data-path-scene],.letter-heading,.envelope,.celebration-intro h2').forEach(el=>observer.observe(el));
 }
-let pending=false;
-function updateScroll(){
- pending=false;if(!motion)return;
- const vh=innerHeight;
- if(opening&&heroImage&&heroVisible){const top=opening.getBoundingClientRect().top;heroImage.style.transform=`translateY(${Math.max(0,-top)*.12}px) scale(1.09)`;}
- scenes.forEach(scene=>{const r=scene.getBoundingClientRect();if(r.top>vh||r.bottom<0)return;const progress=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));scene.style.setProperty('--scene-progress',progress.toFixed(3));});
-}
-window.addEventListener('scroll',()=>{if(!pending&&motion){pending=true;requestAnimationFrame(updateScroll);}},{passive:true});
-document.addEventListener('visibilitychange',()=>{root.dataset.background=String(document.hidden);running.forEach(a=>document.hidden?a.pause():a.play());if(document.hidden)stopCanvas();else startCanvas();});
-updateScroll();
+document.addEventListener('visibilitychange',()=>animations.forEach(a=>document.hidden?a.pause():a.play()));

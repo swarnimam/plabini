@@ -2,7 +2,7 @@
 
 A mobile-first Astro wedding invitation for 8–9 December 2026, Greater Rajwada Resort, Gaya.
 
-The current design follows the couple's real story: VIT-AP, friendship in Bangalore, and two families coming together. Original silk artwork, animated Hindi/English event scenes, lightweight canvas and SVG motion, per-event calendar downloads and a local-only response-message composer.
+The current design follows the couple's real story: VIT-AP, friendship in Bangalore, and two families coming together. Restored moonlit garden artwork, a monogrammed opening envelope, and animated invitation pages, per-event calendar downloads and a local-only response-message composer.
 
 ## Develop and verify
 
@@ -20,7 +20,7 @@ BASE_PATH=/plabini SITE_URL=https://swarnimam.github.io npm run build
 npm run verify
 ```
 
-`src/data/invitation.ts` holds the event details. `src/pages/index.astro`, `src/styles/chapter.css`, `src/styles/celebration.css` and `src/scripts/chapter.ts` implement the current experience. The older garden components remain unused for history; they are not loaded by the current page.
+`src/data/invitation.ts` holds the event details. `src/pages/index.astro`, `src/styles/chapter.css`, `src/styles/regal.css` and `src/scripts/chapter.ts` implement the current experience. The older garden components remain unused for history; they are not loaded by the current page.
 
 ## Deployment
 

@@ -1,3 +1,11 @@
+# Review-led revision: The Garden Invitation
+
+The reviewers preferred the earlier regal garden. Restore its existing moonlit artwork and envelope interaction, preserving corrected family copy and all event facts. The fixed guest dock, moving ribbon, jump table and pictogram loops are removed. Three structural motion gestures replace them: architectural opening doors behind the names; a monogrammed envelope with unfolding letter; whole event pages flying in, settling and opening their illustrated gatefolds. These gestures belong to one physical invitation language. No added rituals or religious claims. The journey remains.
+
+Mobile uses stacked artwork and fully visible information; desktop uses alternating gatefold spreads. Natural scrolling, keyboard-operable native details, no essential hover interaction, no-script content and reduced motion are retained. Effects play once, use transforms/opacity and pause in background tabs. Images are existing imagined garden illustrations, not the actual venue. Build, content, calendar and TypeScript checks are available; actual browser/mobile animation QA is unavailable.
+
+## Prior revision history
+
 # Latest motion and invitation revision
 
 The opening is one invitation from The Kumars & The Nayaks for the wedding of their children. Sangeet now depicts animated dancers, articulated arms and skirt, and sweeping stage light. Haldi uses a spoon-and-turmeric sequence; its text explicitly includes guest games after the ceremony. Tilak flowers assemble around the platter; the wedding fire rises and flickers. Larger masked entrances and scroll-linked depth connect the scenes. These are artistic illustrations, not claims about specific family ritual procedures. Motion is enabled by default without a switch; OS reduced motion remains complete. SVG assets were rasterized and visually inspected with Sharp. Root and GitHub Pages builds and content/calendar checks passed; rendered page, device and animation QA remain unavailable.

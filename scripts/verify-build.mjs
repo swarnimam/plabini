@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
-const html = readFileSync('dist/index.html', 'utf8');
+const html = readFileSync('dist/index.html', 'utf8').replaceAll('&amp;', '&');
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'One primary heading');
 for (const text of ['Tilak / Lagan Chumai', 'Sangeet', 'Haldi', 'Shubh Vivah', 'Greater Rajwada', '2026-12-09T19:30:00+05:30']) assert.ok(html.includes(text), `Missing ${text}`);
 for (const stale of ['Grand Taj Palace', '2019', 'Udaipur', 'A ♥ M', '18.12.2026', '/src/styles/', 'Your Presence Is A Blessing', 'localStorage', 'सुरों की बारात', 'तिलक अभिषेक', 'Followed by dinner', 'Followed by lunch', 'socgen.com']) assert.ok(!html.includes(stale), `Stale content ${stale}`);
@@ -8,8 +8,8 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(new Set(ids).size, ids.length, 'Unique HTML ids');
 for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), `Broken anchor ${match[1]}`);
 // Astro's base is inferred from a known asset so checks work in CI without extra env.
-const imagePath = html.match(/src="([^"]*images\/chapter\/celebration-silk-1280.webp)"/)[1];
-const base = imagePath.slice(0, -'images/chapter/celebration-silk-1280.webp'.length);
+const imagePath = html.match(/src="([^"]*images\/garden\/forever-night.webp)"/)[1];
+const base = imagePath.slice(0, -'images/garden/forever-night.webp'.length);
 for (const match of html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)) {
   const url = match[1];
   assert.ok(url.startsWith(base), `Asset outside base: ${url}`);
@@ -37,8 +37,9 @@ console.log(`Verified: assets under ${base}, internal links, metadata, four IST 
 for (const text of ["शुभारंभ", "शाम शानदार", "रंग रसिया", "फेरे एंड फ़ॉरएवर", "The Kumars & The Nayaks", "their children", "VIT-AP", "one year senior", "Copying this message does not send your response."]) assert.ok(html.includes(text), `Missing approved content: ${text}`);
 
 for (const removed of ['दर्शनाभिलाषी','स्वागतकर्ता','wedding of their son','daughter of','class="schedule section-space"','images/chapter/portrait-','images/chapter/together-','images/chapter/afternoon-']) assert.ok(!html.includes(removed), `Removed content returned: ${removed}`);
-assert.ok(html.includes('id="silk-canvas"'));
-assert.equal((html.match(/class="scene-art scene-/g)||[]).length,4);
+assert.ok(html.includes('id="wedding-envelope"'));
+for (const stale of ['class="guest-dock"','class="celebration-ribbon"','class="event-jump"']) assert.ok(!html.includes(stale));
+assert.equal((html.match(/class="folio-sheet"/g)||[]).length,4);
 assert.ok(!html.includes('id="motion-toggle"'));
 assert.ok(!/>IST</.test(html));
 assert.ok(html.includes("Dance performances from both sides"));
