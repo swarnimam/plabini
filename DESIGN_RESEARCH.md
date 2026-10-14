@@ -1,3 +1,19 @@
+# Editorial and event-illustration revision — 14 October 2026
+
+The approved palette and silk opening remain. Copy has been rewritten throughout in a consistent, gracious invitation voice. Short decorative slogans have been replaced by factual storytelling and clear descriptions. Event descriptions are now shared between the website and calendar downloads. The guest form and generated response also use the revised tone.
+
+Abstract event motifs have been replaced with original, code-native SVG illustrations:
+- Tilak / Lagan Chumai: a platter with kumkum and flowers, softly illuminated. It references Tilak without illustrating a specific sequence of the family's Lagan Chumai rites.
+- Sangeet: a dholak with restrained rhythmic resonance and musical notation. It illustrates music; it does not promise a particular musician or performance.
+- Haldi: a brass bowl of turmeric, spoon and marigolds; the colour reveal relates to the material of the ceremony.
+- Shubh Vivah: a ceremonial fire with a subtle natural flame movement. It references the approved Phere title respectfully, with no click-to-light, extinguishing, game mechanics or ritual-count claims.
+
+Cultural sources checked: [Hindu American Foundation wedding primer](https://www.hinduamerican.org/hindu-wedding-primer) describes the sacred fire and emphasises variation by community and family; [HAF basic questions](https://www.hinduamerican.org/learn/hinduism-faq) describes kumkum among materials used for tilak. These support the broad references, not a claim that all described rites occur at this wedding. No new ceremonies, mantras or ritual instructions appear on the site.
+
+No new image-generation assets were needed: SVG objects support precise independent animation and retain the approved colours. Browser QA remains unavailable; build, content, calendar and TypeScript checks are run. Prior design history follows; this revision supersedes descriptions of the abstract fan, orbital and sunburst event scenes.
+
+---
+
 # Latest revision — celebratory motion, 14 October 2026
 
 User rejected the restrained editorial result and reported the opening portrait obscuring Swarnimam's name. This revision replaces that opening entirely: original generated silk background, isolated foreground typography, no personal photographs. A luminous lightweight canvas layer, scroll-linked silk movement, an unfolding fan, animated Sangeet orbits, a Haldi sunburst and a flowing union line study create stronger motion and colour. These are contemporary decorative art, not claims about regional rituals.

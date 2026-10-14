@@ -21,3 +21,5 @@ Family context informs tone. Caste identities, employers, comparative descriptio
 RSVP delivery is explicitly deferred. The browser prepares a copyable message with attendance, guest count and celebrations. It sends no request, stores no guest details and contains no recipient email. Clipboard failure leaves selectable text.
 
 Latest revision removes all personal photographs from the current site source/build. Original generated silk artwork supplies the hero background. The PS monogram appears in the header; the Ganesha image remains with the invocation. No separate schedule/calendar section: each event keeps its date, time, dress code and calendar link. Research and latest design notes: DESIGN_RESEARCH.md.
+
+Editorial revision: public copy now uses a formal, warm invitation voice. Event descriptions in invitation.ts feed both the event sections and calendar downloads. Original SVG Tilak platter, Sangeet dholak, Haldi bowl and ceremonial fire replace abstract motifs; these are illustrative references, not depictions of the family's exact ritual procedures.

@@ -73,8 +73,8 @@ if('IntersectionObserver' in window){
   if(!entry.isIntersecting)return;
   const el=entry.target;
   if(el.hasAttribute('data-path-scene'))el.querySelectorAll('.draw-path').forEach((path,i)=>animate(path,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:2200,delay:i*130,easing:'ease-out'}));
-  else if(el.classList.contains('scene-blessings'))el.querySelectorAll('.silk-fan>span').forEach((leaf,i)=>animate(leaf,[{transform:'translateX(-50%) rotate(0deg)'},{transform:`translateX(-50%) rotate(${(i-8)*11}deg)`}],{duration:1700,delay:i*25,easing:'cubic-bezier(.2,.7,.2,1)'}));
-  else if(el.classList.contains('scene-sunshine'))el.querySelectorAll('.sun-bloom>span').forEach((leaf,i)=>animate(leaf,[{transform:`rotate(${i*22.5}deg) scaleY(.25)`},{transform:`rotate(${i*22.5}deg) scaleY(1)`}],{duration:1400,delay:i*35,easing:'cubic-bezier(.2,.7,.2,1)'}));
+  else if(el.classList.contains('scene-sunshine'))el.querySelectorAll('.turmeric-stroke').forEach(stroke=>animate(stroke,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:1800,easing:'cubic-bezier(.2,.7,.2,1)'}));
+  else if(el.classList.contains('scene-blessings'))animate(el,[{opacity:.4,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:1600,easing:'ease-out'});
   else animate(el,[{opacity:.45,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],{duration:1000,easing:'cubic-bezier(.2,.7,.2,1)'});
   reveal.unobserve(el);
  });},{threshold:.2});

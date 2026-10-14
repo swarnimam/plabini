@@ -1,9 +1,78 @@
 ---
 const { kind } = Astro.props;
+const flowers = kind === 'blessings' ? [[100,295,0.8],[370,300,0.9],[350,340,.65]] : [[100,335,.9],[375,320,1],[350,365,.65]];
 ---
 <div class={`scene-art scene-${kind}`} aria-hidden="true">
-  {kind === 'blessings' && <div class="silk-fan">{Array.from({length:17},(_,i)=><span style={`--i:${i}`}></span>)}<i></i></div>}
-  {kind === 'music' && <div class="music-orbits"><span></span><span></span><span></span><span></span><div class="music-core">शाम<br />शानदार</div><i></i><i></i><i></i></div>}
-  {kind === 'sunshine' && <div class="sun-bloom">{Array.from({length:16},(_,i)=><span style={`--i:${i}`}></span>)}<i></i></div>}
-  {kind === 'forever' && <svg class="forever-weave" viewBox="0 0 500 500" fill="none">{Array.from({length:12},(_,i)=><path style={`--i:${i}`} d={`M${-100+i*7} ${60+i*11} C${620-i*6} ${10+i*8}, ${610-i*7} ${460-i*6}, 250 ${440-i*9} C${-110+i*7} ${460-i*6}, ${-120+i*6} ${10+i*8}, ${600-i*7} ${60+i*11}`} />)}</svg>}
+  <svg class={`ceremony-illustration illustration-${kind}`} viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id={`${kind}-brass`} x1="100" y1="200" x2="400" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe7a5"/><stop offset=".35" stop-color="#dca052"/><stop offset=".55" stop-color="#fff0be"/><stop offset="1" stop-color="#ae602d"/></linearGradient>
+      <linearGradient id={`${kind}-dark`} x1="150" y1="200" x2="350" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#974f31"/><stop offset=".5" stop-color="#d68c43"/><stop offset="1" stop-color="#6f3029"/></linearGradient>
+      <radialGradient id={`${kind}-flower`}><stop stop-color="#a83f1d"/><stop offset=".45" stop-color="#f79828"/><stop offset="1" stop-color="#ffd276"/></radialGradient>
+      <radialGradient id={`${kind}-glow`}><stop stop-color="#ffd685" stop-opacity=".34"/><stop offset="1" stop-color="#ffd685" stop-opacity="0"/></radialGradient>
+      <linearGradient id={`${kind}-flame`} x1="250" y1="140" x2="250" y2="310" gradientUnits="userSpaceOnUse"><stop stop-color="#fff2b8"/><stop offset=".4" stop-color="#ffd173"/><stop offset="1" stop-color="#ed792c"/></linearGradient>
+    </defs>
+    {kind === 'blessings' && <g class="tilak-still-life">
+      <path d="M90 215Q165 170 210 210L411 340Q345 392 285 364Z" fill="#a83244" opacity=".3"/>
+      <ellipse cx="250" cy="355" rx="176" ry="30" fill="#632033" opacity=".14"/>
+      <path d="M60 298Q60 365 250 377Q440 365 440 298" fill={`url(#${kind}-dark)`} stroke="#f3c782" stroke-width="2"/>
+      <ellipse cx="250" cy="296" rx="190" ry="69" fill={`url(#${kind}-brass)`} stroke="#ffe1a1" stroke-width="3"/>
+      <ellipse cx="250" cy="296" rx="174" ry="55" stroke="#995530" stroke-width="1.4"/>
+      <ellipse cx="250" cy="296" rx="162" ry="47" stroke="#ffecc0" stroke-width="1"/>
+      <path d="M190 256Q193 307 250 311Q307 307 310 256" fill={`url(#${kind}-dark)`} stroke="#ffdf9c" stroke-width="2"/>
+      <ellipse cx="250" cy="253" rx="60" ry="24" fill="#a6263e" stroke="#ffe7ac" stroke-width="5"/>
+      <path d="M201 250Q249 194 299 250Q250 266 201 250" fill="#c52e46"/>
+      <path d="M216 245Q245 213 274 238" stroke="#e66a65" stroke-width="2" opacity=".7"/>
+      <path class="plate-light" d="M85 283C125 248 173 240 214 239M295 352C348 349 402 332 423 311" stroke="#fff1c9" stroke-width="3" stroke-linecap="round"/>
+      <path d="M125 249Q101 205 129 181Q151 204 125 249Z" fill="#758441"/><path d="M125 246Q158 214 182 228Q162 254 125 246Z" fill="#8b984e"/>
+    </g>}
+    {kind === 'music' && <g>
+      <ellipse cx="250" cy="345" rx="166" ry="24" fill="#16072c" opacity=".35"/>
+      <g class="drum-resonance" stroke="#f7c98c" stroke-width="1.6"><path d="M81 185Q45 240 81 295"/><path d="M65 172Q18 240 65 308"/><path d="M417 195Q449 240 417 285"/><path d="M435 183Q475 240 435 297"/></g>
+      <g class="dholak-body" transform="rotate(-12 250 240)">
+        <path d="M128 163Q250 119 374 181L374 299Q250 354 128 317Z" fill={`url(#${kind}-dark)`} stroke="#f4c68b" stroke-width="2"/>
+        <path d="M158 153Q250 130 345 169M158 327Q250 344 345 311" stroke="#e9b579" stroke-width="4"/>
+        {[0,1,2,3,4].map(i=><path d={`M145 ${174+i*32}L359 ${188+i*25}L151 ${201+i*26}`} stroke="#f6d8a5" stroke-width="2" opacity=".85"/>)}
+        <path d="M180 148L185 332M320 156L326 321" stroke="#7a3b2c" stroke-width="8"/>
+        <path d="M184 149L189 333M324 157L330 320" stroke="#e3a762" stroke-width="2"/>
+        <ellipse cx="374" cy="240" rx="32" ry="64" fill="#c89666" stroke="#ffe4aa" stroke-width="6"/>
+        <ellipse cx="374" cy="240" rx="24" ry="54" fill="#e9cf9f" stroke="#9c593c" stroke-width="2"/>
+        <ellipse cx="130" cy="240" rx="43" ry="80" fill="#e8c899" stroke="#ffe7b5" stroke-width="7"/>
+        <ellipse cx="130" cy="240" rx="34" ry="69" stroke="#a77a51" stroke-width="2"/>
+        <ellipse class="drum-head" cx="130" cy="240" rx="28" ry="59" fill="#f4dfb5"/>
+        <path d="M110 188Q98 235 109 280" stroke="#fff2cf" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <g class="music-note note-one" stroke="#ffd89e" stroke-width="3" stroke-linecap="round"><path d="M315 100V55L346 47V91M315 63L346 55"/><ellipse cx="307" cy="102" rx="9" ry="6" fill="#ffd89e" stroke="none"/><ellipse cx="338" cy="93" rx="9" ry="6" fill="#ffd89e" stroke="none"/></g>
+      <g class="music-note note-two" stroke="#eb9fca" stroke-width="3"><path d="M160 104V66Q183 70 178 85"/><ellipse cx="152" cy="105" rx="9" ry="6" fill="#eb9fca" stroke="none"/></g>
+    </g>}
+    {kind === 'sunshine' && <g class="haldi-still-life">
+      <path class="turmeric-stroke" pathLength="1" d="M90 325C180 275 281 386 401 341" stroke="#ed9c29" stroke-width="44" stroke-linecap="round" opacity=".42"/>
+      <ellipse cx="250" cy="353" rx="150" ry="26" fill="#bc6b23" opacity=".2"/>
+      <path d="M145 245Q154 339 250 345Q346 339 355 245Z" fill={`url(#${kind}-brass)`} stroke="#ab6329" stroke-width="2"/>
+      <ellipse cx="250" cy="244" rx="105" ry="40" fill="#c37d25" stroke="#fff0b5" stroke-width="5"/>
+      <ellipse cx="250" cy="243" rx="94" ry="30" fill="#eca72a"/>
+      <path d="M168 244Q205 217 224 203Q250 171 275 205Q306 222 334 244Q250 272 168 244" fill="#ffbe35"/>
+      <path d="M198 238Q242 190 271 219" stroke="#ffe276" stroke-width="4" stroke-linecap="round"/>
+      <path d="M300 226L373 125" stroke="#7a472a" stroke-width="13" stroke-linecap="round"/>
+      <path d="M300 226L373 125" stroke="#d8a16a" stroke-width="7" stroke-linecap="round"/>
+      <ellipse cx="299" cy="227" rx="18" ry="10" transform="rotate(-45 299 227)" fill="#dc9e36"/>
+      <path class="bowl-light" d="M170 276Q192 319 230 323" stroke="#fff1c0" stroke-width="3" stroke-linecap="round"/>
+      <path d="M87 313Q59 272 78 250Q108 277 87 313M100 319Q118 278 144 285Q134 313 100 319" fill="#9a9239"/>
+    </g>}
+    {(kind === 'blessings' || kind === 'sunshine') && flowers.map(([x,y,scale])=><g transform={`translate(${x} ${y}) scale(${scale})`}>
+      {Array.from({length:12},(_,i)=><ellipse cx="0" cy="-17" rx="10" ry="19" transform={`rotate(${i*30})`} fill={`url(#${kind}-flower)`} stroke="#ec8a25" stroke-width=".6"/>)}<circle r="12" fill="#cc5e22"/>{Array.from({length:8},(_,i)=><ellipse cx="0" cy="-6" rx="4" ry="7" transform={`rotate(${i*45})`} fill="#f9b139"/>)}
+    </g>)}
+    {kind === 'forever' && <g>
+      <ellipse class="firelight" cx="250" cy="237" rx="165" ry="175" fill={`url(#${kind}-glow)`}/>
+      <ellipse cx="250" cy="382" rx="170" ry="22" fill="#63132c" opacity=".35"/>
+      <path d="M108 348L250 311L392 348L250 394Z" fill="#b77849" stroke="#f9cd8e" stroke-width="2"/>
+      <path d="M108 348V367L250 410L392 367V348L250 391Z" fill="#91422f" stroke="#e6ad72" stroke-width="2"/>
+      <path d="M131 317L250 286L369 317L250 356Z" fill="#efbf7a" stroke="#ffe6b1" stroke-width="2"/>
+      <path d="M131 317V341L250 377L369 341V317L250 354Z" fill="#b8673b" stroke="#f4c389" stroke-width="2"/>
+      <path d="M157 295L250 269L343 295L250 327Z" fill="#5f2e27" stroke="#ffe3a6" stroke-width="5"/>
+      <path d="M177 300L303 283M202 280L299 308" stroke="#9b5835" stroke-width="10" stroke-linecap="round"/>
+      <path class="ceremonial-flame flame-outer" d="M248 307C190 302 178 270 200 231C212 257 223 259 222 232C218 195 256 165 247 118C300 166 269 196 296 222C313 236 311 264 298 284C287 302 266 308 248 307Z" fill={`url(#${kind}-flame)`}/>
+      <path class="ceremonial-flame flame-inner" d="M249 304C219 301 215 279 231 257C239 247 250 228 250 209C281 249 289 268 278 288C271 300 260 305 249 304Z" fill="#fff0b0"/>
+      <path d="M160 342L245 368M257 367L343 343" stroke="#ffe2a4" stroke-width="1"/>
+    </g>}
+  </svg>
 </div>
