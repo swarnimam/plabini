@@ -3,8 +3,7 @@ const root = document.documentElement;
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
 const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
 const constrained = Boolean(connection?.saveData || ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8) <= 2);
-let motion = !preference.matches && !constrained;
-const toggle = document.querySelector<HTMLButtonElement>('#motion-toggle');
+let motion = !preference.matches;
 const running = new Set<Animation>();
 function animate(el: Element, frames: Keyframe[], options: KeyframeAnimationOptions) {
   if (!motion) return;
@@ -22,7 +21,7 @@ let width=0,height=0,pointerX=0,pointerY=0;
 function resizeCanvas(){
   if(!canvas||!opening||!ctx)return;
   width=opening.clientWidth;height=opening.clientHeight;
-  const ratio=Math.min(devicePixelRatio||1,1.5);
+  const ratio=Math.min(devicePixelRatio||1,constrained?1:1.5);
   canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
   ctx.setTransform(ratio,0,0,ratio,0,0);
 }
@@ -34,7 +33,7 @@ function draw(time:number){
   lastFrame=time;ctx.clearRect(0,0,width,height);
   const t=time*.00022;
   // A small number of silk-like luminous curves; no sprites or image textures.
-  for(let i=0;i<20;i++){
+  for(let i=0;i<(constrained?12:20);i++){
     const phase=i*.14;const sway=Math.sin(t+phase)*width*.07;
     const left=i%2===0;
     const edge=left?width*.06:width*.94;
@@ -49,14 +48,12 @@ function draw(time:number){
 function startCanvas(){if(!frame&&motion&&heroVisible&&!document.hidden)frame=requestAnimationFrame(draw);}
 function stopCanvas(){cancelAnimationFrame(frame);frame=0;ctx?.clearRect(0,0,width,height);}
 function syncMotion(){
-  root.dataset.motion=motion?'on':'off';toggle?.setAttribute('aria-pressed',String(motion));
-  if(toggle){toggle.hidden=false;toggle.textContent=motion?'Motion on':'Motion off';}
+  root.dataset.motion=motion?'on':'off';
   if(!motion){running.forEach(a=>a.cancel());running.clear();stopCanvas();if(heroImage)heroImage.style.transform='';}
   else startCanvas();
 }
 syncMotion();resizeCanvas();
-toggle?.addEventListener('click',()=>{motion=!motion;syncMotion();updateScroll();});
-preference.addEventListener('change',()=>{motion=!preference.matches&&!constrained;syncMotion();updateScroll();});
+preference.addEventListener('change',()=>{motion=!preference.matches;syncMotion();updateScroll();});
 window.addEventListener('resize',resizeCanvas,{passive:true});
 opening?.addEventListener('pointermove',event=>{if(event.pointerType==='mouse'){pointerX=(event.clientX/innerWidth-.5)*20;pointerY=(event.clientY/innerHeight-.5)*10;}},{passive:true});
 opening?.addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;});
@@ -73,12 +70,17 @@ if('IntersectionObserver' in window){
   if(!entry.isIntersecting)return;
   const el=entry.target;
   if(el.hasAttribute('data-path-scene'))el.querySelectorAll('.draw-path').forEach((path,i)=>animate(path,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:2200,delay:i*130,easing:'ease-out'}));
-  else if(el.classList.contains('scene-sunshine'))el.querySelectorAll('.turmeric-stroke').forEach(stroke=>animate(stroke,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:1800,easing:'cubic-bezier(.2,.7,.2,1)'}));
-  else if(el.classList.contains('scene-blessings'))animate(el,[{opacity:.4,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:1600,easing:'ease-out'});
+  else if(el.classList.contains('scene-art')){
+    const art=el.querySelector('.ceremony-illustration');
+    if(art)animate(art,[{opacity:.2,transform:'translateY(50px) scale(.78)',clipPath:'inset(12% 6% 0 6%)'},{opacity:1,transform:'translateY(0) scale(1)',clipPath:'inset(0% 0% 0% 0%)'}],{duration:1800,easing:'cubic-bezier(.16,1,.3,1)'});
+    if(el.classList.contains('scene-blessings'))el.querySelectorAll('.ceremony-flower').forEach((flower,i)=>animate(flower,[{translate:`${i%2?60:-60}px -95px`,opacity:0,scale:'.5'},{translate:'0 0',opacity:1,scale:'1'}],{duration:1800,delay:250+i*150,easing:'cubic-bezier(.2,.7,.2,1)'}));
+    if(el.classList.contains('scene-sunshine'))el.querySelectorAll('.turmeric-stroke').forEach(stroke=>animate(stroke,[{strokeDasharray:'1',strokeDashoffset:'1'},{strokeDasharray:'1',strokeDashoffset:'0'}],{duration:1900,easing:'cubic-bezier(.2,.7,.2,1)'}));
+    if(el.classList.contains('scene-forever'))el.querySelectorAll('.fire-rise').forEach(flame=>animate(flame,[{scale:'1 .15',opacity:.3},{scale:'1 1',opacity:1}],{duration:2300,easing:'cubic-bezier(.2,.7,.2,1)'}));
+  }
   else animate(el,[{opacity:.45,transform:'translateY(30px)'},{opacity:1,transform:'translateY(0)'}],{duration:1000,easing:'cubic-bezier(.2,.7,.2,1)'});
   reveal.unobserve(el);
  });},{threshold:.2});
- document.querySelectorAll('[data-reveal],[data-path-scene],.scene-blessings,.scene-sunshine').forEach(el=>reveal.observe(el));
+ document.querySelectorAll('[data-reveal],[data-path-scene],.scene-art').forEach(el=>reveal.observe(el));
 }
 let pending=false;
 function updateScroll(){

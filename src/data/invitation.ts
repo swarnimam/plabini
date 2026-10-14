@@ -26,14 +26,14 @@ export const invitation = {
       id: 'sangeet', number: '02', name: 'Sangeet', hindi: 'शाम शानदार',
       day: 'Tuesday', date: '8 December', iso: '2026-12-08T19:30:00+05:30', time: '7:30 pm',
       theme: 'sage', motif: 'music',
-      description: 'Join us for an evening of music and dance as family and friends come together to celebrate the wedding. We look forward to sharing this joyful occasion with you.',
+      description: 'Dance performances from both sides of the family, a lively dance floor, and a party for everyone. Join the bride’s and groom’s families for an evening of music, movement and celebration.',
       attire: 'Elegant traditional wear or formal suits', meal: '',
     },
     {
       id: 'haldi', number: '03', name: 'Haldi', hindi: 'रंग रसिया',
       day: 'Wednesday', date: '9 December', iso: '2026-12-09T11:30:00+05:30', time: '11:30 am',
       theme: 'saffron', motif: 'sun',
-      description: 'We gather for Haldi in the company of family and friends, sharing a morning of tradition, warmth and celebration before the wedding.',
+      description: 'The morning begins with ceremonial Haldi, followed by games for our guests. Join us for the traditions, then stay for some friendly competition and time together before the wedding.',
       attire: 'Festive wear in shades of yellow', meal: '',
     },
     {

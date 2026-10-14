@@ -1,3 +1,7 @@
+# Latest motion and invitation revision
+
+The opening is one invitation from The Kumars & The Nayaks for the wedding of their children. Sangeet now depicts animated dancers, articulated arms and skirt, and sweeping stage light. Haldi uses a spoon-and-turmeric sequence; its text explicitly includes guest games after the ceremony. Tilak flowers assemble around the platter; the wedding fire rises and flickers. Larger masked entrances and scroll-linked depth connect the scenes. These are artistic illustrations, not claims about specific family ritual procedures. Motion is enabled by default without a switch; OS reduced motion remains complete. SVG assets were rasterized and visually inspected with Sharp. Root and GitHub Pages builds and content/calendar checks passed; rendered page, device and animation QA remain unavailable.
+
 # Editorial and event-illustration revision — 14 October 2026
 
 The approved palette and silk opening remain. Copy has been rewritten throughout in a consistent, gracious invitation voice. Short decorative slogans have been replaced by factual storytelling and clear descriptions. Event descriptions are now shared between the website and calendar downloads. The guest form and generated response also use the revised tone.

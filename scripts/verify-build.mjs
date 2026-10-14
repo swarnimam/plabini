@@ -30,13 +30,16 @@ for (const [event, start] of Object.entries(starts)) {
   assert.ok(!raw.replace(/\r\n/g, '').includes('\n'), 'ICS uses CRLF');
 }
 assert.equal((html.match(/data-chapter="[0-3]"/g) || []).length, 4, 'Four readable ceremony chapters');
-assert.ok(html.includes('id="motion-toggle"'), 'Motion control exists');
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 assert.equal(schema.location.address.addressLocality, 'Gaya');
 assert.equal(schema.startDate, '2026-12-08T14:00:00+05:30');
 console.log(`Verified: assets under ${base}, internal links, metadata, four IST calendar events, UTF-8 calendar folding, and placeholder exclusion.`);
-for (const text of ["शुभारंभ", "शाम शानदार", "रंग रसिया", "फेरे एंड फ़ॉरएवर", "The Kumar & Nayak families", "their children", "VIT-AP", "one year senior", "Copying this message does not send your response."]) assert.ok(html.includes(text), `Missing approved content: ${text}`);
+for (const text of ["शुभारंभ", "शाम शानदार", "रंग रसिया", "फेरे एंड फ़ॉरएवर", "The Kumars & The Nayaks", "their children", "VIT-AP", "one year senior", "Copying this message does not send your response."]) assert.ok(html.includes(text), `Missing approved content: ${text}`);
 
 for (const removed of ['दर्शनाभिलाषी','स्वागतकर्ता','wedding of their son','daughter of','class="schedule section-space"','images/chapter/portrait-','images/chapter/together-','images/chapter/afternoon-']) assert.ok(!html.includes(removed), `Removed content returned: ${removed}`);
 assert.ok(html.includes('id="silk-canvas"'));
 assert.equal((html.match(/class="scene-art scene-/g)||[]).length,4);
+assert.ok(!html.includes('id="motion-toggle"'));
+assert.ok(!/>IST</.test(html));
+assert.ok(html.includes("Dance performances from both sides"));
+assert.ok(html.includes("games for our guests"));

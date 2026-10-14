@@ -2,7 +2,7 @@
 const { kind } = Astro.props;
 const flowers = kind === 'blessings' ? [[100,295,0.8],[370,300,0.9],[350,340,.65]] : [[100,335,.9],[375,320,1],[350,365,.65]];
 ---
-<div class={`scene-art scene-${kind}`} aria-hidden="true">
+<div class={`scene-art scene-${kind}`} aria-hidden="true"><div class="scene-aura"></div>
   <svg class={`ceremony-illustration illustration-${kind}`} viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id={`${kind}-brass`} x1="100" y1="200" x2="400" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe7a5"/><stop offset=".35" stop-color="#dca052"/><stop offset=".55" stop-color="#fff0be"/><stop offset="1" stop-color="#ae602d"/></linearGradient>
@@ -25,24 +25,35 @@ const flowers = kind === 'blessings' ? [[100,295,0.8],[370,300,0.9],[350,340,.65
       <path class="plate-light" d="M85 283C125 248 173 240 214 239M295 352C348 349 402 332 423 311" stroke="#fff1c9" stroke-width="3" stroke-linecap="round"/>
       <path d="M125 249Q101 205 129 181Q151 204 125 249Z" fill="#758441"/><path d="M125 246Q158 214 182 228Q162 254 125 246Z" fill="#8b984e"/>
     </g>}
-    {kind === 'music' && <g>
-      <ellipse cx="250" cy="345" rx="166" ry="24" fill="#16072c" opacity=".35"/>
-      <g class="drum-resonance" stroke="#f7c98c" stroke-width="1.6"><path d="M81 185Q45 240 81 295"/><path d="M65 172Q18 240 65 308"/><path d="M417 195Q449 240 417 285"/><path d="M435 183Q475 240 435 297"/></g>
-      <g class="dholak-body" transform="rotate(-12 250 240)">
-        <path d="M128 163Q250 119 374 181L374 299Q250 354 128 317Z" fill={`url(#${kind}-dark)`} stroke="#f4c68b" stroke-width="2"/>
-        <path d="M158 153Q250 130 345 169M158 327Q250 344 345 311" stroke="#e9b579" stroke-width="4"/>
-        {[0,1,2,3,4].map(i=><path d={`M145 ${174+i*32}L359 ${188+i*25}L151 ${201+i*26}`} stroke="#f6d8a5" stroke-width="2" opacity=".85"/>)}
-        <path d="M180 148L185 332M320 156L326 321" stroke="#7a3b2c" stroke-width="8"/>
-        <path d="M184 149L189 333M324 157L330 320" stroke="#e3a762" stroke-width="2"/>
-        <ellipse cx="374" cy="240" rx="32" ry="64" fill="#c89666" stroke="#ffe4aa" stroke-width="6"/>
-        <ellipse cx="374" cy="240" rx="24" ry="54" fill="#e9cf9f" stroke="#9c593c" stroke-width="2"/>
-        <ellipse cx="130" cy="240" rx="43" ry="80" fill="#e8c899" stroke="#ffe7b5" stroke-width="7"/>
-        <ellipse cx="130" cy="240" rx="34" ry="69" stroke="#a77a51" stroke-width="2"/>
-        <ellipse class="drum-head" cx="130" cy="240" rx="28" ry="59" fill="#f4dfb5"/>
-        <path d="M110 188Q98 235 109 280" stroke="#fff2cf" stroke-width="3" stroke-linecap="round"/>
+    {kind === 'music' && <g class="dance-stage">
+      <g class="stage-lights"><path class="spotlight beam-left" d="M85 30L40 350L330 350Z" fill="#f1a9da" opacity=".13"/><path class="spotlight beam-right" d="M415 30L170 350L460 350Z" fill="#ffe0a0" opacity=".14"/><circle cx="85" cy="30" r="9" fill="#ffdda8"/><circle cx="415" cy="30" r="9" fill="#f0a4cf"/></g>
+      <ellipse cx="250" cy="373" rx="205" ry="32" fill="#240d43" stroke="#a56baf" stroke-width="1"/>
+      <g class="dance-floor" stroke="#e2b17a" stroke-width=".8" opacity=".45"><path d="M60 370H440M85 382H415M100 357H400M130 350L95 389M210 344L195 400M290 344L305 400M370 350L405 389"/></g>
+      <g class="dancer dancer-left">
+        <g class="step-left" fill="#e5b985"><path d="M168 282L180 287L168 350L151 359L140 356L154 345Z"/><path d="M192 283L206 280L216 343L231 354L226 361L204 351Z"/></g>
+        <g class="dancer-torso">
+          <path class="dance-skirt" d="M165 210Q177 223 199 213C212 243 235 271 255 293Q201 325 127 300Q150 255 165 210Z" fill="#ee98bd" stroke="#ffd3ab" stroke-width="1.2"/>
+          <path d="M171 226L157 300M183 229L187 308M197 226L224 302" stroke="#ffe0b0" stroke-width="2" opacity=".65"/>
+          <path d="M166 155Q178 146 194 155L205 213Q181 231 160 211Z" fill="#d974aa" stroke="#ffd3ab" stroke-width="1.5"/>
+          <path d="M167 166L201 207" stroke="#ffd796" stroke-width="7"/>
+          <path d="M178 144V158L187 160L190 143" fill="#e5b985"/>
+          <circle cx="185" cy="126" r="21" fill="#e5b985"/>
+          <path d="M164 126Q155 100 179 101Q208 96 210 125L201 134Q201 109 177 111Z" fill="#4e2448"/><circle cx="165" cy="118" r="12" fill="#4e2448"/>
+          <g class="dance-arm arm-left"><path d="M166 164L134 184L107 146" stroke="#e5b985" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M106 146L99 132M106 146L112 133" stroke="#e5b985" stroke-width="5" stroke-linecap="round"/></g>
+          <g class="dance-arm arm-right"><path d="M197 165L222 143L234 110" stroke="#e5b985" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M234 110L233 97M234 110L243 100" stroke="#e5b985" stroke-width="5" stroke-linecap="round"/></g>
+        </g>
       </g>
-      <g class="music-note note-one" stroke="#ffd89e" stroke-width="3" stroke-linecap="round"><path d="M315 100V55L346 47V91M315 63L346 55"/><ellipse cx="307" cy="102" rx="9" ry="6" fill="#ffd89e" stroke="none"/><ellipse cx="338" cy="93" rx="9" ry="6" fill="#ffd89e" stroke="none"/></g>
-      <g class="music-note note-two" stroke="#eb9fca" stroke-width="3"><path d="M160 104V66Q183 70 178 85"/><ellipse cx="152" cy="105" rx="9" ry="6" fill="#eb9fca" stroke="none"/></g>
+      <g class="dancer dancer-right">
+        <g class="step-right" stroke="#efc993" stroke-width="15" stroke-linecap="round"><path d="M306 273L287 312L304 350"/><path d="M331 275L344 311L351 351"/></g>
+        <path d="M298 350L316 359M347 353L366 353" stroke="#422443" stroke-width="12" stroke-linecap="round"/>
+        <g class="dancer-torso">
+          <path d="M300 160Q317 150 333 162L344 274Q319 290 294 274Z" fill="#f5ca83" stroke="#fff0bc" stroke-width="1.5"/><path d="M317 159L320 280M299 266L341 266" stroke="#ba713e" stroke-width="1.5"/><circle cx="320" cy="194" r="2" fill="#9f5134"/><circle cx="320" cy="214" r="2" fill="#9f5134"/>
+          <path d="M312 144V159L322 161L325 144" fill="#d7a16d"/><circle cx="319" cy="126" r="21" fill="#d7a16d"/><path d="M298 125Q293 99 319 102Q341 97 341 123L333 118L330 111L305 114Z" fill="#44243d"/>
+          <g class="dance-arm arm-left"><path d="M300 171L275 145L263 108" stroke="#f5ca83" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><path d="M263 108L258 96" stroke="#d7a16d" stroke-width="10" stroke-linecap="round"/></g>
+          <g class="dance-arm arm-right"><path d="M333 171L364 190L391 160" stroke="#f5ca83" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><path d="M391 160L400 150" stroke="#d7a16d" stroke-width="10" stroke-linecap="round"/></g>
+        </g>
+      </g>
+      <g class="stage-confetti" fill="#ffd69b">{Array.from({length:10},(_,i)=><rect x={70+i*38} y={50+(i%3)*35} width="3" height="7" rx="1" style={`--i:${i}`} />)}</g>
     </g>}
     {kind === 'sunshine' && <g class="haldi-still-life">
       <path class="turmeric-stroke" pathLength="1" d="M90 325C180 275 281 386 401 341" stroke="#ed9c29" stroke-width="44" stroke-linecap="round" opacity=".42"/>
@@ -52,13 +63,13 @@ const flowers = kind === 'blessings' ? [[100,295,0.8],[370,300,0.9],[350,340,.65
       <ellipse cx="250" cy="243" rx="94" ry="30" fill="#eca72a"/>
       <path d="M168 244Q205 217 224 203Q250 171 275 205Q306 222 334 244Q250 272 168 244" fill="#ffbe35"/>
       <path d="M198 238Q242 190 271 219" stroke="#ffe276" stroke-width="4" stroke-linecap="round"/>
-      <path d="M300 226L373 125" stroke="#7a472a" stroke-width="13" stroke-linecap="round"/>
+      <g class="haldi-spoon"><path d="M300 226L373 125" stroke="#7a472a" stroke-width="13" stroke-linecap="round"/>
       <path d="M300 226L373 125" stroke="#d8a16a" stroke-width="7" stroke-linecap="round"/>
       <ellipse cx="299" cy="227" rx="18" ry="10" transform="rotate(-45 299 227)" fill="#dc9e36"/>
-      <path class="bowl-light" d="M170 276Q192 319 230 323" stroke="#fff1c0" stroke-width="3" stroke-linecap="round"/>
+      </g><g class="turmeric-pour" fill="#ffcb4d">{Array.from({length:12},(_,i)=><circle cx={292+(i%4)*4} cy={213-(i%3)*5} r={1.7+(i%3)} style={`--i:${i}`} />)}</g><path class="bowl-light" d="M170 276Q192 319 230 323" stroke="#fff1c0" stroke-width="3" stroke-linecap="round"/>
       <path d="M87 313Q59 272 78 250Q108 277 87 313M100 319Q118 278 144 285Q134 313 100 319" fill="#9a9239"/>
     </g>}
-    {(kind === 'blessings' || kind === 'sunshine') && flowers.map(([x,y,scale])=><g transform={`translate(${x} ${y}) scale(${scale})`}>
+    {(kind === 'blessings' || kind === 'sunshine') && flowers.map(([x,y,scale],i)=><g class="ceremony-flower" style={`--flower:${i}`} transform={`translate(${x} ${y}) scale(${scale})`}>
       {Array.from({length:12},(_,i)=><ellipse cx="0" cy="-17" rx="10" ry="19" transform={`rotate(${i*30})`} fill={`url(#${kind}-flower)`} stroke="#ec8a25" stroke-width=".6"/>)}<circle r="12" fill="#cc5e22"/>{Array.from({length:8},(_,i)=><ellipse cx="0" cy="-6" rx="4" ry="7" transform={`rotate(${i*45})`} fill="#f9b139"/>)}
     </g>)}
     {kind === 'forever' && <g>
@@ -70,9 +81,9 @@ const flowers = kind === 'blessings' ? [[100,295,0.8],[370,300,0.9],[350,340,.65
       <path d="M131 317V341L250 377L369 341V317L250 354Z" fill="#b8673b" stroke="#f4c389" stroke-width="2"/>
       <path d="M157 295L250 269L343 295L250 327Z" fill="#5f2e27" stroke="#ffe3a6" stroke-width="5"/>
       <path d="M177 300L303 283M202 280L299 308" stroke="#9b5835" stroke-width="10" stroke-linecap="round"/>
-      <path class="ceremonial-flame flame-outer" d="M248 307C190 302 178 270 200 231C212 257 223 259 222 232C218 195 256 165 247 118C300 166 269 196 296 222C313 236 311 264 298 284C287 302 266 308 248 307Z" fill={`url(#${kind}-flame)`}/>
+      <g class="fire-rise"><path class="ceremonial-flame flame-outer" d="M248 307C190 302 178 270 200 231C212 257 223 259 222 232C218 195 256 165 247 118C300 166 269 196 296 222C313 236 311 264 298 284C287 302 266 308 248 307Z" fill={`url(#${kind}-flame)`}/>
       <path class="ceremonial-flame flame-inner" d="M249 304C219 301 215 279 231 257C239 247 250 228 250 209C281 249 289 268 278 288C271 300 260 305 249 304Z" fill="#fff0b0"/>
-      <path d="M160 342L245 368M257 367L343 343" stroke="#ffe2a4" stroke-width="1"/>
+      </g><path d="M160 342L245 368M257 367L343 343" stroke="#ffe2a4" stroke-width="1"/>
     </g>}
   </svg>
 </div>

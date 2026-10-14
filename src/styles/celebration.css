@@ -224,3 +224,50 @@ html[data-background=true] .scene-art *,html[data-background=true] .celebration-
 .is-visible .scene-art *{animation-play-state:running}
 html[data-background=true] .scene-art *{animation-play-state:paused!important}
 @media(min-width:1000px){.city-moments p{font-size:27px}.hero-preface{font-size:25px}.ceremony-illustration{width:100%;max-width:520px}.scene-art{height:440px}}
+/* Choreographed event stages, active whenever the section is visible. */
+.hero-hosts{font-family:var(--serif);font-size:clamp(1.9rem,5vw,3.5rem);line-height:1.2;color:#ffe3ab;margin-bottom:16px}
+.hero-hosts i{font-size:.75em;color:#f4bf69}
+.hero-preface{font-family:var(--sans);font-style:normal;font-size:12px;line-height:1.9;letter-spacing:.02em;color:#fff0d4}
+.hero-copy h1{margin-top:35px;margin-bottom:35px}
+.hero-date{margin-top:35px}
+.scene-art{isolation:isolate}
+.ceremony-illustration{position:relative;z-index:1;transform:translateY(calc((.5 - var(--scene-progress,.5))*35px)) rotateY(calc((var(--scene-progress,.5) - .5)*16deg));transition:transform .08s linear}
+.scene-aura{position:absolute;inset:8% 0;border-radius:50%;background:radial-gradient(ellipse,#fff3b345,transparent 67%);transform:scale(calc(.85 + var(--scene-progress,.5)*.3));z-index:0;pointer-events:none}
+.scene-music .scene-aura{background:radial-gradient(ellipse,#d487eb35,transparent 68%)}
+.scene-forever .scene-aura{background:radial-gradient(ellipse,#ffc15b38,transparent 65%)}
+.dancer{transform-box:fill-box;transform-origin:50% 100%;animation:dance-sway 2.6s ease-in-out infinite}
+.dancer-right{animation-delay:-1.3s;animation-direction:reverse}
+.dancer-torso{transform-box:fill-box;transform-origin:50% 95%;animation:shoulder-groove 1.3s ease-in-out infinite}
+.dance-arm{transform-box:fill-box;transform-origin:80% 85%;animation:arm-phrase 2.6s ease-in-out infinite}
+.arm-right{animation-direction:reverse;transform-origin:10% 90%;animation-delay:-.65s}
+.dance-skirt{transform-box:fill-box;transform-origin:50% 0;animation:skirt-swing 2.6s ease-in-out infinite}
+.step-left,.step-right{transform-box:fill-box;transform-origin:50% 0;animation:dance-step 1.3s ease-in-out infinite}
+.step-right{animation-delay:-.65s}
+.spotlight{transform-box:view-box;transform-origin:85px 30px;animation:stage-sweep 7s ease-in-out infinite}
+.beam-right{transform-origin:415px 30px;animation-direction:reverse;animation-delay:-3.5s}
+.stage-confetti rect{animation:dance-confetti 5.2s ease-in-out infinite;animation-delay:calc(var(--i)*-.43s)}
+.haldi-spoon{transform-box:view-box;transform-origin:300px 226px;animation:spoon-pour 5.5s ease-in-out infinite}
+.turmeric-pour circle{animation:turmeric-fall 5.5s ease-in infinite;animation-delay:calc(var(--i)*.09s)}
+.ceremony-flower{transform-box:fill-box;transform-origin:center;animation:flower-settle 7s ease-in-out infinite;animation-delay:calc(var(--flower)*-.8s)}
+.fire-rise{transform-box:fill-box;transform-origin:50% 100%}
+.firelight{animation:living-firelight 4s ease-in-out infinite}
+.ceremonial-flame{animation:living-flame 3.1s ease-in-out infinite}
+.flame-inner{animation-delay:-1.5s;animation-duration:2.3s}
+.plate-light{stroke-dasharray:45 220;animation:platter-reflection 6s ease-in-out infinite}
+@keyframes dance-sway{0%,100%{translate:-7px 0;rotate:-4deg}50%{translate:7px -8px;rotate:4deg}}
+@keyframes shoulder-groove{0%,100%{rotate:-2deg;translate:0 0}50%{rotate:2deg;translate:0 4px}}
+@keyframes arm-phrase{0%,100%{rotate:-13deg}50%{rotate:13deg}}
+@keyframes skirt-swing{0%,100%{skew:-5deg;scale:1.02 1}50%{skew:7deg;scale:1.08 1}}
+@keyframes dance-step{0%,100%{rotate:-4deg}50%{rotate:4deg}}
+@keyframes stage-sweep{0%,100%{rotate:-13deg;opacity:.12}50%{rotate:16deg;opacity:.24}}
+@keyframes dance-confetti{0%{translate:0 -15px;opacity:0;rotate:0deg}20%{opacity:.65}75%{opacity:.5}100%{translate:15px 100px;opacity:0;rotate:90deg}}
+@keyframes spoon-pour{0%,20%,100%{rotate:0deg}40%,65%{rotate:-18deg}80%{rotate:0deg}}
+@keyframes turmeric-fall{0%,30%,85%,100%{translate:0 -12px;opacity:0}42%{opacity:.9}65%{translate:-25px 30px;opacity:.3}75%{translate:-32px 37px;opacity:0}}
+@keyframes flower-settle{0%,100%{rotate:-2deg;translate:0 0}50%{rotate:3deg;translate:0 -3px}}
+@keyframes living-flame{0%,100%{transform:scaleX(.97) scaleY(.96) skewX(-3deg)}35%{transform:scaleX(1.04) scaleY(1.12) skewX(2deg)}70%{transform:scaleX(.95) scaleY(1.04) skewX(-1deg)}}
+@keyframes living-firelight{0%,100%{opacity:.55;scale:.95}50%{opacity:1;scale:1.1}}
+@keyframes platter-reflection{0%,100%{stroke-dashoffset:200;opacity:.4}50%{stroke-dashoffset:0;opacity:1}}
+.scene-art *{animation-play-state:paused}.is-visible .scene-art *{animation-play-state:running}
+html[data-background=true] .scene-art *{animation-play-state:paused!important}
+@media(min-width:1000px){.hero-preface{font-size:14px}.scene-art{height:490px}.event-main{transform:translateY(calc((.5 - var(--scene-progress,.5))*18px))}}
+@media(prefers-reduced-motion:reduce){.ceremony-illustration,.event-main{transform:none!important}.scene-art *{animation:none!important}}

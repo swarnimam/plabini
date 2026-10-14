@@ -3,7 +3,7 @@
 Latest source: Invitation-Refined.pdf, visually inspected both pages. User corrections in this conversation take precedence.
 
 - Swarnimam & Plabini; #perfectlyPS.
-- Latest website correction: invitation is from the Kumar & Nayak families, celebrating the wedding of their children. Individual parent names and son/daughter wording are not displayed.
+- Latest website correction: invitation is from The Kumars & The Nayaks, celebrating the wedding of their children. Individual parent names and son/daughter wording are not displayed.
 - शुभारंभ — Tilak / Lagan Chumai, 8 December 2026 at 2 pm IST.
 - शाम शानदार — Sangeet, 8 December at 7:30 pm IST.
 - रंग रसिया — Haldi, 9 December at 11:30 am IST.
@@ -22,4 +22,6 @@ RSVP delivery is explicitly deferred. The browser prepares a copyable message wi
 
 Latest revision removes all personal photographs from the current site source/build. Original generated silk artwork supplies the hero background. The PS monogram appears in the header; the Ganesha image remains with the invocation. No separate schedule/calendar section: each event keeps its date, time, dress code and calendar link. Research and latest design notes: DESIGN_RESEARCH.md.
 
-Editorial revision: public copy now uses a formal, warm invitation voice. Event descriptions in invitation.ts feed both the event sections and calendar downloads. Original SVG Tilak platter, Sangeet dholak, Haldi bowl and ceremonial fire replace abstract motifs; these are illustrative references, not depictions of the family's exact ritual procedures.
+Editorial revision: public copy now uses a formal, warm invitation voice. Event descriptions in invitation.ts feed both the event sections and calendar downloads. Original SVG Tilak platter, Sangeet dance stage, Haldi bowl and ceremonial fire replace abstract motifs; these are illustrative references, not depictions of the family's exact ritual procedures.
+
+Latest activity and presentation corrections: Sangeet features dance performances from both sides of the family and a dance party. Ceremonial Haldi is followed by guest games. Visible timezone labels are omitted; calendar data retains the correct India timezone. The redundant English blessing heading and motion switch are removed. Motion runs by default, respects OS reduced motion, and pauses offscreen.
