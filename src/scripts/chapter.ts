@@ -66,3 +66,17 @@ document.fonts.ready.then(refresh);
 window.addEventListener('load',refresh,{once:true});
 document.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach(img=>img.addEventListener('load',refresh,{once:true}));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)gsap.ticker.sleep();else{gsap.ticker.wake();ScrollTrigger.update();}});
+// A restrained optical response for fine pointers; touch uses the scroll timeline.
+media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',()=>{
+ const cleanups:Array<()=>void>=[];
+ document.querySelectorAll<HTMLElement>('.folio-art').forEach(art=>{
+  const glint=art.querySelector<HTMLElement>('.art-glint');
+  const rx=gsap.quickTo(art,'rotationX',{duration:.65,ease:'power3.out'});
+  const ry=gsap.quickTo(art,'rotationY',{duration:.65,ease:'power3.out'});
+  const move=(event:PointerEvent)=>{const r=art.getBoundingClientRect();rx(-(event.clientY-r.top-r.height/2)/r.height*5);ry((event.clientX-r.left-r.width/2)/r.width*7);if(glint)gsap.to(glint,{opacity:.75,xPercent:(event.clientX-r.left)/r.width*25-12.5,duration:.5,overwrite:true});};
+  const leave=()=>{rx(0);ry(0);if(glint)gsap.to(glint,{opacity:0,duration:.6,overwrite:true});};
+  art.addEventListener('pointermove',move);art.addEventListener('pointerleave',leave);
+  cleanups.push(()=>{art.removeEventListener('pointermove',move);art.removeEventListener('pointerleave',leave);});
+ });
+ return()=>cleanups.forEach(cleanup=>cleanup());
+});

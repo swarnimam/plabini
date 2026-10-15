@@ -1,3 +1,11 @@
+# Latest editorial and interaction pass
+
+Keep family names exclusively inside the letter. Story is now an arc from missed college connection to friendship in Bangalore and an everyday sense of belonging. Generate Tilak/Haldi scenes matching the approved dance and mandap artwork.
+
+Add an optional full-screen scene viewer: an illustration expands from its page position into the dialog; event facts remain on the page and are repeated inside the viewer; next/previous transitions use a directional reveal. Native dialog supplies modal focus containment, Escape closes, and focus returns to the opener. Arrow keys browse scenes. Buttons are exposed only when the dialog is initialized. Reduced motion uses immediate state changes. Fine pointers receive a restrained perspective/foil response; no touch gesture is captured.
+
+Build/content/TypeScript verification is available. Browser, phone, animation and accessibility interaction testing remain unavailable; implementation is not a substitute for those checks.
+
 # Latest artwork correction
 
 The couple prefers illustrated scenes over code-built compositions. Sangeet now depicts guests dancing, not instruments. Shubh Vivah depicts a red-and-gold mandap and agni with an anonymous illustrative couple, following the couple’s request for pheras imagery. No precise regional sequence/count is asserted. Existing scroll timelines are retained. Generated with the built-in image tool; optimized 640px/1024px WebP assets have crop positions chosen for dancers and fire. See ASSET_PROMPTS.md for full prompts and paths.

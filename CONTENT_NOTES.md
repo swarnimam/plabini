@@ -31,3 +31,5 @@ Latest review revision: restore the earlier regal moonlit garden imagery and cli
 Reference-led revision: remove event numbering, alternate labels and event slogans. Keep Tilak/Haldi imagery; replace Sangeet/Vivah imagery with original code-built light and woven-panel compositions. All approved event names, activities, timings, dress codes and calendar data remain unchanged.
 
 Latest artwork correction: restore illustrated imagery for all four events. New Sangeet depicts a dance celebration; new Shubh Vivah uses a red/maroon/gold mandap, agni and anonymous illustrative couple taking pheras. These generated scenes are not photographs of the couple or actual venue. Retain scroll motion and existing Tilak/Haldi images.
+
+Latest editorial correction: The Kumars & The Nayaks appears only once, within the opened letter. Hero says We’re getting married; envelope exterior says For you, with love. Remove the story header location label; retell the confirmed college/Bangalore/friendship story without inventing dates or anecdotes. New Tilak and Haldi illustrations complement Sangeet/Vivah; all depict anonymous imagined people, not portraits or actual event arrangements.
