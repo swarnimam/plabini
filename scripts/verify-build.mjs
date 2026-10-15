@@ -51,5 +51,5 @@ assert.ok(html.includes('vivah-agni-1024.webp'));
 
 assert.equal((html.match(/The Kumars & The Nayaks/g)||[]).length,1,"Family names appear only once, inside letter");
 assert.ok(!html.includes("VIT-AP · BANGALORE"));
-for(const name of ["tilak-family-1024.webp","haldi-family-1024.webp","scene-cinema"]) assert.ok(html.includes(name));
-assert.equal((html.match(/data-scene-open=/g)||[]).length,4);
+for(const name of ["tilak-family-1024.webp","haldi-family-1024.webp"]) assert.ok(html.includes(name));
+assert.ok(!html.includes("data-scene-open"));
