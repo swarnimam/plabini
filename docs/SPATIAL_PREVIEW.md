@@ -1,17 +1,20 @@
-# Spatial wedding preview
+# Destination preview
 
-The existing invitation remains at `/`. The separate `/experience/` route introduces a Three.js arcade with a scroll-driven camera, column fluting, wall screens, paving inlays, a water channel, brass lamps and a red canopy. This is an imagined setting, not a representation of the booked venue or a claim about unconfirmed regional rituals.
+`/experience/` now uses a cinematic image-based 2.5D treatment, replacing the rejected primitive Three.js architecture. The entrance image supplies the established art direction; a transparent architectural foreground travels toward the viewer while the corridor is revealed behind it. The corridor slowly advances with scrolling, then a red-and-gold mandap appears near the wedding chapter. Two short scenic intervals show the setting without text. This is not a freely navigable, reconstructed 3D destination.
 
-All four event facts and calendar files use the existing invitation data. The family names appear only in the opened letter. The original site no longer exposes the rejected Explore scene buttons or viewer. No audio or guest-facing motion switch was added.
+The scene uses CSS perspective, transform and opacity; it does not depend on WebGL. The former SVG geometry review mode and Three.js dependencies were removed. The existing root invitation retains its layout and receives the new Tilak/Haldi assets.
 
-## Verification
+Tilak and Haldi artwork now show empty prepared settings. Sangeet and Shubh Vivah event artwork remain unchanged. All generated images depict imagined settings, not the booked venue. No ceremony details were added to the approved text.
 
-- Astro builds and existing calendar/content/response checks pass for root and `/plabini/` deployments.
-- TypeScript checks pass with DOM, DOM.Iterable and ES2022 libraries.
-- Cloud-browser checks cover the desktop page, letter disclosure, schedule navigation and 390/360-pixel iframe viewports. Those are real layout widths, not hardware/touch emulation.
-- Initial browser inspection found horizontal overflow from incoming artwork and a flap overlapping the invitation heading; both were corrected. Event copy received an opaque background for readability over the fallback illustration.
-- This cloud browser reports GL_VENDOR/GL_RENDERER Disabled and cannot create a WebGL context. The static illustrated fallback was exercised. GPU lighting, visual quality, frame rate and physical mobile performance remain unverified.
-- `/experience/?renderer=svg` is a developer review route using Three's SVG renderer to inspect the same geometry and camera. It differs from WebGL in lighting, depth sorting and material rendering; it is not a substitute for GPU validation. `/review/` embeds this at selectable portrait widths.
-- Reduced motion disables the card choreography and freezes the 3D camera. CSS suppresses letter animation. OS preference emulation was not available in this browser, so that branch was reviewed in code rather than exercised through system settings.
+Event artwork and descriptions are wrapped in one animated sheet. Mobile images use the full portrait composition, including gifts and the foreground decor. Image and description widths are identical; desktop columns use equal tracks. Both move together rather than drifting out of alignment during the reveal.
 
-The production route caps pixel ratio, limits rendering cadence, pauses drawing while hidden, and lowers pixel ratio after repeated slow frames. No Core Web Vitals or hardware performance scores are claimed. The Three.js scene is isolated to the new route; the established invitation does not download it.
+## Validation and practical limits
+
+- Root and `/plabini/` Astro builds and existing content/calendar/response checks pass.
+- The new motion script passes TypeScript with DOM, DOM.Iterable and ES2022 libraries.
+- All static content remains available without JavaScript. Reduced-motion preferences disable scale/depth transforms and sheet choreography; the successive background scenes remain available.
+- The first entrance image has high loading priority. Scene and event images use compressed WebP variants; event images are lazy-loaded. Scroll work is coalesced into a single animation frame, with no perpetual render loop.
+- The motion code is about 2.5 kB minified plus the existing shared GSAP/ScrollTrigger bundle. This is a build measurement, not a Core Web Vitals score.
+- Browser checks use the actual deployed page and `/review/` iframe layouts. Iframe widths exercise responsive CSS, but do not emulate a physical phone's GPU, battery use, touch handling or network.
+
+See DESTINATION_ASSETS.md for asset paths, prompts and provenance.
