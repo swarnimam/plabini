@@ -4,6 +4,7 @@ import { invitation as w, asset } from '../data/invitation';
 import EventDetails from '../components/chapter/EventDetails.astro';
 import Envelope from '../components/garden/Envelope.astro';
 import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
+import Countdown from '../components/garden/Countdown.astro';
 ---
 <BaseLayout>
   <header class="site-header">
@@ -17,6 +18,7 @@ import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
       <div class="hero-copy"><p class="hero-preface">We’re getting married.</p><h1 id="couple-names"><span>Swarnimam</span><i>&</i><span>Plabini</span></h1><div class="hero-date"><span>08 — 09</span><p>DECEMBER 2026<br />GREATER RAJWADA RESORT · GAYA</p></div><a class="hero-enter" href="#celebrations"><span>Explore the celebrations</span><b aria-hidden="true">↓</b></a></div>
       <span class="hero-side" aria-hidden="true">#perfectlyPS · THE CELEBRATION BEGINS</span>
     </section>
+    <Countdown />
     <section id="story" class="story section-space" aria-labelledby="story-title">
       <div class="section-caption"><span>OUR STORY</span></div>
       <h2 id="story-title" class="editorial-title" data-reveal>We shared a campus.<br /><em>Then we found each other.</em></h2>
