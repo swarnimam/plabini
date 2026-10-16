@@ -57,7 +57,7 @@ media.add('(prefers-reduced-motion: no-preference)',()=>{
   if(image)gsap.fromTo(image,{scale:1.3,yPercent:-5},{scale:1.05,yPercent:5,ease:'none',scrollTrigger:{trigger:art,start:'top bottom',end:'bottom top',scrub:true}});
 
  });
- gsap.utils.toArray<HTMLElement>('[data-reveal],.letter-heading,.celebration-intro h2').forEach(el=>gsap.from(el,{y:55,opacity:.2,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none reverse'}}));
+ gsap.utils.toArray<HTMLElement>('[data-reveal],.letter-heading h2,.celebration-intro h2').forEach(el=>gsap.from(el,{y:55,opacity:.2,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none reverse'}}));
  gsap.utils.toArray<SVGPathElement>('.draw-path').forEach((p,i)=>gsap.fromTo(p,{strokeDasharray:1,strokeDashoffset:1},{strokeDashoffset:0,duration:1.8,delay:i*.15,scrollTrigger:{trigger:p,start:'top 85%'}}));
  gsap.fromTo('.city-type',{xPercent:-7},{xPercent:7,ease:'none',scrollTrigger:{trigger:'.city-scene',start:'top bottom',end:'bottom top',scrub:true}});
  return()=>{document.documentElement.dataset.motion='off';};
