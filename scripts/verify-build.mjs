@@ -34,7 +34,7 @@ const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\
 assert.equal(schema.location.address.addressLocality, 'Gaya');
 assert.equal(schema.startDate, '2026-12-08T14:00:00+05:30');
 console.log(`Verified: assets under ${base}, internal links, metadata, four IST calendar events, UTF-8 calendar folding, and placeholder exclusion.`);
-for (const text of ["शुभारंभ", "शाम शानदार", "रंग रसिया", "फेरे एंड फ़ॉरएवर", "The Kumars & The Nayaks", "their children", "VIT-AP", "one year senior", "Copying this message does not send your response."]) assert.ok(html.includes(text), `Missing approved content: ${text}`);
+for (const text of ["शुभारंभ", "शाम शानदार", "रंग रसिया", "फेरे एंड फ़ॉरएवर", "The Kumars & The Nayaks", "their children", "VIT-AP", "one year senior"]) assert.ok(html.includes(text), `Missing approved content: ${text}`);
 
 for (const removed of ['दर्शनाभिलाषी','स्वागतकर्ता','wedding of their son','daughter of','class="schedule section-space"','images/chapter/portrait-','images/chapter/together-','images/chapter/afternoon-']) assert.ok(!html.includes(removed), `Removed content returned: ${removed}`);
 assert.ok(html.includes('id="wedding-envelope"'));

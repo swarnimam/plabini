@@ -1,4 +1,7 @@
 /* A garden invitation: architectural depth, engraved paper and unfolding pages. */
+.site-footer .footer-farewell{display:block;font-size:clamp(3.4rem,7.5vw,7rem);line-height:1.02}
+.site-footer .footer-names{display:block;margin:24px 0 48px;font-size:clamp(2rem,4.5vw,4.4rem);line-height:1.15;color:#e7d8b5}
+.site-header nav a:last-child{display:flex}
 :root{--paper:#f4efdf;--ink:#20392f;--wine:#7d382e;--muted:#716d5b;--rule:#c8b88b;--gold:#c5a466}
 body{padding-bottom:0;background:var(--paper)}
 .site-header{position:absolute;inset:0 0 auto;height:82px;background:transparent;color:#f5e9c9;border-bottom:1px solid #d7bb7730;padding:12px 6%;z-index:20}.brand{gap:12px}.brand img{width:57px;height:57px;object-fit:contain}.brand small{font-family:var(--sans);font-size:9px;letter-spacing:.08em}.site-header nav{gap:20px}.site-header nav a{font-size:11px}
