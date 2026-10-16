@@ -1,0 +1,60 @@
+---
+import { invitation as w, asset } from "../data/invitation";
+import EventDetails from "./EventDetails.astro";
+---
+
+<section
+  id="celebrations"
+  class="celebrations"
+  aria-labelledby="celebrations-title"
+>
+  <div class="celebration-intro section-space">
+    <p class="celebration-motto">
+      <span>Two days</span>
+      <i>✧</i>
+      <span>Four celebrations</span>
+      <i>✧</i>
+      <span>One forever</span>
+    </p>
+    <h2 id="celebrations-title">
+      Every moment,<br />
+      <em>its own kind of magic.</em>
+    </h2>
+  </div>
+  <div class="invitation-folio">
+    {
+      w.events.map((event, i) => (
+        <article
+          class={`event folio-event folio-${i}`}
+          id={event.id}
+          data-chapter={i}
+          aria-labelledby={`event-${i}`}
+        >
+          <div class="folio-sheet">
+            <div class="folio-art">
+              <img
+                src={asset(`images/${event.image}-1024.webp`)}
+                srcset={`${asset(`images/${event.image}-640.webp`)} 640w, ${asset(`images/${event.image}-1024.webp`)} 1024w`}
+                sizes="(min-width: 800px) 48vw, 100vw"
+                width="1024"
+                height="1536"
+                loading="lazy"
+                decoding="async"
+                alt={event.imageAlt}
+              />
+              <span class="art-glint" aria-hidden="true"></span>
+            </div>
+            <div class="event-main">
+              <p class="event-hindi" lang="hi">
+                {event.hindi}
+              </p>
+              <h3 id={`event-${i}`}>{event.name}</h3>
+              <p class="event-description">{event.description}</p>
+              <EventDetails event={event} />
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

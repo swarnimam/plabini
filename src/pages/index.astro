@@ -1,49 +1,41 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { invitation as w, asset } from '../data/invitation';
-import EventDetails from '../components/chapter/EventDetails.astro';
-import Envelope from '../components/garden/Envelope.astro';
-import RsvpPortal from '../components/rsvp/RsvpPortal.astro';
-import Countdown from '../components/garden/Countdown.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { invitation, asset } from "../data/invitation";
+import Hero from "../components/Hero.astro";
+import Story from "../components/Story.astro";
+import Celebrations from "../components/Celebrations.astro";
+import Venue from "../components/Venue.astro";
+import Footer from "../components/Footer.astro";
+import Envelope from "../components/Envelope.astro";
+import RsvpForm from "../components/RsvpForm.astro";
+import Countdown from "../components/Countdown.astro";
 ---
+
 <BaseLayout>
   <header class="site-header">
-    <a class="brand" href="#home" aria-label="Swarnimam and Plabini, home"><img src={asset('images/chapter/monogram.webp')} width="64" height="64" alt="PS wedding monogram" /><small>#perfectlyPS</small></a>
-    <nav aria-label="Main navigation"><a href="#story">Our story</a><a href="#celebrations">Celebrations</a><a href="#venue">Venue</a></nav>
+    <a class="brand" href="#home" aria-label="Swarnimam and Plabini, home"
+      ><img
+        src={asset("images/monogram.webp")}
+        width="64"
+        height="64"
+        alt="PS wedding monogram"
+      /><small>{invitation.hashtag}</small></a
+    >
+    <nav aria-label="Main navigation">
+      <a href="#story">Our story</a><a href="#celebrations">Celebrations</a><a
+        href="#venue">Venue</a>
+    </nav>
   </header>
   <main id="main">
-    <section class="opening" id="home" aria-labelledby="couple-names">
-      <div class="hero-scenery" aria-hidden="true"><img src={asset('images/garden/forever-night.webp')} width="1536" height="1024" fetchpriority="high" alt="" /><div class="hero-shade"></div></div>
-      <div class="palace-door door-left" aria-hidden="true"></div><div class="palace-door door-right" aria-hidden="true"></div>
-      <div class="hero-copy"><p class="hero-preface">We’re getting married.</p><h1 id="couple-names"><span>Swarnimam</span><i>&</i><span>Plabini</span></h1><div class="hero-date"><span>08 — 09</span><p>DECEMBER 2026<br />GREATER RAJWADA RESORT · GAYA</p></div><a class="hero-enter" href="#celebrations"><span>Explore the celebrations</span><b aria-hidden="true">↓</b></a></div>
-    </section>
+    <Hero />
     <Countdown />
-    <section id="story" class="story section-space" aria-labelledby="story-title">
-      <div class="section-caption"><span>OUR STORY</span></div>
-      <h2 id="story-title" class="editorial-title" data-reveal>We shared a campus.<br /><em>Then we found each other.</em></h2>
-      <div class="story-grid">
-        <div class="story-copy"><p class="lead">The person we would marry was at the same university. We just hadn’t met yet.</p><p>At VIT-AP University, Plabini was one year senior to Swarnimam. We had friends in common and a campus in common, but somehow, never a conversation.</p><p>It took a new city to change that. After the pandemic, Swarnimam moved to Bangalore for his first job. Plabini was already there, and through close mutual friends, she became one of the first people he got to know.</p><p>What college never quite managed, Bangalore made easy.</p></div>
-        <div class="paths" data-path-scene aria-label="From Aliganj and Rourkela, our paths met in Bangalore"><div class="path-origins"><span>ALIGANJ<small>Swarnimam</small></span><span>ROURKELA<small>Plabini</small></span></div><svg viewBox="0 0 400 240" fill="none" aria-hidden="true"><path class="path-base" d="M50 5C50 145 200 45 200 230M350 5C350 145 200 45 200 230"/><path class="draw-path" pathLength="1" d="M50 5C50 145 200 45 200 230"/><path class="draw-path second" pathLength="1" d="M350 5C350 145 200 45 200 230"/><circle cx="200" cy="230" r="5"/></svg><p>BANGALORE<small>Where our story began.</small></p></div>
-      </div>
-      <div class="city-scene" data-scroll-scene><div class="city-type" aria-hidden="true"><span>A new city.</span><em>A familiar feeling.</em></div><div class="city-moments"><p><span>THE PLACES</span>A city to discover together.</p><p><span>THE PLANS</span>Food trails. Films. Time for one another.</p><p><span>THE FEELING</span>Somewhere along the way, it became us.</p></div><p class="city-caption">There were food outings, evenings at the movies and all the little discoveries that make a new city your own. We laughed, wandered and grew closer. What began as friendship became the part of our lives we couldn’t imagine doing without.</p><svg class="city-lines" viewBox="0 0 800 500" fill="none" aria-hidden="true"><path d="M-100 100C400 -50 100 600 900 300"/><path d="M-100 140C450 0 150 650 900 340"/></svg></div>
-      <p class="story-turn" data-reveal>By the time we talked about forever,<br /><em>we had already found it in the everyday.</em></p>
-    </section>
+    <Story />
     <Envelope />
-    <section id="celebrations" class="celebrations" aria-labelledby="celebrations-title">
-      <div class="celebration-intro section-space"><p class="celebration-motto"><span>Two days</span><i>✧</i><span>Four celebrations</span><i>✧</i><span>One forever</span></p><h2 id="celebrations-title">Every moment,<br /><em>its own kind of magic.</em></h2></div>
-      <div class="invitation-folio">
-      {w.events.map((event,i) => <article class={`event folio-event folio-${i}`} id={event.id} data-chapter={i} aria-labelledby={`event-${i}`}>
-        <div class="folio-sheet">
-          <div class="folio-art"><img src={asset(`images/${['journey/tilak-setting','garden/sangeet-dance','journey/haldi-setting','garden/vivah-agni'][i]}-1024.webp`)} srcset={`${asset(`images/${['journey/tilak-setting','garden/sangeet-dance','journey/haldi-setting','garden/vivah-agni'][i]}-640.webp`)} 640w, ${asset(`images/${['journey/tilak-setting','garden/sangeet-dance','journey/haldi-setting','garden/vivah-agni'][i]}-1024.webp`)} 1024w`} sizes="(min-width: 800px) 48vw, 100vw" width="1024" height="1536" loading="lazy" decoding="async" alt={['A prepared Tilak setting with brass thalis, gifts and folded textiles; no people','An imagined Sangeet with families dancing together','An empty Haldi setting with marigold garlands, brass bowls and yellow decor','An imagined red-and-gold mandap with agni and pheras'][i]} /><span class="art-glint" aria-hidden="true"></span></div>
-          <div class="event-main"><p class="event-hindi" lang="hi">{event.hindi}</p><h3 id={`event-${i}`}>{event.name}</h3><p class="event-description">{event.description}</p><EventDetails index={i} /></div>
-        </div>
-      </article>)}
-      </div>
-    </section>
-    <section id="venue" class="venue section-space" aria-labelledby="venue-title"><div class="venue-copy"><p class="overline">THE WEDDING VENUE</p><h2 id="venue-title">We look forward to<br /><em>welcoming you<br />in Gaya.</em></h2><p class="venue-name">Greater Rajwada Resort</p><p>Manpur, Gaya · Near Mehta Petrol Pump<br />Bihar, India</p><a class="button" href={w.venue.mapsUrl} target="_blank" rel="noopener noreferrer">Open directions ↗<span class="sr-only"> in Google Maps, new tab</span></a></div><div class="venue-art" aria-hidden="true"><span>08</span><i>&</i><span>09</span><p>DECEMBER<br />GAYA, BIHAR</p><svg viewBox="0 0 400 500" fill="none"><path d="M-40 40C460 0 450 500 80 440S-100 200 440 200"/><path d="M-40 60C430 20 430 480 100 420S-70 220 440 220"/></svg></div></section>
-    <RsvpPortal />
+    <Celebrations />
+    <Venue />
+    <RsvpForm />
   </main>
-  <footer class="site-footer"><p class="footer-title"><em class="footer-farewell">See you in our forever.</em><span class="footer-names">Swarnimam &amp; Plabini.</span></p><div class="footer-bottom"><span>#perfectlyPS</span><span>8–9 DECEMBER 2026 · GAYA</span><a href="#home">Back to top ↑</a></div></footer>
-  <script src="../scripts/chapter.ts"></script>
-  <script src="../scripts/invitation.ts"></script>
+  <Footer />
+  <script src="../scripts/animations.ts"></script>
+  <script src="../scripts/rsvp.ts"></script>
 </BaseLayout>

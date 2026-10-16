@@ -1,5 +1,0 @@
----
-import { asset } from '../../data/invitation';
-const { index } = Astro.props;
----
-{index === 1 ? <div class="dance-scenography" aria-hidden="true"><div class="stage-halo"></div><div class="light-columns">{Array.from({length:11},(_,i)=><span style={`--column:${i}`}></span>)}</div><div class="dance-floor"></div><div class="stage-word" lang="hi">शाम<br />शानदार</div><div class="stage-beam beam-a"></div><div class="stage-beam beam-b"></div></div> : <div class="union-scenography" aria-hidden="true"><div class="union-panel union-left"></div><div class="union-panel union-right"></div><svg class="union-weave" viewBox="0 0 600 700" fill="none">{Array.from({length:19},(_,i)=><path d={`M${-180+i*13} -40 C${520+i*4} 70 ${100+i*6} 430 ${700+i*10} 760`} />)}{Array.from({length:19},(_,i)=><path d={`M${780-i*13} -40 C${80-i*4} 70 ${500-i*6} 430 ${-100-i*10} 760`} />)}</svg><div class="union-monogram"><img src={asset('images/chapter/monogram.webp')} width="180" height="180" alt="" /></div></div>}

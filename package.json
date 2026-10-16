@@ -1,5 +1,5 @@
 {
-  "name": "cinematic-wedding",
+  "name": "perfectly-ps-wedding",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -7,16 +7,17 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
     "verify": "node scripts/verify-build.mjs && node --experimental-strip-types scripts/verify-response.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
-    "gsap": "^3.12.5",
-    "lenis": "^1.1.18"
+    "gsap": "^3.12.5"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22.6.0"
   }
 }
