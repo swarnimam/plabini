@@ -90,6 +90,6 @@ For root hosting, set `BASE_PATH=/` and `SITE_URL` to the destination origin. Up
 - Animations run by default and respect the operating system’s reduced-motion preference. Scrolling is native; there is no audio autoplay.
 - Event artwork uses responsive WebP images and lazy loading. The opening image is prioritized. Decorative images are hidden from assistive technology where appropriate.
 - The countdown stops at zero, shows the celebrations message, and avoids unnecessary updates while the page is hidden.
-- RSVP **prepares a message only**. Guests copy and share it themselves. No guest data is submitted, stored or emailed by this site.
+- RSVP supports a Google Sheets endpoint through `PUBLIC_RSVP_ENDPOINT`. Until it is configured, guests prepare and copy a message themselves. See [integration setup and verification](integrations/google-sheets/README.md). Online confirmation appears only after a matching successful server response.
 - Fonts load from Google Fonts, with local serif/sans-serif fallbacks. There are no analytics or tracking scripts in the application.
 - Artwork is illustrative; it is not photography of the actual couple or booked venue.

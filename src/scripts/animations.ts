@@ -98,13 +98,13 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
     .fromTo(
       ".door-left",
       { opacity: 1, rotationY: 0 },
-      { opacity: 0, rotationY: -105, duration: 1.8, ease: "power3.inOut" },
+      { rotationY: -105, duration: 3.2, ease: "power2.inOut" },
       0,
     )
     .fromTo(
       ".door-right",
       { opacity: 1, rotationY: 0 },
-      { opacity: 0, rotationY: 105, duration: 1.8, ease: "power3.inOut" },
+      { rotationY: 105, duration: 3.2, ease: "power2.inOut" },
       0,
     )
     .from(
@@ -117,8 +117,9 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
         duration: 1.4,
         ease: "power3.out",
       },
-      0.2,
-    );
+      0.8,
+    )
+    .to(".palace-door", { opacity: 0, duration: 0.65 }, 2.55);
   const hero = gsap.timeline({
     scrollTrigger: {
       trigger: ".opening",

@@ -4,5 +4,6 @@ export default defineConfig({
   site: process.env.SITE_URL || undefined,
   base: process.env.BASE_PATH || "/",
   output: "static",
+  vite: { server: { allowedHosts: ["terminal.local"] } },
   server: { port: 3000, host: true },
 });
