@@ -1,5 +1,7 @@
 ---
 import { invitation as w } from "../data/invitation";
+const endpoint = import.meta.env.PUBLIC_RSVP_ENDPOINT || "";
+const online = /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(endpoint);
 ---
 
 <section id="rsvp" class="rsvp-section" aria-labelledby="rsvp-title">
@@ -11,13 +13,13 @@ import { invitation as w } from "../data/invitation";
         <em>your plans.</em>
       </h2>
       <p>
-        We’d love to celebrate with you. Prepare a little note and share it with
-        the family to let us know your plans.
+        {online ? "We’d love to celebrate with you. Let us know your plans, and we’ll take care of the rest." : "We’d love to celebrate with you. Prepare a little note and share it with the family to let us know your plans."}
       </p>
       <span class="rsvp-signature">With love,<br />Swarnimam & Plabini</span>
     </div>
     <div class="response-card">
-      <form id="response-form" hidden>
+      <form id="response-form" data-endpoint={online ? endpoint : undefined} hidden>
+        <div class="rsvp-honeypot" aria-hidden="true"><label>Leave this blank<input name="website" tabindex="-1" autocomplete="off" /></label></div>
         <label for="guest-name"
           >Your name<input
             id="guest-name"
@@ -69,8 +71,10 @@ import { invitation as w } from "../data/invitation";
             placeholder="Add a personal message, if you wish."
           ></textarea>
         </label>
-        <button class="button" type="submit">Prepare my message ↗</button>
+        <button class="button" type="submit">{online ? "Send RSVP ↗" : "Prepare my message ↗"}</button>
+        <p id="rsvp-error" role="alert" hidden></p>
       </form>
+      <div id="rsvp-confirmation" tabindex="-1" hidden><h3>Thank you for letting us know.</h3><p>Your RSVP has been received. We’re grateful to have you as part of our story.</p></div>
       <noscript>
         <p>
           Send your name, attendance, guest count and chosen celebrations to the

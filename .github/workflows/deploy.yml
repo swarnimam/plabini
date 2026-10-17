@@ -39,6 +39,7 @@ jobs:
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          PUBLIC_RSVP_ENDPOINT: ${{ vars.PUBLIC_RSVP_ENDPOINT }}
       - name: Verify content, links and calendar files
         run: npm run verify
       - name: Upload verified site

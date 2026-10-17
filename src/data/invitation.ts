@@ -22,7 +22,7 @@ export const invitation = {
       iso: "2026-12-08T14:00:00+05:30",
       time: "2:00 pm",
       description:
-        "Our wedding celebrations open with Tilak / Lagan Chumai, bringing our families together in an atmosphere of affection, tradition and the blessings of our elders.",
+        "Our wedding celebration starts off with Tilak / Lagan Chumai, bringing our families together in an atmosphere of affection, tradition and the blessings of our elders.",
       attire: "Festive wear in vibrant colours",
     },
     {
@@ -36,8 +36,8 @@ export const invitation = {
       iso: "2026-12-08T19:30:00+05:30",
       time: "7:30 pm",
       description:
-        "Dance performances from both sides of the family, a lively dance floor, and a party for everyone. Join the bride’s and groom’s families for an evening of music, movement and celebration.",
-      attire: "Elegant traditional wear or formal suits",
+        "An evening of music, dance, and laughter awaits as we celebrate the joy of two hearts coming together.\n\nJoin us for a sparkling Sangeet night filled with rhythm, love, and unforgettable memories.",
+      attire: "Elegant traditional, Indo-Western, or formal suits.",
     },
     {
       id: "haldi",
@@ -51,7 +51,7 @@ export const invitation = {
       iso: "2026-12-09T11:30:00+05:30",
       time: "11:30 am",
       description:
-        "The morning begins with ceremonial Haldi, followed by games for our guests. Join us for the traditions, then stay for some friendly competition and time together before the wedding.",
+        "The morning begins with the age-old traditions of Haldi, a little turmeric, a lot of laughter, and the love of everyone we hold dear.\n\nPainted in yellow. Poured with love.",
       attire: "Festive wear in shades of yellow",
     },
     {
@@ -65,8 +65,8 @@ export const invitation = {
       iso: "2026-12-09T19:30:00+05:30",
       time: "7:30 pm",
       description:
-        "With the blessings of our families, we invite you to witness our wedding ceremony and share in the joy of our union.",
-      attire: "Elegant ethnic wear for the wedding evening",
+        "With the blessings of our families, we invite you to be part of the sacred vows that unite us in marriage and the beginning of our forever.",
+      attire: "Elegant ethnic attire.",
     },
   ],
 };

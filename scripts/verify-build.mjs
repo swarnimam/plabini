@@ -24,14 +24,14 @@ for (const text of [
   "रंग रसिया",
   "फेरे एंड फ़ॉरएवर",
   "Festive wear in vibrant colours",
-  "Elegant traditional wear or formal suits",
+  "Elegant traditional, Indo-Western, or formal suits.",
   "Festive wear in shades of yellow",
-  "Elegant ethnic wear for the wedding evening",
-  "their children",
-  "one year senior",
+  "Elegant ethnic attire.",
+  "their beloved children",
+  "He tolerates Taylor, and she vibes to Diljit.",
 ])
   assert.ok(html.includes(text), `Missing approved content: ${text}`);
-assert.equal((html.match(/The Kumars & The Nayaks/g) || []).length, 1);
+assert.equal((html.match(/THE KUMAR FAMILY & THE NAYAK FAMILY/g) || []).length, 1);
 assert.equal((html.match(/<h1\b/g) || []).length, 1, "One primary heading");
 assert.equal((html.match(/data-chapter="[0-3]"/g) || []).length, 4);
 

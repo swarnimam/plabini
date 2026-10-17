@@ -6,17 +6,17 @@
 | Event | Hindi title | Date | Time | Dress code |
 | --- | --- | --- | --- | --- |
 | Tilak / Lagan Chumai | शुभारंभ | Tuesday, 8 December 2026 | 2:00 pm | Festive wear in vibrant colours |
-| Sangeet | शाम शानदार | Tuesday, 8 December 2026 | 7:30 pm | Elegant traditional wear or formal suits |
+| Sangeet | शाम शानदार | Tuesday, 8 December 2026 | 7:30 pm | Elegant traditional, Indo-Western, or formal suits. |
 | Haldi | रंग रसिया | Wednesday, 9 December 2026 | 11:30 am | Festive wear in shades of yellow |
-| Shubh Vivah | फेरे एंड फ़ॉरएवर | Wednesday, 9 December 2026 | 7:30 pm | Elegant ethnic wear for the wedding evening |
+| Shubh Vivah | फेरे एंड फ़ॉरएवर | Wednesday, 9 December 2026 | 7:30 pm | Elegant ethnic attire. |
 
 There are four events. शुभारंभ is the Hindi title for Tilak / Lagan Chumai, not a separate ceremony. Sangeet features dance performances from both families and a dance party. Haldi is followed by games for guests. Ceremony end times have not been supplied and must not be invented.
 
 ## Invitation and story
 
-“The Kumars & The Nayaks” appears only inside the opened letter, inviting guests to the wedding of “their children.” Preserve the approved Hindi text and its Devanagari font support.
+The opened letter begins “THE KUMAR FAMILY & THE NAYAK FAMILY,” inviting guests to the union of “their beloved children,” and closes “The Kumar & Nayak Families.” Family names stay inside the letter. Preserve the approved Hindi text and its Devanagari font support.
 
-Plabini was one year senior to Swarnimam at VIT-AP University. They shared mutual friends but did not meet or talk in college. They met through close mutual friends in Bangalore after the pandemic, when Swarnimam moved there for his first job. Food outings, films and exploring the city became friendship, love and the decision to marry.
+Plabini was one year senior to Swarnimam at VIT-AP University. They shared mutual friends but did not meet or talk in college. They met through close mutual friends in Bangalore after the pandemic, when Swarnimam moved there for his first job. The displayed story follows three stages: how they met, their journey together, and the decision. It includes their contrasting university routines, his dark humour and her laugh, movies, food outings, exploring Bangalore, dancing to Bollywood songs, Taylor and Diljit. The closing is “By the time we talked about forever, we had already found it in the everyday.”
 
 Keep public copy focused on the celebration. Do not add unconfirmed rituals, hospitality promises, personal contact details or extra family names. The guest response form is a browser-local message composer, not an RSVP submission service.
 
