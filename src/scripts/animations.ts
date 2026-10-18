@@ -114,6 +114,7 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
   intro
     .to(".gate-leaf--left", { rotationY: -108, duration: 2.3, ease: "power3.inOut" }, 0)
     .to(".gate-leaf--right", { rotationY: 108, duration: 2.3, ease: "power3.inOut" }, 0)
+    .fromTo(".hero-copy", { opacity: 0 }, { opacity: 1, duration: .9, ease: "power2.out" }, 1.15)
     .fromTo(".hero-copy h1>span",
       { yPercent: 32, opacity: 0 },
       { yPercent: 0, opacity: 1, stagger: 0.13, duration: 0.85, ease: "power2.out" },
