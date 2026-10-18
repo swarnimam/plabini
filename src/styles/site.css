@@ -2090,36 +2090,42 @@ body {
 .site-footer { padding-bottom: 88px; }
 @media print { .music-toggle { display: none; } }
 
-/* An intentional, accessible gate-opening gesture. */
-.opening { position: relative; }
-.gate-enter { position: absolute; z-index: 12; left: 50%; top: 53%; transform: translate(-50%, -50%); min-width: 190px; min-height: 56px; padding: 14px 22px; border: 1px solid #dfc58c; background: #17332e; color: #fff6df; text-align: center; box-shadow: 0 12px 30px #0005; }
-.gate-enter span { display: block; font-family: var(--serif); font-size: 25px; }
-.gate-enter small { display: block; font-size: 10px; letter-spacing: .06em; }
-.gate-enter[hidden] { display: none; }
-
-/* Keep the entrance closed until the guest explicitly opens it. */
-html[data-gates="open"] .palace-door { pointer-events: none; }
-html:not([data-gates="open"]) .palace-door { opacity: 1; }
-@media (prefers-reduced-motion: reduce) {
-  html:not([data-gates="open"]) .palace-door { opacity: 0; }
-}
-
-/* Cinematic ceremonial gates */
+/* Moonlit palace entrance. The photo's fixed architecture and real door cutouts
+   share one coordinate system, so the original composition stays aligned. */
 .opening { isolation: isolate; }
-.palace-door { z-index: 8; opacity: 1; overflow: hidden; background: #0a251f; border: 0; backface-visibility: hidden; }
-.palace-door::before,.palace-door::after { display: none; }
-.gate-art { position: absolute; inset: 0; width: 100%; height: 100%; }
-.door-right .gate-art { transform: scaleX(-1); }
-.gate-glow { position: absolute; z-index: 7; left: 50%; top: 0; width: 4px; height: 100%; background: #ffe4a6; box-shadow: 0 0 25px 9px #f3c578; opacity: 0; pointer-events: none; }
-.gate-sparks { position: absolute; inset: 0; z-index: 9; pointer-events: none; }
-.gate-sparks i { position: absolute; left: var(--x); top: var(--y); width: 3px; height: 3px; border-radius: 50%; background: #ffdf9c; opacity: 0; }
-
-.gate-enter { z-index: 12; top: 55%; width: min(88vw, 320px); min-height: 0; padding: 0; background: transparent; border: 0; box-shadow: none; color: #fff1ce; text-shadow: 0 2px 12px #000; }
-.gate-enter:hover { background: transparent; box-shadow: none; }
-.gate-medallion { display: grid!important; place-items: center; width: 128px; height: 128px; margin: 0 auto 20px; border: 3px double #f6d89c; border-radius: 50%; background: radial-gradient(circle, #936e39, #2b4434 55%, #091e1a 75%); box-shadow: 0 0 0 7px #102a24, 0 0 0 9px #d7b579, 0 0 55px #e5b76570; transition: transform .3s; }
-.gate-medallion span { font-family: var(--hindi); font-size: 56px; color: #ffe4a7; }
-.gate-enter:hover .gate-medallion { transform: scale(1.06); }
-.gate-enter .gate-action { font-size: clamp(27px, 5vw, 35px); line-height: 1.1; }
-.gate-enter small { margin-top: 9px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
-html[data-gates="opening"] .gate-enter { display: none; }
-@media (prefers-reduced-motion: reduce) { .palace-door { display: none; } }
+.gate-theatre {
+  position: absolute; inset: 0; z-index: 8; display: none;
+  overflow: hidden; perspective: 1400px; pointer-events: none;
+}
+.gate-world {
+  position: absolute; top: 50%; left: 50%;
+  width: max(100%, 150svh); aspect-ratio: 3 / 2;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d; pointer-events: none;
+}
+.gate-artwork { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: fill; }
+.gate-leaf { backface-visibility: hidden; will-change: transform; }
+.gate-leaf--left { transform-origin: 33.3% 48%; }
+.gate-leaf--right { transform-origin: 66.7% 48%; }
+.gate-frame { z-index: 2; }
+.gate-enter {
+  position: absolute; z-index: 12; left: 50%; top: 53%;
+  transform: translate(-50%, -50%); display: grid; place-items: center;
+  width: clamp(88px, 14vw, 126px); height: clamp(88px, 14vw, 126px);
+  padding: 8px; border: 2px solid #e1c58b; border-radius: 50%;
+  background: #142e27d9; cursor: pointer;
+  box-shadow: 0 0 0 6px #132b24b0, 0 0 0 8px #d4b271, 0 10px 28px #0008;
+  transition: scale .2s ease;
+}
+.gate-enter img { display: block; max-width: 100%; height: auto; object-fit: contain; }
+.gate-enter:hover { scale: 1.05; }
+.gate-enter:focus-visible { outline: 3px solid #fff0bf; outline-offset: 13px; }
+.gate-enter[hidden] { display: none; }
+html:is([data-gates="closed"],[data-gates="opening"]) .gate-theatre { display: block; }
+html:is([data-gates="closed"],[data-gates="opening"]) .site-header { opacity: 0; pointer-events: none; }
+html:is([data-gates="closed"],[data-gates="opening"]) .hero-copy { opacity: 0; }
+html[data-gates="opening"] .hero-copy { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .gate-theatre { transition: none; }
+}
+@media print { .gate-theatre,.gate-enter { display: none !important; } }
