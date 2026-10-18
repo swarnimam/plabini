@@ -8,17 +8,33 @@ const envelope =
 let letterTimeline: gsap.core.Timeline | undefined;
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 const gateButton = document.querySelector<HTMLButtonElement>("#gate-enter");
-// The approved gate is enabled only if all three image layers load successfully.
-// Missing image assets cannot block access to the invitation.
-if (gateButton) {
+if (gateButton && document.documentElement.dataset.gates === "loading") {
   const images = Array.from(document.querySelectorAll<HTMLImageElement>(".gate-artwork"));
-  Promise.all(images.map((image) => { const source = image.dataset.gateImage; if (!source) return Promise.reject(new Error("Missing gate image path")); image.src = source; return image.decode(); })).then(() => {
-    document.documentElement.dataset.gates = "closed";
-    gateButton.hidden = false;
-  }).catch(() => { document.documentElement.dataset.gates = "open"; document.dispatchEvent(new Event("gate:unavailable")); });
+
+  // Never show a partial gate: wait for the artwork, or reveal the real website.
+  Promise.all(images.map((image) => image.decode()))
+    .then(() => {
+      if (document.documentElement.dataset.gates !== "loading") return;
+      document.documentElement.dataset.gates = "closed";
+      gateButton.hidden = false;
+    })
+    .catch(() => {
+      document.documentElement.dataset.gates = "open";
+      document.dispatchEvent(new Event("gate:unavailable"));
+    });
+
   gateButton.addEventListener("click", () => {
     gateButton.hidden = true;
-    document.documentElement.dataset.gates = reduced.matches ? "open" : "opening";
+    if (reduced.matches) {
+      document.documentElement.dataset.gates = "open";
+      document.dispatchEvent(new Event("gate:opened"));
+      return;
+    }
+
+    // The hero's scroll-parallax tween can own opacity at page load.
+    // Set it to zero synchronously before making the hero visible.
+    gsap.set(".hero-copy-inner", { opacity: 0 });
+    document.documentElement.dataset.gates = "opening";
   }, { once: true });
 }
 function refresh() {
@@ -99,6 +115,10 @@ envelope?.addEventListener("toggle", () => {
   if (!changingLetter) refresh();
 });
 reduced.addEventListener("change", () => {
+  if (reduced.matches && document.documentElement.dataset.gates === "opening") {
+    document.documentElement.dataset.gates = "open";
+    document.dispatchEvent(new Event("gate:opened"));
+  }
   letterTimeline?.revert();
   changingLetter = false;
   if (envelope) gsap.set(envelope, { clearProps: "height,overflow" });
@@ -109,19 +129,37 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
   const desktop = matchMedia("(min-width:800px)").matches;
   const intro = gsap.timeline({
     paused: true,
-    onComplete: () => { document.documentElement.dataset.gates = "open"; },
+    onComplete: () => {
+      document.documentElement.dataset.gates = "open";
+      document.dispatchEvent(new Event("gate:opened"));
+      refresh();
+    },
   });
+  // Door leaves open first; the camera then travels through the familiar
+  // floral arch. The surrounding architecture gently dissolves into the
+  // actual homepage image while the invitation comes into focus.
   intro
-    .to(".gate-leaf--left", { rotationY: -108, duration: 2.3, ease: "power3.inOut" }, 0)
-    .to(".gate-leaf--right", { rotationY: 108, duration: 2.3, ease: "power3.inOut" }, 0)
-    .fromTo(".hero-copy", { opacity: 0 }, { opacity: 1, duration: .9, ease: "power2.out" }, 1.15)
+    .fromTo(".gate-leaf--left", { rotationY: 0 },
+      { rotationY: -106, duration: 2.15, ease: "power2.inOut" }, 0)
+    .fromTo(".gate-leaf--right", { rotationY: 0 },
+      { rotationY: 106, duration: 2.15, ease: "power2.inOut" }, 0)
+    .fromTo(".hero-scenery img", { scale: 1.09, filter: "brightness(.78)" },
+      { scale: 1, filter: "brightness(1)", duration: 1.8, ease: "power2.out" }, .65)
+    .to(".gate-world", { scale: 1.14, duration: 1.5, ease: "power2.inOut" }, 1.05)
+    .to(".gate-frame", { opacity: 0, duration: 1.25, ease: "sine.inOut" }, 1.40)
+    .to(".gate-theatre", { opacity: 0, duration: .85, ease: "sine.inOut" }, 2.10)
+    .fromTo(".hero-copy-inner",
+      { autoAlpha: 0, y: 24, filter: "blur(6px)" },
+      { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.05, ease: "power2.out" },
+      1.85)
     .fromTo(".hero-copy h1>span",
-      { yPercent: 32, opacity: 0 },
-      { yPercent: 0, opacity: 1, stagger: 0.13, duration: 0.85, ease: "power2.out" },
-      1.2)
-    .to(".gate-frame", { opacity: 0, duration: 0.6 }, 2.05)
-    .to(".gate-theatre", { opacity: 0, duration: 0.5 }, 2.4);
+      { yPercent: 15, opacity: 0 },
+      { yPercent: 0, opacity: 1, stagger: .12, duration: .9, ease: "power2.out" },
+      2.0)
+    .fromTo(".site-header", { autoAlpha: 0 },
+      { autoAlpha: 1, duration: .7, ease: "sine.out" }, 2.35);
   gateButton?.addEventListener("click", () => intro.play(), { once: true });
+
   const hero = gsap.timeline({
     scrollTrigger: {
       trigger: ".opening",
