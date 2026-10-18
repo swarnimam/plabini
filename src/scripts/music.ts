@@ -7,6 +7,8 @@ if (audio && toggle && label) {
   toggle.hidden = false;
   audio.volume = 0.35;
   let enabled = true;
+  const gate = document.querySelector<HTMLButtonElement>('#gate-enter');
+  gate?.addEventListener('click', () => { void play(); }, { once: true });
   const sync = () => {
     toggle.setAttribute('aria-pressed', String(enabled));
     toggle.setAttribute('aria-label', enabled ? 'Turn music off' : 'Turn music on');
@@ -32,5 +34,5 @@ if (audio && toggle && label) {
     if (document.hidden) audio.pause(); else void play();
   });
   sync();
-  void play();
+  if (!gate) void play();
 }
