@@ -12,10 +12,10 @@ const gateButton = document.querySelector<HTMLButtonElement>("#gate-enter");
 // Missing image assets cannot block access to the invitation.
 if (gateButton) {
   const images = Array.from(document.querySelectorAll<HTMLImageElement>(".gate-artwork"));
-  Promise.all(images.map((image) => image.decode())).then(() => {
+  Promise.all(images.map((image) => { const source = image.dataset.src; if (!source) return Promise.reject(new Error("Missing gate image path")); image.src = source; return image.decode(); })).then(() => {
     document.documentElement.dataset.gates = "closed";
     gateButton.hidden = false;
-  }).catch(() => { document.documentElement.dataset.gates = "open"; });
+  }).catch(() => { document.documentElement.dataset.gates = "open"; document.dispatchEvent(new Event("gate:unavailable")); });
   gateButton.addEventListener("click", () => {
     gateButton.hidden = true;
     document.documentElement.dataset.gates = reduced.matches ? "open" : "opening";
