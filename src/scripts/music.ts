@@ -28,8 +28,12 @@ if (audio && toggle && label) {
     sync();
     play(); // Invoke play synchronously from the guest's opening gesture.
   };
-  if (gate) gate.addEventListener('click', enter, { once: true });
-  else enter();
+  if (gate) {
+    gate.addEventListener('click', enter, { once: true });
+    const unavailable = () => { entered = true; enabled = false; sync(); };
+    document.addEventListener('gate:unavailable', unavailable, { once: true });
+    if (document.documentElement.dataset.gates === 'open' && gate.hidden) unavailable();
+  } else enter();
   toggle.addEventListener('click', () => {
     enabled = !enabled;
     sync();
