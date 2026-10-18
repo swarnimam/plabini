@@ -7,6 +7,7 @@ const envelope =
   document.querySelector<HTMLDetailsElement>("#wedding-envelope");
 let letterTimeline: gsap.core.Timeline | undefined;
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+if (reduced.matches) document.querySelector("#gate-enter")?.addEventListener("click", (event) => { (event.currentTarget as HTMLElement).hidden = true; }, { once: true });
 function refresh() {
   requestAnimationFrame(() => ScrollTrigger.refresh());
 }
@@ -93,7 +94,7 @@ reduced.addEventListener("change", () => {
 media.add("(prefers-reduced-motion: no-preference)", () => {
   document.documentElement.dataset.motion = "on";
   const desktop = matchMedia("(min-width:800px)").matches;
-  const intro = gsap.timeline();
+  const intro = gsap.timeline({ paused: true });
   intro
     .fromTo(
       ".door-left",
@@ -120,6 +121,7 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
       0.8,
     )
     .to(".palace-door", { opacity: 0, duration: 0.65 }, 2.55);
+  document.querySelector("#gate-enter")?.addEventListener("click", (event) => { (event.currentTarget as HTMLElement).hidden = true; intro.play(); }, { once: true });
   const hero = gsap.timeline({
     scrollTrigger: {
       trigger: ".opening",
