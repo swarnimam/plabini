@@ -2096,3 +2096,10 @@ body {
 .gate-enter span { display: block; font-family: var(--serif); font-size: 25px; }
 .gate-enter small { display: block; font-size: 10px; letter-spacing: .06em; }
 .gate-enter[hidden] { display: none; }
+
+/* Keep the entrance closed until the guest explicitly opens it. */
+html[data-gates="open"] .palace-door { pointer-events: none; }
+html:not([data-gates="open"]) .palace-door { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-gates="open"]) .palace-door { opacity: 0; }
+}
