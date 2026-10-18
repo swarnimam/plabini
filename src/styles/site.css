@@ -2089,3 +2089,10 @@ body {
 .music-toggle:focus-visible { outline: 3px solid #bca46c; outline-offset: 4px; }
 .site-footer { padding-bottom: 88px; }
 @media print { .music-toggle { display: none; } }
+
+/* An intentional, accessible gate-opening gesture. */
+.opening { position: relative; }
+.gate-enter { position: absolute; z-index: 12; left: 50%; top: 53%; transform: translate(-50%, -50%); min-width: 190px; min-height: 56px; padding: 14px 22px; border: 1px solid #dfc58c; background: #17332e; color: #fff6df; text-align: center; box-shadow: 0 12px 30px #0005; }
+.gate-enter span { display: block; font-family: var(--serif); font-size: 25px; }
+.gate-enter small { display: block; font-size: 10px; letter-spacing: .06em; }
+.gate-enter[hidden] { display: none; }
