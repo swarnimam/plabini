@@ -1,0 +1,7 @@
+---
+import { asset } from '../data/invitation';
+---
+<audio id="wedding-music" src={asset('audio/wedding-music.m4a')} preload="none" loop></audio>
+<button id="music-toggle" class="music-toggle" type="button" aria-label="Turn music off" aria-pressed="true" hidden><span aria-hidden="true">♪</span> <span id="music-label">Music on</span></button>
+<span id="music-status" class="sr-only" role="status"></span>
+<script src="../scripts/music.ts"></script>

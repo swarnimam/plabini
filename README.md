@@ -87,9 +87,9 @@ For root hosting, set `BASE_PATH=/` and `SITE_URL` to the destination origin. Up
 ## Behaviour, accessibility and privacy
 
 - Essential content is server-rendered. The letter uses native `<details>` as its no-JavaScript fallback; the form provides a no-script explanation.
-- Animations run by default and respect the operating system’s reduced-motion preference. Scrolling is native; there is no audio autoplay.
+- Animations run by default and respect the operating system’s reduced-motion preference. Scrolling is native; there is music is enabled by default; browsers may defer playback until the first interaction. Guests can turn it off.
 - Event artwork uses responsive WebP images and lazy loading. The opening image is prioritized. Decorative images are hidden from assistive technology where appropriate.
 - The countdown stops at zero, shows the celebrations message, and avoids unnecessary updates while the page is hidden.
-- RSVP supports a Google Sheets endpoint through `PUBLIC_RSVP_ENDPOINT`. Until it is configured, guests prepare and copy a message themselves. See [integration setup and verification](integrations/google-sheets/README.md). Online confirmation appears only after a matching successful server response.
+- RSVP supports a Google Sheets endpoint through `PUBLIC_RSVP_ENDPOINT`. The supplied endpoint is enabled by default; an environment variable can override it. See [integration setup and verification](integrations/google-sheets/README.md). Online confirmation appears only after a successful server response. The uploaded music loops at a gentle volume and pauses when the page is hidden.
 - Fonts load from Google Fonts, with local serif/sans-serif fallbacks. There are no analytics or tracking scripts in the application.
 - Artwork is illustrative; it is not photography of the actual couple or booked venue.
