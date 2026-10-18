@@ -2124,7 +2124,8 @@ body {
 html:is([data-gates="closed"],[data-gates="opening"]) .gate-theatre { display: block; }
 html:is([data-gates="closed"],[data-gates="opening"]) .site-header { opacity: 0; pointer-events: none; }
 html:is([data-gates="closed"],[data-gates="opening"]) .hero-copy { opacity: 0; }
-html[data-gates="opening"] .hero-copy { opacity: 1; }
+/* The reveal timeline fades invitation content in only after the doors begin opening. */
+html[data-gates="opening"] .hero-copy { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   .gate-theatre { transition: none; }
 }
