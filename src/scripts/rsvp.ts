@@ -54,6 +54,20 @@ form?.addEventListener("submit", async (event) => {
       const saved = await response.json();
       if (!response.ok || saved.status !== 'success') throw new Error('Unconfirmed response');
       const confirmation = document.querySelector<HTMLElement>('#rsvp-confirmation')!;
+      const heading = confirmation.querySelector<HTMLElement>('h3');
+      const detail = confirmation.querySelector<HTMLElement>('p');
+      if (heading && detail) {
+        if (choice === 'decline') {
+          heading.textContent = 'Thank you for letting us know.';
+          detail.textContent = 'We’ll miss celebrating with you in person. Thank you for your warm wishes, and we hope to see you soon.';
+        } else if (choice === 'unsure') {
+          heading.textContent = 'Thank you for the update.';
+          detail.textContent = 'We understand your plans are still taking shape. Please let us know when you can confirm.';
+        } else {
+          heading.textContent = 'We can’t wait to celebrate with you!';
+          detail.textContent = 'Your RSVP has been received. We look forward to sharing these special moments together.';
+        }
+      }
       form.hidden = true; confirmation.hidden = false; confirmation.focus();
     } catch {
       error.textContent = 'We couldn’t confirm whether your RSVP was saved. Please check with the family before sending again to avoid a duplicate.';
