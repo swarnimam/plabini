@@ -8,11 +8,17 @@ const envelope =
 let letterTimeline: gsap.core.Timeline | undefined;
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 const gateButton = document.querySelector<HTMLButtonElement>("#gate-enter");
+// The approved gate is enabled only if all three image layers load successfully.
+// Missing image assets cannot block access to the invitation.
 if (gateButton) {
-  gateButton.hidden = false;
+  const images = Array.from(document.querySelectorAll<HTMLImageElement>(".gate-artwork"));
+  Promise.all(images.map((image) => { const source = image.dataset.gateImage; if (!source) return Promise.reject(new Error("Missing gate image path")); image.src = source; return image.decode(); })).then(() => {
+    document.documentElement.dataset.gates = "closed";
+    gateButton.hidden = false;
+  }).catch(() => { document.documentElement.dataset.gates = "open"; document.dispatchEvent(new Event("gate:unavailable")); });
   gateButton.addEventListener("click", () => {
     gateButton.hidden = true;
-    document.documentElement.dataset.gates = "opening";
+    document.documentElement.dataset.gates = reduced.matches ? "open" : "opening";
   }, { once: true });
 }
 function refresh() {
@@ -101,36 +107,20 @@ reduced.addEventListener("change", () => {
 media.add("(prefers-reduced-motion: no-preference)", () => {
   document.documentElement.dataset.motion = "on";
   const desktop = matchMedia("(min-width:800px)").matches;
-  const intro = gsap.timeline({ paused: true, onComplete: () => { document.documentElement.dataset.gates = "open"; } });
+  const intro = gsap.timeline({
+    paused: true,
+    onComplete: () => { document.documentElement.dataset.gates = "open"; },
+  });
   intro
-    .fromTo(
-      ".door-left",
-      { opacity: 1, rotationY: 0 },
-      { rotationY: -112, duration: 2.7, ease: "power2.inOut" },
-      0,
-    )
-    .fromTo(
-      ".door-right",
-      { opacity: 1, rotationY: 0 },
-      { rotationY: 112, duration: 2.7, ease: "power2.inOut" },
-      0,
-    )
-    .from(
-      ".hero-copy h1>span",
-      {
-        yPercent: 80,
-        opacity: 0,
-        rotationX: -25,
-        stagger: 0.15,
-        duration: 1.4,
-        ease: "power3.out",
-      },
-      0.8,
-    )
-    .fromTo(".gate-glow", { opacity: 0, scaleX: .1 }, { opacity: .95, scaleX: 5, duration: 1.8 }, .1)
-    .fromTo(".gate-sparks i", { opacity: 0, y: 30 }, { opacity: .8, y: -90, stagger: .045, duration: 1.5 }, .2)
-    .to(".palace-door", { opacity: 0, duration: .55 }, 2.3)
-    .to(".gate-glow,.gate-sparks", { opacity: 0, duration: .5 }, 2.5);
+    .to(".gate-leaf--left", { rotationY: -108, duration: 2.3, ease: "power3.inOut" }, 0)
+    .to(".gate-leaf--right", { rotationY: 108, duration: 2.3, ease: "power3.inOut" }, 0)
+    .fromTo(".hero-copy", { opacity: 0 }, { opacity: 1, duration: .9, ease: "power2.out" }, 1.15)
+    .fromTo(".hero-copy h1>span",
+      { yPercent: 32, opacity: 0 },
+      { yPercent: 0, opacity: 1, stagger: 0.13, duration: 0.85, ease: "power2.out" },
+      1.2)
+    .to(".gate-frame", { opacity: 0, duration: 0.6 }, 2.05)
+    .to(".gate-theatre", { opacity: 0, duration: 0.5 }, 2.4);
   gateButton?.addEventListener("click", () => intro.play(), { once: true });
   const hero = gsap.timeline({
     scrollTrigger: {
