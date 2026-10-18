@@ -14,8 +14,6 @@ attendance?.addEventListener("change", () => {
   }
   if (events) events.disabled = declined;
 });
-let pendingPayload = "";
-let submissionId = "";
 let submitting = false;
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -30,21 +28,35 @@ form?.addEventListener("submit", async (event) => {
   }
   if (form.dataset.endpoint) {
     if (submitting) return;
-    const payload = {name, attendance: String(data.get('attendance')), guests: Number(data.get('guests') || 0), events: data.getAll('events').map(String), note: String(data.get('message') || '').trim(), website: String(data.get('website') || '')};
-    const serialized = JSON.stringify(payload);
-    if (serialized !== pendingPayload) { pendingPayload = serialized; submissionId = crypto.randomUUID(); }
+    if (data.get('website')) return;
+    const selected = data.getAll('events').map(String);
+    const choice = String(data.get('attendance'));
+    const safeText = (value: string) => /^[=+@-]/.test(value) ? "'" + value : value;
+    const payload = new URLSearchParams({
+      name: safeText(name), joining: choice === 'accept' ? 'Yes' : choice === 'decline' ? 'No' : 'Yet to confirm',
+      guests: choice === 'decline' ? '0' : String(data.get('guests') || '1'),
+      tilak: selected.includes('Tilak / Lagan Chumai') ? 'Yes' : 'No',
+      sangeet: selected.includes('Sangeet') ? 'Yes' : 'No',
+      haldi: selected.includes('Haldi') ? 'Yes' : 'No',
+      vivah: selected.includes('Shubh Vivah') ? 'Yes' : 'No',
+      message: safeText(prepareResponse(name, choice, String(data.get('guests') || '0'), selected, String(data.get('message') || '').trim())),
+    });
+    // The deployed script also accepts the original RSVP template's field names.
+    payload.set('attend', payload.get('joining')!);
+    payload.set('people', payload.get('guests')!);
+    payload.set('attendance', payload.get('joining')!);
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const error = document.querySelector<HTMLElement>('#rsvp-error')!;
     submitting = true; button.disabled = true; button.textContent = 'Sending…'; error.hidden = true;
     form.setAttribute('aria-busy', 'true');
     try {
-      const response = await fetch(form.dataset.endpoint, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({...payload, id: submissionId}), redirect: 'follow', signal: AbortSignal.timeout(25000)});
+      const response = await fetch(form.dataset.endpoint, {method: 'POST', body: payload, redirect: 'follow', signal: AbortSignal.timeout(25000)});
       const saved = await response.json();
-      if (!response.ok || saved.ok !== true || saved.id !== submissionId) throw new Error('Unconfirmed response');
+      if (!response.ok || saved.status !== 'success') throw new Error('Unconfirmed response');
       const confirmation = document.querySelector<HTMLElement>('#rsvp-confirmation')!;
       form.hidden = true; confirmation.hidden = false; confirmation.focus();
     } catch {
-      error.textContent = 'We couldn’t confirm your RSVP. Please try again. Retrying the same details won’t create a duplicate response.';
+      error.textContent = 'We couldn’t confirm whether your RSVP was saved. Please check with the family before sending again to avoid a duplicate.';
       error.hidden = false;
     } finally {
       submitting = false; button.disabled = false; button.textContent = 'Send RSVP ↗'; form.removeAttribute('aria-busy');
