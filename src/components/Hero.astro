@@ -2,6 +2,11 @@
 import { asset } from "../data/invitation";
 ---
 
+<!-- Set the entrance state before the hero paints; without JS, the invitation is visible. -->
+<script is:inline>
+  document.documentElement.dataset.gates = "loading";
+</script>
+
 <section class="opening" id="home" aria-labelledby="couple-names">
   <div class="hero-scenery" aria-hidden="true">
     <img
@@ -13,7 +18,46 @@ import { asset } from "../data/invitation";
     />
     <div class="hero-shade"></div>
   </div>
-  <div class="gate-theatre" aria-hidden="true"><div class="gate-world">\n    <img class="gate-artwork gate-leaf gate-leaf--left" data-gate-image={asset("images/moonlit-gate-left.webp")} width="1536" height="1024" alt="" />\n    <img class="gate-artwork gate-leaf gate-leaf--right" data-gate-image={asset("images/moonlit-gate-right.webp")} width="1536" height="1024" alt="" />\n    <img class="gate-artwork gate-frame" data-gate-image={asset("images/moonlit-gate-frame.webp")} width="1536" height="1024" alt="" />\n  </div></div>\n  <button class="gate-enter" id="gate-enter" type="button" hidden aria-label="Open our invitation"><img src={asset("images/monogram.webp")} alt="" width="96" height="96" /></button>\n  <div class="hero-copy">
+
+  <div class="gate-theatre" aria-hidden="true">
+    <div class="gate-world">
+      <img
+        class="gate-artwork gate-leaf gate-leaf--left"
+        src={asset("images/moonlit-gate-left.webp")}
+        width="1536"
+        height="1024"
+        alt=""
+        decoding="async"
+      />
+      <img
+        class="gate-artwork gate-leaf gate-leaf--right"
+        src={asset("images/moonlit-gate-right.webp")}
+        width="1536"
+        height="1024"
+        alt=""
+        decoding="async"
+      />
+      <img
+        class="gate-artwork gate-frame"
+        src={asset("images/moonlit-gate-frame.webp")}
+        width="1536"
+        height="1024"
+        alt=""
+        decoding="async"
+      />
+    </div>
+  </div>
+  <!-- The PS emblem is already part of the artwork. Keep the actual hit target invisible. -->
+  <button
+    class="gate-enter"
+    id="gate-enter"
+    type="button"
+    hidden
+    aria-label="Open Swarnimam and Plabini's wedding invitation"
+  ></button>
+
+  <div class="hero-copy">
+    <div class="hero-copy-inner">
     <p class="hero-preface">We’re getting married.</p>
     <h1 id="couple-names">
       <span>Swarnimam</span>
@@ -28,5 +72,6 @@ import { asset } from "../data/invitation";
       <span>Explore the celebrations</span>
       <b aria-hidden="true">↓</b>
     </a>
+    </div>
   </div>
 </section>

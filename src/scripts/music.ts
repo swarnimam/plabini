@@ -8,8 +8,9 @@ if (audio && toggle && label) {
   audio.volume = 0.35;
   let enabled = true;
   let entered = false;
+  let entranceFinished = !gate;
   const sync = () => {
-    toggle.hidden = !entered;
+    toggle.hidden = !entered || !entranceFinished;
     toggle.setAttribute('aria-pressed', String(enabled));
     toggle.setAttribute('aria-label', enabled ? 'Turn music off' : 'Turn music on');
     label.textContent = enabled ? 'Music on' : 'Music off';
@@ -30,7 +31,8 @@ if (audio && toggle && label) {
   };
   if (gate) {
     gate.addEventListener('click', enter, { once: true });
-    const unavailable = () => { entered = true; enabled = false; sync(); };
+    const unavailable = () => { entered = true; enabled = false; entranceFinished = true; sync(); };
+    document.addEventListener('gate:opened', () => { entranceFinished = true; sync(); }, { once: true });
     document.addEventListener('gate:unavailable', unavailable, { once: true });
     if (document.documentElement.dataset.gates === 'open' && gate.hidden) unavailable();
   } else enter();

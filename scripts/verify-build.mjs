@@ -41,10 +41,21 @@ for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
   assert.ok(ids.includes(id), `Broken anchor: ${id}`);
 }
 
+// Keep the ceremonial first impression clean during future hero refactors.
+const opening = html.match(/<section class="opening"[\s\S]*?<\/section>/)?.[0];
+assert.ok(opening, "Opening hero present");
+assert.ok(!opening.includes("\\n"), "Hero must not render literal escaped newlines");
+const gateControl = opening.match(/<button(?=[^>]*\bid="gate-enter")[^>]*>([\s\S]*?)<\/button>/);
+assert.ok(gateControl, "Accessible wedding entrance control present");
+assert.equal(gateControl[1].trim(), "", "Do not duplicate the PS seal already painted on the gate");
+
 // Infer the build base so the same checks work at / and /plabini in CI.
 const hero = html.match(/src="([^"]*images\/hero.webp)"/);
 assert.ok(hero, "Hero resource present");
 const base = hero[1].slice(0, -"images/hero.webp".length);
+for (const panel of ["moonlit-gate-left.webp", "moonlit-gate-right.webp", "moonlit-gate-frame.webp"]) {
+  assert.ok(html.includes(`src="${base}images/${panel}"`), `Required gate artwork: ${panel}`);
+}
 const resources = [...html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)].map(
   (m) => m[1],
 );
