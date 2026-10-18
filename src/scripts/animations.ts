@@ -12,7 +12,7 @@ if (gateButton) {
   gateButton.hidden = false;
   gateButton.addEventListener("click", () => {
     gateButton.hidden = true;
-    document.documentElement.dataset.gates = "open";
+    document.documentElement.dataset.gates = "opening";
   }, { once: true });
 }
 function refresh() {
@@ -101,18 +101,18 @@ reduced.addEventListener("change", () => {
 media.add("(prefers-reduced-motion: no-preference)", () => {
   document.documentElement.dataset.motion = "on";
   const desktop = matchMedia("(min-width:800px)").matches;
-  const intro = gsap.timeline({ paused: true });
+  const intro = gsap.timeline({ paused: true, onComplete: () => { document.documentElement.dataset.gates = "open"; } });
   intro
     .fromTo(
       ".door-left",
       { opacity: 1, rotationY: 0 },
-      { rotationY: -105, duration: 3.2, ease: "power2.inOut" },
+      { rotationY: -112, duration: 2.7, ease: "power2.inOut" },
       0,
     )
     .fromTo(
       ".door-right",
       { opacity: 1, rotationY: 0 },
-      { rotationY: 105, duration: 3.2, ease: "power2.inOut" },
+      { rotationY: 112, duration: 2.7, ease: "power2.inOut" },
       0,
     )
     .from(
@@ -127,7 +127,10 @@ media.add("(prefers-reduced-motion: no-preference)", () => {
       },
       0.8,
     )
-    .to(".palace-door", { opacity: 0, duration: 0.65 }, 2.55);
+    .fromTo(".gate-glow", { opacity: 0, scaleX: .1 }, { opacity: .95, scaleX: 5, duration: 1.8 }, .1)
+    .fromTo(".gate-sparks i", { opacity: 0, y: 30 }, { opacity: .8, y: -90, stagger: .045, duration: 1.5 }, .2)
+    .to(".palace-door", { opacity: 0, duration: .55 }, 2.3)
+    .to(".gate-glow,.gate-sparks", { opacity: 0, duration: .5 }, 2.5);
   gateButton?.addEventListener("click", () => intro.play(), { once: true });
   const hero = gsap.timeline({
     scrollTrigger: {
