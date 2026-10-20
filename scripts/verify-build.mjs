@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 
 const html = readFileSync("dist/index.html", "utf8").replaceAll("&amp;", "&")
   .replace(/\s+/g, " ");
@@ -40,6 +40,23 @@ assert.equal(new Set(ids).size, ids.length, "Unique HTML IDs");
 for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
   assert.ok(ids.includes(id), `Broken anchor: ${id}`);
 }
+
+// The gallery must discover every image from its one folder, without a hand-edited manifest.
+const gallerySource = readFileSync("src/components/Memories.astro", "utf8");
+assert.ok(gallerySource.includes("import.meta.glob"), "Memories must auto-discover photos");
+assert.ok(html.includes('id="memories-open"'), "Memories navigation control");
+assert.ok(html.includes('id="memories-overlay"'), "Memories overlay");
+assert.ok(html.includes('aria-modal="true"'), "Accessible gallery dialog");
+assert.ok(html.includes('id="memories-viewer"'), "Scrollable gallery viewer");
+assert.ok(html.includes('id="memories-counter"'), "Gallery position indicator");
+const memoryFolder = "src/assets/memories";
+const photoCount = existsSync(memoryFolder)
+  ? readdirSync(memoryFolder).filter((name) => /\.(jpe?g|png|webp|avif)$/i.test(name)).length
+  : 0;
+assert.equal((html.match(/class="memories-slide"/g) || []).length, photoCount,
+  "Every folder photo appears in the vertical viewer");
+assert.equal((html.match(/class="memories-thumb"/g) || []).length, photoCount,
+  "Every folder photo has a grid thumbnail");
 
 // Keep the ceremonial first impression clean during future hero refactors.
 const opening = html.match(/<section class="opening"[\s\S]*?<\/section>/)?.[0];

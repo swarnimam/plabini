@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// Add or remove photos in src/assets/memories/; no manifest to maintain.
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/memories/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
+);
+const photos = Object.entries(modules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([path, module], index) => ({
+    image: module.default,
+    label: path.split("/").pop()!
+      .replace(/\.[^.]+$/, "")
+      .replace(/^\d+[\s_-]*/, "")
+      .replace(/[-_]+/g, " ")
+      .trim() || ("Photo " + (index + 1)),
+  }));
+const total = photos.length;
+---
+
+<div class="memories-overlay" id="memories-overlay" hidden>
+  <section
+    class="memories-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="memories-title"
+    tabindex="-1"
+  >
+    <header class="memories-header">
+      <div class="memories-heading">
+        <p class="memories-eyebrow">Swarnimam &amp; Plabini · Our album</p>
+        <h2 id="memories-title">Memories</h2>
+      </div>
+      <button class="memories-close" id="memories-close" type="button" aria-label="Close memories gallery">
+        <span aria-hidden="true">×</span>
+      </button>
+    </header>
+    {
+      total > 0 ? (
+        <div class="memories-body">
+          <div
+            class="memories-viewer"
+            id="memories-viewer"
+            role="region"
+            aria-label="Memories photo viewer"
+            tabindex="0"
+          >
+            {photos.map((photo, index) => (
+              <figure
+                class="memories-slide"
+                id={"memories-photo-" + (index + 1)}
+                data-memory-index={index}
+                aria-label={"Photo " + (index + 1) + " of " + total}
+              >
+                <Image
+                  src={photo.image}
+                  alt={photo.label}
+                  widths={[480, 800, 1200, 1600]}
+                  sizes="(max-width: 720px) 100vw, (max-width: 1100px) 75vw, 1000px"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <aside class="memories-aside" aria-label="Photo thumbnails">
+            <div class="memories-aside-heading">
+              <span>THE COLLECTION</span>
+              <span id="memories-counter" aria-live="polite">01 / {String(total).padStart(2, "0")}</span>
+            </div>
+            <div class="memories-grid" role="group" aria-label="Choose a photo">
+              {photos.map((photo, index) => (
+                <button
+                  type="button"
+                  class="memories-thumb"
+                  data-memory-target={index}
+                  aria-label={"View photo " + (index + 1) + ": " + photo.label}
+                  aria-current={index === 0 ? "true" : undefined}
+                  aria-controls={"memories-photo-" + (index + 1)}
+                >
+                  <Image
+                    src={photo.image}
+                    alt=""
+                    width={144}
+                    height={144}
+                    fit="cover"
+                    format="webp"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              ))}
+            </div>
+          </aside>
+        </div>
+      ) : (
+        <div class="memories-empty">
+          <p>Our memories will find their home here soon.</p>
+        </div>
+      )
+    }
+  </section>
+</div>
