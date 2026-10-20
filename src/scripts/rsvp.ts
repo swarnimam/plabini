@@ -35,7 +35,7 @@ form?.addEventListener("submit", async (event) => {
     const payload = new URLSearchParams({
       name: safeText(name), joining: choice === 'accept' ? 'Yes' : choice === 'decline' ? 'No' : 'Yet to confirm',
       guests: choice === 'decline' ? '0' : String(data.get('guests') || '1'),
-      tilak: selected.includes('Tilak / Lagan Chumai') ? 'Yes' : 'No',
+      tilak: selected.includes('Tilak / Lagan Chumawan') ? 'Yes' : 'No',
       sangeet: selected.includes('Sangeet') ? 'Yes' : 'No',
       haldi: selected.includes('Haldi') ? 'Yes' : 'No',
       vivah: selected.includes('Shubh Vivah') ? 'Yes' : 'No',

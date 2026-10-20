@@ -15,7 +15,7 @@ for (const text of [
   "Swarnimam",
   "Plabini",
   "Greater Rajwada Resort",
-  "Tilak / Lagan Chumai",
+  "Tilak / Lagan Chumawan",
   "Sangeet",
   "Haldi",
   "Shubh Vivah",

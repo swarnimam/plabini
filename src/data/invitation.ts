@@ -15,14 +15,14 @@ export const invitation = {
       image: "tilak",
       imageAlt:
         "A prepared Tilak setting with brass thalis, gifts and folded textiles; no people",
-      name: "Tilak / Lagan Chumai",
+      name: "Tilak / Lagan Chumawan",
       hindi: "शुभारंभ",
       day: "Tuesday",
       date: "8 December",
       iso: "2026-12-08T14:00:00+05:30",
       time: "2:00 pm",
       description:
-        "Our wedding celebration starts off with Tilak / Lagan Chumai, bringing our families together in an atmosphere of affection, tradition and the blessings of our elders.",
+        "Our wedding celebration starts off with Tilak / Lagan Chumawan, bringing our families together in an atmosphere of affection, tradition and the blessings of our elders.",
       attire: "Festive wear in vibrant colours",
     },
     {

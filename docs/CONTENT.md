@@ -5,12 +5,12 @@
 
 | Event | Hindi title | Date | Time | Dress code |
 | --- | --- | --- | --- | --- |
-| Tilak / Lagan Chumai | शुभारंभ | Tuesday, 8 December 2026 | 2:00 pm | Festive wear in vibrant colours |
+| Tilak / Lagan Chumawan | शुभारंभ | Tuesday, 8 December 2026 | 2:00 pm | Festive wear in vibrant colours |
 | Sangeet | शाम शानदार | Tuesday, 8 December 2026 | 7:30 pm | Elegant traditional, Indo-Western, or formal suits. |
 | Haldi | रंग रसिया | Wednesday, 9 December 2026 | 11:30 am | Festive wear in shades of yellow |
 | Shubh Vivah | फेरे एंड फ़ॉरएवर | Wednesday, 9 December 2026 | 7:30 pm | Elegant ethnic attire. |
 
-There are four events. शुभारंभ is the Hindi title for Tilak / Lagan Chumai, not a separate ceremony. Sangeet features dance performances from both families and a dance party. Haldi is followed by games for guests. Ceremony end times have not been supplied and must not be invented.
+There are four events. शुभारंभ is the Hindi title for Tilak / Lagan Chumawan, not a separate ceremony. Sangeet features dance performances from both families and a dance party. Haldi is followed by games for guests. Ceremony end times have not been supplied and must not be invented.
 
 ## Invitation and story
 
