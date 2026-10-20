@@ -1,4 +1,4 @@
-# Swarnimam & Plabini · #perfectlyPS
+# Swarnimam & Plabini · #perfectlyPS 
 
 A mobile-first wedding invitation for **8–9 December 2026** at **Greater Rajwada Resort, Manpur, Gaya, Bihar**. Built with Astro and TypeScript, with GSAP for the opening, envelope and scroll animations. The output is a static website; no application server or database is needed.
 
