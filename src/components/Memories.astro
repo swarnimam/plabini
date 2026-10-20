@@ -1,0 +1,81 @@
+---
+import { readdirSync } from "node:fs";
+import { resolve } from "node:path";
+import { asset } from "../data/invitation";
+import "../styles/memories.css";
+
+// This directory is the entire album: add or remove photos here, then redeploy.
+// No manifest, imports, or code changes are required for future photographs.
+const photos = readdirSync(resolve(process.cwd(), "public/memories"))
+  .filter((name) => /\.(?:jpe?g|png|webp|avif|gif)$/i.test(name))
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }))
+  .map((name, index) => ({
+    src: asset(`memories/${encodeURIComponent(name)}`),
+    label: name.replace(/\.[^.]+$/, "").replace(/^\d+[\s._-]*/, "").replace(/[-_]+/g, " ").trim() || `Photo ${index + 1}`,
+    number: String(index + 1).padStart(2, "0"),
+  }));
+const count = String(photos.length).padStart(2, "0");
+---
+
+<div
+  class="memories-overlay"
+  id="memories-dialog"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="memories-title"
+  hidden
+>
+  <section class="memories-window" aria-label="Memories photo album">
+    <header class="memories-header">
+      <div class="memories-heading">
+        <p class="memories-kicker">SWARNIMAM & PLABINI · THE ALBUM</p>
+        <h2 id="memories-title">Our <em>memories</em></h2>
+      </div>
+      <div class="memories-controls">
+        <span class="memories-counter" id="memories-counter" aria-live="off">{photos.length ? `01 / ${count}` : "00 / 00"}</span>
+        <button class="memories-close" id="memories-close" type="button" aria-label="Close memories">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="memories-body">
+      <div
+        class="memories-stage"
+        id="memories-stage"
+        tabindex="0"
+        aria-label="Photographs. Scroll vertically to see the next memory."
+      >
+        {photos.length ? photos.map((photo, index) => (
+          <figure class="memory-slide" data-memory-index={index}>
+            <img src={photo.src} alt={photo.label} loading="lazy" decoding="async" />
+            <figcaption><span>{photo.number} / {count}</span><span>{photo.label}</span></figcaption>
+          </figure>
+        )) : (
+          <div class="memories-empty">
+            <p>Your memories will appear here.</p>
+          </div>
+        )}
+      </div>
+      <aside class="memories-index" aria-label="Photo selection">
+        <div class="memories-index-heading"><span>THE COLLECTION</span><span>{count} FRAMES</span></div>
+        <div class="memories-thumbnails" id="memories-thumbnails">
+          {photos.map((photo, index) => (
+            <button
+              type="button"
+              class:list={["memory-thumb", { "is-active": index === 0 }]}
+              data-memory-target={index}
+              aria-label={`View photo ${index + 1}: ${photo.label}`}
+              aria-pressed={index === 0 ? "true" : "false"}
+            >
+              <img src={photo.src} alt="" loading="lazy" decoding="async" />
+              <span aria-hidden="true">{photo.number}</span>
+            </button>
+          ))}
+        </div>
+        <p class="memories-hint">Scroll to explore <span aria-hidden="true">↓</span></p>
+      </aside>
+    </div>
+  </section>
+</div>
+<script src="../scripts/memories.ts"></script>

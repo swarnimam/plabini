@@ -1,0 +1,243 @@
+/* A private photo salon above the invitation. The site remains visible behind it. */
+.site-header nav .memories-nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: inherit;
+  white-space: nowrap;
+}
+.site-header nav .memories-nav-trigger:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+body.memories-is-open { overflow: hidden; }
+.memories-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgb(5 19 18 / 76%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.memories-window {
+  width: min(1120px, 100%);
+  height: min(810px, calc(100dvh - 48px));
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid rgb(201 171 111 / 70%);
+  background: #102c27;
+  color: #f3e9d1;
+  box-shadow: 0 24px 100px rgb(0 0 0 / 55%);
+}
+.memories-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px 16px 28px;
+  border-bottom: 1px solid rgb(201 171 111 / 27%);
+}
+.memories-kicker {
+  color: #cbb78b;
+  font-size: 9px;
+  line-height: 1.5;
+  letter-spacing: .19em;
+}
+.memories-heading h2 {
+  margin-top: 4px;
+  font-size: clamp(28px, 3.3vw, 43px);
+  letter-spacing: -.02em;
+}
+.memories-heading h2 em { color: #e6c790; }
+.memories-controls { display: flex; align-items: center; gap: 20px; }
+.memories-counter {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.memories-close {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(201 171 111 / 50%);
+  border-radius: 50%;
+  background: transparent;
+  color: #f3e9d1;
+  font-size: 31px;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  line-height: 1;
+  transition: background .2s, border-color .2s;
+}
+.memories-close:hover { background: rgb(255 255 255 / 10%); border-color: #e6c790; }
+.memories-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  min-height: 0;
+}
+.memories-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #9a7f55 #0b211d;
+  background: #071c1b;
+}
+.memory-slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.memory-slide img {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.memory-slide figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 22px;
+  color: #dfd1b5;
+  font-size: 10px;
+  letter-spacing: .08em;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+.memory-slide figcaption span:first-child {
+  color: #cbb78b;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.memory-slide figcaption span:last-child { text-align: right; }
+.memories-index {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  padding: 22px 16px 18px;
+  border-left: 1px solid rgb(201 171 111 / 25%);
+}
+.memories-index-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: #cbb78b;
+  font-size: 9px;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.memories-thumbnails {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  align-content: start;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9a7f55 transparent;
+  padding: 3px;
+}
+.memory-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #193b32;
+  opacity: .67;
+  transition: opacity .2s, border-color .2s;
+}
+.memory-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.memory-thumb span {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  padding: 2px 3px;
+  background: rgb(4 18 16 / 65%);
+  color: #fff4d8;
+  font-size: 8px;
+  line-height: 1;
+}
+.memory-thumb:hover, .memory-thumb.is-active { opacity: 1; }
+.memory-thumb.is-active { border-color: #e6c790; }
+.memories-hint {
+  margin-top: auto;
+  padding-top: 14px;
+  color: #cbb78b;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+}
+.memories-hint span { padding-left: 8px; }
+.memories-empty {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #e6c790;
+  font-family: var(--serif);
+  font-size: 26px;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .memories-overlay { padding: 0; }
+  .memories-window { width: 100%; height: 100dvh; border: 0; }
+  .memories-header { padding: max(14px, env(safe-area-inset-top)) 16px 12px; }
+  .memories-heading h2 { font-size: 30px; }
+  .memories-kicker { font-size: 8px; }
+  .memories-controls { gap: 12px; }
+  .memories-counter { font-size: 16px; }
+  .memories-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 132px; }
+  .memories-index { border-left: 0; border-top: 1px solid rgb(201 171 111 / 25%); padding: 9px 14px max(12px, env(safe-area-inset-bottom)); }
+  .memories-index-heading, .memories-hint { display: none; }
+  .memories-thumbnails {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-template-rows: repeat(2, 48px);
+    grid-auto-columns: 48px;
+    gap: 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px;
+  }
+  .memory-slide figcaption { padding: 10px 15px; }
+}
+@media (max-width: 430px) {
+  .site-header { padding-left: 12px; padding-right: 12px; }
+  .site-header .brand { gap: 0; }
+  .site-header .brand img { width: 43px; height: 43px; }
+  .site-header .brand small { display: none; }
+  .site-header nav { gap: 10px; }
+  .site-header nav a, .site-header nav .memories-nav-trigger { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .memory-thumb, .memories-close { transition: none; }
+  .memories-stage { scroll-behavior: auto; }
+}
+@media print { .memories-overlay { display: none !important; } }

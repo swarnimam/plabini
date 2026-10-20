@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 
 const html = readFileSync("dist/index.html", "utf8").replaceAll("&amp;", "&")
   .replace(/\s+/g, " ");
@@ -55,6 +55,21 @@ assert.ok(hero, "Hero resource present");
 const base = hero[1].slice(0, -"images/hero.webp".length);
 for (const panel of ["moonlit-gate-left.webp", "moonlit-gate-right.webp", "moonlit-gate-frame.webp"]) {
   assert.ok(html.includes(`src="${base}images/${panel}"`), `Required gate artwork: ${panel}`);
+}
+// Photos are discovered from the folder at build time, without a hardcoded manifest.
+const memoryFiles = readdirSync("public/memories")
+  .filter((name) => /\.(?:jpe?g|png|webp|avif|gif)$/i.test(name));
+assert.ok(html.includes('id="memories-trigger"'), "Memories navigation control");
+assert.ok(html.includes('id="memories-dialog"'), "Memories overlay dialog");
+assert.ok(html.includes('id="memories-stage"'), "Vertical photo viewer");
+assert.equal((html.match(/class="memory-slide"/g) || []).length, memoryFiles.length,
+  "Every photo in public/memories must appear in the viewer");
+assert.equal((html.match(/data-memory-target="\d+"/g) || []).length, memoryFiles.length,
+  "Every photo must have a selectable thumbnail");
+for (const photo of memoryFiles) {
+  const url = `${base}memories/${encodeURIComponent(photo)}`;
+  assert.ok(html.includes(`src="${url}"`), `Album photo missing from HTML: ${photo}`);
+  assert.ok(existsSync(`dist/memories/${photo}`), `Album photo missing from build: ${photo}`);
 }
 const resources = [...html.matchAll(/(?:src|href)="(\/[^"#?]+)"/g)].map(
   (m) => m[1],

@@ -10,6 +10,7 @@ import Envelope from "../components/Envelope.astro";
 import RsvpForm from "../components/RsvpForm.astro";
 import Music from "../components/Music.astro";
 import Countdown from "../components/Countdown.astro";
+import Memories from "../components/Memories.astro";
 ---
 
 <BaseLayout>
@@ -25,6 +26,7 @@ import Countdown from "../components/Countdown.astro";
     <nav aria-label="Main navigation">
       <a href="#story">Our story</a><a href="#celebrations">Celebrations</a><a
         href="#venue">Venue</a>
+      <button type="button" class="memories-nav-trigger" id="memories-trigger" aria-haspopup="dialog" aria-controls="memories-dialog" aria-expanded="false">Memories</button>
     </nav>
   </header>
   <main id="main">
@@ -38,6 +40,7 @@ import Countdown from "../components/Countdown.astro";
   </main>
   <Footer />
   <Music />
+  <Memories />
   <script src="../scripts/animations.ts"></script>
   <script src="../scripts/rsvp.ts"></script>
 </BaseLayout>
